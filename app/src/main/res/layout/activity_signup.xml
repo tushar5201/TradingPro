@@ -5,51 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".SignupActivity"
     android:orientation="vertical"
     android:layout_marginVertical="30dp"
     android:layout_marginHorizontal="20dp"
-    android:background="#161617"
-    >
+    android:background="#161617">
 
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to"
+        android:text="Hey there,"
         android:textColor="#3d3d3c"
         android:textSize="20sp"
-        android:gravity="center"
-        />
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/tvAppname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TradingPro"
+        android:text="Create an Account"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="27sp"
         android:textColor="#fff"
         android:gravity="center"
         android:layout_below="@id/tvWelcome"
-        android:fontFamily="@font/poppins_font"
-        />
+        android:fontFamily="@font/poppins_font" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@drawable/yellow_logo_trans"
-        android:layout_below="@id/tvAppname"
-        android:id="@+id/imgLogo"
-        />
-
-    <!--Username-->
+    <!--username -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiUsername"
+        android:id="@+id/tvname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgLogo"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:hint="Enter Username"
         app:cursorColor="#fee83f"
         app:endIconMode="clear_text"
@@ -60,21 +48,70 @@
         app:boxCornerRadiusTopStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        >
+        app:boxCornerRadiusBottomEnd="10dp">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
-            />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--password-->
+    <!--phone number -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvphone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvname"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Phone Number"
+        app:cursorColor="#fee83f"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/phone_call"
+        app:boxBackgroundColor="#474647"
+        app:boxStrokeColor="#fee83f"
+        app:hintTextColor="#fee83f"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusBottomEnd="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--email -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvphone"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Email"
+        app:cursorColor="#fee83f"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/mail"
+        app:boxBackgroundColor="#474647"
+        app:boxStrokeColor="#fee83f"
+        app:hintTextColor="#fee83f"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusBottomEnd="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--password -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tiUsername"
+        android:layout_below="@id/tvemail"
         android:layout_marginTop="5dp"
         android:hint="Enter Password"
         app:cursorColor="#fee83f"
@@ -86,13 +123,12 @@
         app:boxCornerRadiusTopStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        >
+        app:boxCornerRadiusBottomEnd="10dp">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
-            />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.checkbox.MaterialCheckBox
@@ -102,32 +138,29 @@
         android:layout_height="wrap_content"
         android:text="By continuing you accept our Privacy Policy and terms of use."
         android:textColor="#3d3d3c"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_marginTop="10dp" />
 
-    <!--    btnLogin-->
+    <!--register button-->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnregister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log In"
+        android:text="Register"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:backgroundTint="#fee83f"
         android:layout_below="@id/chkRemember"
         android:layout_marginTop="30dp"
         app:cornerRadius="10dp"
-        android:height="50dp"
-        />
+        android:height="50dp" />
 
     <!--    Divider-->
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnLogin"
-        android:layout_marginTop="30dp"
-        />
+        android:layout_below="@id/btnregister"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -135,7 +168,7 @@
         android:text="OR"
         android:padding="20dp"
         android:background="#161617"
-        android:layout_below="@id/btnLogin"
+        android:layout_below="@id/btnregister"
         android:layout_centerInParent="true"
         />
 
@@ -171,15 +204,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? "
+            android:text="Already have an account? "
             android:textColor="#3d3d3c"
             />
 
         <TextView
-            android:id="@+id/btnsignup"
+            android:id="@+id/tvlogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
+            android:text="Login"
             android:textColor="#fee83f"
             />
     </LinearLayout>
