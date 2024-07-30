@@ -1,187 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:orientation="vertical"
-    android:layout_marginVertical="30dp"
-    android:layout_marginHorizontal="20dp"
-    android:background="#161617"
-    >
+    android:background="@color/bg_color">
 
-    <TextView
-        android:id="@+id/tvWelcome"
+    <RelativeLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to"
-        android:textColor="#3d3d3c"
-        android:textSize="20sp"
-        android:gravity="center"
-        />
-
-    <TextView
-        android:id="@+id/tvAppname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TradingPro"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="#fff"
-        android:gravity="center"
-        android:layout_below="@id/tvWelcome"
-        android:fontFamily="@font/poppins_font"
-        />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@drawable/yellow_logo_trans"
-        android:layout_below="@id/tvAppname"
-        android:id="@+id/imgLogo"
-        />
-
-    <!--Username-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgLogo"
-        android:layout_marginTop="100dp"
-        android:hint="Enter Username"
-        app:cursorColor="#fee83f"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/user"
-        app:boxBackgroundColor="#474647"
-        app:boxStrokeColor="#fee83f"
-        app:hintTextColor="#fee83f"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!--password-->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tiUsername"
-        android:layout_marginTop="5dp"
-        android:hint="Enter Password"
-        app:cursorColor="#fee83f"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/padlock"
-        app:boxBackgroundColor="#474647"
-        app:boxStrokeColor="#fee83f"
-        app:hintTextColor="#fee83f"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/chkRemember"
-        android:layout_below="@id/tiPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="By continuing you accept our Privacy Policy and terms of use."
-        android:textColor="#3d3d3c"
-        android:layout_marginTop="10dp"
-        />
-
-    <!--    btnLogin-->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log In"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:backgroundTint="#fee83f"
-        android:layout_below="@id/chkRemember"
-        android:layout_marginTop="30dp"
-        app:cornerRadius="10dp"
-        android:height="50dp"
-        />
-
-    <!--    Divider-->
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnLogin"
-        android:layout_marginTop="30dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OR"
-        android:padding="20dp"
-        android:background="#161617"
-        android:layout_below="@id/btnLogin"
-        android:layout_centerInParent="true"
-        />
-
-    <!--    Google Logo-->
-    <ImageView
-        android:id="@+id/imgGoogle"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/google_logo"
-        android:layout_below="@id/divider"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        />
-
-    <!--    last divider-->
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgGoogle"
-        android:layout_marginTop="20dp"
-        />
-
-    <!--    Signup Line-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/divider2"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Don't have an account? "
-            android:textColor="#3d3d3c"
-            />
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="30dp"
+        tools:context=".LoginActivity">
 
         <TextView
-            android:id="@+id/btnsignup"
+            android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:textColor="#fee83f"
-            />
-    </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins_light"
+            android:text="Welcome to"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/desc_text"
+            android:textSize="20sp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvAppname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvWelcome"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins_font"
+            android:text="TradingPro"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/tvAppname"
+            android:src="@drawable/yellow_logo_trans" />
+
+        <!--Username-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgLogo"
+            android:layout_marginTop="100dp"
+            android:hint="Username"
+            app:boxBackgroundColor="@color/desc_text"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/yellow"
+            app:cursorColor="@color/yellow"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/exclamation"
+            app:helperText="Required*"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/desc_text"
+            app:hintTextColor="@color/yellow"
+            app:startIconDrawable="@drawable/user">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--password-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tiUsername"
+            android:layout_marginTop="5dp"
+            android:hint="Password"
+            app:boxBackgroundColor="@color/desc_text"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/yellow"
+            app:cursorColor="@color/yellow"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/exclamation"
+            app:helperText="Required*"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/desc_text"
+            app:hintTextColor="@color/yellow"
+            app:startIconDrawable="@drawable/padlock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/chkRemember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tiPass"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="By continuing you accept our Privacy Policy and terms of use."
+            android:textColor="@color/desc_text" />
+
+        <!--    btnLogin-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/chkRemember"
+            android:layout_marginTop="25dp"
+            android:height="50dp"
+            android:backgroundTint="@color/yellow"
+            android:fontFamily="@font/poppins"
+            android:text="Log In"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+        <!--    Divider-->
+        <RelativeLayout
+            android:id="@+id/relativeOR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnLogin"
+            android:layout_marginTop="30dp">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/dividerOR2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/tvOr"
+                android:background="@color/desc_text" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/dividerOR1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@id/tvOr"
+                android:background="@color/desc_text" />
+
+
+            <TextView
+                android:id="@+id/tvOr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins_light"
+                android:paddingHorizontal="20dp"
+                android:text="OR" />
+
+        </RelativeLayout>
+
+        <!--    Google Logo-->
+        <ImageView
+            android:id="@+id/imgGoogle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/relativeOR"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/google_logo"
+
+            />
+
+        <!--    last divider-->
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgGoogle"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/desc_text" />
+
+        <!--    Signup Line-->
+        <LinearLayout
+            android:id="@+id/linearSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider2"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:text="Don't have an account ? "
+                android:textColor="@color/desc_text" />
+
+            <TextView
+                android:id="@+id/btnsignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="  Sign Up"
+                android:textColor="@color/yellow" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

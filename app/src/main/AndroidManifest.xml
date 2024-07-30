@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TradingPro"
+        android:theme="@style/Base.Theme.TradingPro"
         tools:targetApi="31">
         <activity
             android:name=".SignupActivity"
@@ -30,6 +30,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
