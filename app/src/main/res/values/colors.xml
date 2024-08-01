@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primary_text">#000</color>
+    <color name="secondary_text">#fff</color>
+    <color name="edText">#E8E2E2</color>
+    <color name="edBorder">#474647</color>
     <color name="yellow">#fee83f</color>
-    <color name="bg_color">#161617</color>
+    <color name="bg_color">#FCF8F3</color>
     <color name="desc_text">#474647</color>
 
 <!--    <color name="colorPrimary">#fff</color>-->
