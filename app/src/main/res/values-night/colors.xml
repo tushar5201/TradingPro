@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_text">#FFF</color>
+    <color name="secondary_text">#000</color>
+    <color name="edText">#474647</color>
+    <color name="edBorder">#fee83f</color>
+    <color name="yellow">#fee83f</color>
+    <color name="bg_color">#161617</color>
+    <color name="desc_text">#9D9C9C</color>
+</resources>

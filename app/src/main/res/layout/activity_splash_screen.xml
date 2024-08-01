@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity"
     android:orientation="vertical"
-    android:background="#161617"
+    android:background="@color/bg_color"
     >
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TradingPro"
-        android:textColor="#fff"
+        android:textColor="@color/primary_text"
         android:textSize="40sp"
         android:textStyle="bold"
         android:gravity="center"
