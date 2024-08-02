@@ -68,7 +68,8 @@
             android:textColor="@color/secondary_text"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:cornerRadius="10dp" />
+            app:cornerRadius="10dp"
+            />
 
     </RelativeLayout>
 </ScrollView>
