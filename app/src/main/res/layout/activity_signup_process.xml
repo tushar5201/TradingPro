@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupProcessActivity"
+    >
+
+    <com.shuhart.stepview.StepView
+        android:layout_alignParentTop="true"
+        android:id="@+id/step_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:sv_selectedCircleColor="@color/yellow"
+        app:sv_stepLineWidth="1dp"
+        app:sv_stepPadding="4dp"
+        app:sv_nextTextColor="@color/secondary_text"
+        app:sv_nextStepLineColor="@color/desc_text"
+        app:sv_doneCircleColor="@color/yellow"
+        app:sv_doneStepLineColor="@color/yellow"
+        app:sv_doneCircleRadius="15dp"
+        app:sv_selectedCircleRadius="17dp"
+        app:sv_selectedStepNumberColor="@color/primary_text"
+        app:sv_stepViewStyle="@style/StepView"
+        app:sv_doneStepMarkColor="@color/primary_text"
+        app:sv_stepNumberTextSize="15sp"
+        app:sv_animationType="All"
+        app:sv_nextStepCircleEnabled="true"
+        app:sv_nextStepCircleColor="@color/edText"
+        />
+
+
+</RelativeLayout>
