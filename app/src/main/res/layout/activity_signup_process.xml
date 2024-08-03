@@ -47,7 +47,8 @@
             app:sv_stepLineWidth="2dp"
             app:sv_stepNumberTextSize="15sp"
             app:sv_stepPadding="4dp"
-            app:sv_stepViewStyle="@style/StepView" />
+            app:sv_stepViewStyle="@style/StepView"
+            tools:ignore="MissingClass" />
 
         <FrameLayout
             android:id="@+id/fragment_container"
@@ -72,4 +73,5 @@
             />
 
     </RelativeLayout>
+
 </ScrollView>
