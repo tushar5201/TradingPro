@@ -1,14 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonalInformationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_color">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".PersonalInformationFragment">
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvn"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="12dp"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold"
+        android:text="Personal And Address Information"
+        android:textSize="20sp"
+        android:gravity="center">
+    </TextView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/number"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tvn"
+        app:prefixText="+91"
+        app:boxBackgroundColor="@color/edText"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/edBorder"
+        app:cursorColor="@color/edBorder"
+        app:hintTextColor="@color/edBorder">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/edno"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="9876543218"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tvn"
+        android:layout_toRightOf="@+id/number"
+        android:layout_marginHorizontal="20sp"
+        app:boxBackgroundColor="@color/edText"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/edBorder"
+        app:cursorColor="@color/edBorder"
+        app:hintTextColor="@color/edBorder">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:id="@+id/edphoneno"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resilayout"
+        android:hint="Residency status"
+        android:layout_below="@+id/number"
+        android:layout_marginTop="13dp"
+        android:layout_marginHorizontal="10sp"
+        app:boxBackgroundColor="@color/edText"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/edBorder"
+        app:cursorColor="@color/edBorder"
+        app:hintTextColor="@color/edBorder">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/edresi"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addlayout"
+        android:hint="Address line"
+        android:layout_below="@+id/resilayout"
+        android:layout_marginHorizontal="10sp"
+        android:layout_marginTop="13dp"
+        app:boxBackgroundColor="@color/edText"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/edBorder"
+        app:cursorColor="@color/edBorder"
+        app:hintTextColor="@color/edBorder">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/edaddress"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/linerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addlayout"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="City"
+            android:layout_below="@+id/addlayout"
+            android:layout_marginHorizontal="10sp"
+            android:layout_marginTop="13dp"
+            app:boxBackgroundColor="@color/edText"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/edBorder"
+            app:cursorColor="@color/edBorder"
+            app:hintTextColor="@color/edBorder"
+            android:layout_weight="0.5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edcity"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/regionlayout"
+            android:hint="Region"
+            android:layout_marginHorizontal="10sp"
+            android:layout_marginTop="13dp"
+            app:boxBackgroundColor="@color/edText"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/edBorder"
+            app:cursorColor="@color/edBorder"
+            app:hintTextColor="@color/edBorder"
+            android:layout_weight="0.5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edregion"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linerlayout"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/countrylayout"
+            android:hint="Country"
+            android:layout_marginHorizontal="10sp"
+            android:layout_marginTop="13dp"
+            app:boxBackgroundColor="@color/edText"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/edBorder"
+            app:cursorColor="@color/edBorder"
+            app:hintTextColor="@color/edBorder"
+            android:layout_weight="0.5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edcountry"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/codelayout"
+            android:hint="Postal code"
+            android:layout_marginHorizontal="10sp"
+            android:layout_marginTop="13dp"
+            app:boxBackgroundColor="@color/edText"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/edBorder"
+            app:cursorColor="@color/edBorder"
+            app:hintTextColor="@color/edBorder"
+            android:layout_weight="0.5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edcode"
+                android:inputType="number"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/note"
+        android:text="Note: Every field counts! Let's unlock your enhanced finance world with Portfolio App!"
+        android:layout_below="@+id/l2"
+        android:textSize="16sp"
+        android:textColor="@color/desc_text"
+        android:layout_marginTop="90dp"
+        android:layout_marginHorizontal="10sp"
+        android:fontFamily="@font/poppins_light">
+    </TextView>
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/btnsave"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_below="@id/note"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:layout_marginHorizontal="12dp"-->
+<!--        android:height="50dp"-->
+<!--        android:backgroundTint="@color/yellow"-->
+<!--        android:fontFamily="@font/poppins"-->
+<!--        android:text="Save &amp; Continue"-->
+<!--        android:textColor="@color/secondary_text"-->
+<!--        android:textSize="17sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:cornerRadius="10dp" />-->
+
+    </RelativeLayout>
+</ScrollView>
