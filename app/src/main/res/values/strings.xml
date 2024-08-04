@@ -25,4 +25,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--    id_information-->
+    <string name="id_inforrmation">ID inforrmation</string>
+    <string name="id_information">ID information</string>
+    <string name="desc1">Snap to it! Tap and capture your</string>
+    <string name="desc2">fabulous selfie!</string>
+    <string name="desc4">(Max file size 2MB)</string>
+    <string name="desc3">Upload a clear photo of your Pancard</string>
+    <string name="desc5">Are you a political exposed person?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="save_continue"><![CDATA[Save & Continue]]></string>
+    <string name="desc6">Upload front</string>
+    <string name="desc8">Upload your ID Card</string>
+    <string name="take_photo">Take photo</string>
+
 </resources>
