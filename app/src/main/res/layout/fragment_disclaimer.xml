@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisclaimerFragment">
+    tools:context=".DisclaimerFragment"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="30dp"
+    android:background="@color/bg_color">
 
-    <!-- TODO: Update blank fragment layout -->
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Disclaimer"
+       android:textSize="20sp"
+       android:textStyle="bold"
+       android:fontFamily="@font/poppins"
+       android:textColor="@color/primary_text"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="This virtual stock app is designed for educational and informational purposes only. The app simulates stock trading and does not involve real money transactions. The information provided is not guaranteed to be accurate, complete, or up-to-date, and it does not constitute financial advice. Users should seek professional financial advice before making any investment decisions. \n\n\t\tThe creators of this app are not responsible for any losses or damages resulting from the use of this app. By using this app, you acknowledge and agree to this disclaimer."
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/desc_text"/>
 
-</FrameLayout>
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agree &amp; Continue"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_light"
+        android:textSize="15sp"
+        android:textColor="@color/desc_text"/>
+
+</LinearLayout>
