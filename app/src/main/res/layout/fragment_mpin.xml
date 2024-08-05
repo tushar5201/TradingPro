@@ -1,14 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MpinFragment">
+    tools:context=".MpinFragment"
+    android:background="@color/bg_color">
 
-    <!-- TODO: Update blank fragment layout -->
+  <TextView
+      android:id="@+id/tvTitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Create your secure PIN"
+      android:textColor="@color/primary_text"
+      android:textSize="25sp"
+      android:fontFamily="@font/poppins"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="60dp"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tvSubDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter 4 digit PIN."
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/desc_text"
+        android:textSize="15sp"
+        android:layout_marginStart="50dp"/>
 
-</FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearPIN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvSubDesc"
+        >
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSubRedesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearPIN"
+        android:text="Please re-enter 4 digit PIN."
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/desc_text"
+        android:textSize="15sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearREPIN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvSubRedesc"
+        android:layout_marginBottom="120dp"
+        >
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
