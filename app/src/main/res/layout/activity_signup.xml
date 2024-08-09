@@ -42,7 +42,7 @@
 
         <!--username -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvname"
+            android:id="@+id/textInputLayoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
@@ -64,6 +64,7 @@
             app:startIconDrawable="@drawable/user">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEdName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -72,10 +73,10 @@
 
         <!--phone number -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvphone"
+            android:id="@+id/textInputLayoutPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvname"
+            android:layout_below="@id/textInputLayoutName"
             android:layout_marginTop="5dp"
             android:hint="@string/phone_number"
             app:boxBackgroundColor="@color/edText"
@@ -98,6 +99,7 @@
             app:prefixText="+91">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEdPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="number"
@@ -106,10 +108,10 @@
 
         <!--email -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvemail"
+            android:id="@+id/textInputLayoutEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvphone"
+            android:layout_below="@id/textInputLayoutPhone"
             android:layout_marginTop="5dp"
             android:hint="@string/email"
             app:boxBackgroundColor="@color/edText"
@@ -130,6 +132,7 @@
             app:placeholderText="abc1@gmail.com">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEdEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
@@ -138,10 +141,10 @@
 
         <!--password -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiPass"
+            android:id="@+id/textInputLayoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvemail"
+            android:layout_below="@id/textInputLayoutEmail"
             android:layout_marginTop="5dp"
             android:hint="@string/password"
             app:boxBackgroundColor="@color/edText"
@@ -161,6 +164,7 @@
             app:startIconDrawable="@drawable/padlock">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEdPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
@@ -171,7 +175,7 @@
             android:id="@+id/chkRemember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tiPass"
+            android:layout_below="@id/textInputLayoutPassword"
             android:layout_marginTop="10dp"
             android:text="@string/checkbox_desc"
             android:textColor="@color/desc_text"

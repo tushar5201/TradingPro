@@ -1,4 +1,4 @@
-package com.example.tradingpro;
+package com.example.tradingpro.SignupProcessFragment;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tradingpro.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link IdInformationFragment#newInstance} factory method to
+ * Use the {@link DisclaimerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class IdInformationFragment extends Fragment {
+public class DisclaimerFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class IdInformationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public IdInformationFragment() {
+    public DisclaimerFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class IdInformationFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment IdInformationFragment.
+     * @return A new instance of fragment DisclaimerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static IdInformationFragment newInstance(String param1, String param2) {
-        IdInformationFragment fragment = new IdInformationFragment();
+    public static DisclaimerFragment newInstance(String param1, String param2) {
+        DisclaimerFragment fragment = new DisclaimerFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class IdInformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_id_information, container, false);
+        return inflater.inflate(R.layout.fragment_disclaimer, container, false);
     }
 }

@@ -13,6 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tradingpro.SignupProcessFragment.BiometricsEnableFragment;
+import com.example.tradingpro.SignupProcessFragment.DisclaimerFragment;
+import com.example.tradingpro.SignupProcessFragment.IdInformationFragment;
+import com.example.tradingpro.SignupProcessFragment.MpinFragment;
+import com.example.tradingpro.SignupProcessFragment.PersonalInformationFragment;
 import com.shuhart.stepview.StepView;
 
 import java.util.Arrays;
