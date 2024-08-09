@@ -12,10 +12,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
     TextView btnsignup;
+    TextInputLayout textInputLayoutEmailOrPhnLog, textInputLayoutPasswordLog;
+    TextInputEditText textInputEdEmailOrPhnLog, textInputEdPasswordLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,10 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         btnsignup = findViewById(R.id.btnsignup);
+        textInputLayoutEmailOrPhnLog = findViewById(R.id.textInputLayoutEmailOrPhnLog);
+        textInputLayoutPasswordLog = findViewById(R.id.textInputLayoutPasswordLog);
+        textInputEdEmailOrPhnLog = findViewById(R.id.textInputEdEmailOrPhnLog);
+        textInputEdPasswordLog = findViewById(R.id.textInputEdPasswordLog);
 
         btnLogin.setOnClickListener(v-> {
 //            Intent i1 = new Intent(LoginActivity.this, Data.class);

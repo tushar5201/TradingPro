@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisclaimerFragment"
+    tools:context=".SignupProcessFragment.DisclaimerFragment"
     android:orientation="vertical"
     android:paddingHorizontal="15dp"
     android:paddingVertical="30dp"
@@ -34,6 +34,7 @@
         android:layout_marginTop="50dp"
         android:fontFamily="@font/poppins_light"
         android:textSize="15sp"
-        android:textColor="@color/desc_text"/>
+        android:textColor="@color/desc_text"
+        android:textStyle="bold"/>
 
 </LinearLayout>
