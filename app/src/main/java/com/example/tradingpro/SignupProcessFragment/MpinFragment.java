@@ -1,4 +1,4 @@
-package com.example.tradingpro;
+package com.example.tradingpro.SignupProcessFragment;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tradingpro.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link PersonalInformationFragment#newInstance} factory method to
+ * Use the {@link MpinFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PersonalInformationFragment extends Fragment {
+public class MpinFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class PersonalInformationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public PersonalInformationFragment() {
+    public MpinFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class PersonalInformationFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PersonalInformationFragment.
+     * @return A new instance of fragment MpinFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PersonalInformationFragment newInstance(String param1, String param2) {
-        PersonalInformationFragment fragment = new PersonalInformationFragment();
+    public static MpinFragment newInstance(String param1, String param2) {
+        MpinFragment fragment = new MpinFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class PersonalInformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personal_information, container, false);
+        return inflater.inflate(R.layout.fragment_mpin, container, false);
     }
 }
