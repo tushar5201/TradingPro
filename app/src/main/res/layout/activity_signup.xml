@@ -99,6 +99,7 @@
             app:prefixText="+91">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:maxLength="10"
                 android:id="@+id/textInputEdPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -154,7 +155,7 @@
             app:boxCornerRadiusTopStart="10dp"
             app:boxStrokeColor="@color/edBorder"
             app:cursorColor="@color/edBorder"
-            app:endIconMode="clear_text"
+            app:endIconMode="password_toggle"
             app:errorEnabled="true"
             app:errorIconDrawable="@drawable/exclamation"
             app:helperText="@string/required"
