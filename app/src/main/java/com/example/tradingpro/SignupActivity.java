@@ -296,13 +296,14 @@ public class SignupActivity extends AppCompatActivity {
                 if(snapshot.exists()) {
                     flag = false;
                     Snackbar.make(main, "Email is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
+                } else {
+                    flag = true;
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Snackbar.make(main, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
-
             }
         });
         
@@ -312,6 +313,8 @@ public class SignupActivity extends AppCompatActivity {
                 if(snapshot.exists()){
                     flag = false;
                     Snackbar.make(main, "Phone number is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
+                } else {
+                    flag = true;
                 }
             }
 
