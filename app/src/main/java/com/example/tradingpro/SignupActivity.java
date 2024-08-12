@@ -88,7 +88,7 @@ public class SignupActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), SignupProcessActivity.class));
                     }
                 } else {
-                    Snackbar.make(main, "Please accpect terms and condition", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(main, "Please accpect terms and conditionn", Snackbar.LENGTH_SHORT).show();
                 }
             } else {
                 Snackbar.make(main,"Please correct the errors", Snackbar.LENGTH_SHORT).show();
