@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView btnsignup;
     TextInputLayout textInputLayoutEmailOrPhnLog, textInputLayoutPasswordLog;
     TextInputEditText textInputEdEmailOrPhnLog, textInputEdPasswordLog;
+    String emailOrPhone, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); //For night mode theme
 
         btnLogin = findViewById(R.id.btnLogin);
         btnsignup = findViewById(R.id.btnsignup);
@@ -38,8 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         textInputEdPasswordLog = findViewById(R.id.textInputEdPasswordLog);
 
         btnLogin.setOnClickListener(v-> {
-//            Intent i1 = new Intent(LoginActivity.this, Data.class);
-//            startActivity(i1);
+            emailOrPhone = textInputEdEmailOrPhnLog.getText().toString().trim();
+            password = textInputEdPasswordLog.getText().toString().trim();
+
         });
 
         btnsignup.setOnClickListener(v -> {
