@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,10 +41,9 @@ public class LoginActivity extends AppCompatActivity {
     TextView btnsignup;
     TextInputLayout textInputLayoutEmailOrPhnLog, textInputLayoutPasswordLog;
     TextInputEditText textInputEdEmailOrPhnLog, textInputEdPasswordLog;
-    String emailOrPhone, password;
     MotionLayout main;
     String emailOrPhone, password, user, pass, username;
-    RelativeLayout main;
+    RelativeLayout mainRelative;
     MaterialCheckBox chkRemember;
     Boolean flag = false;
 
@@ -53,17 +54,17 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        main = findViewById(R.id.main);
+        mainRelative = findViewById(R.id.realtiveLogin);
         btnLogin = findViewById(R.id.btnLogin);
         btnsignup = findViewById(R.id.btnsignup);
         textInputLayoutEmailOrPhnLog = findViewById(R.id.textInputLayoutEmailOrPhnLog);
         textInputLayoutPasswordLog = findViewById(R.id.textInputLayoutPasswordLog);
         textInputEdEmailOrPhnLog = findViewById(R.id.textInputEdEmailOrPhnLog);
         textInputEdPasswordLog = findViewById(R.id.textInputEdPasswordLog);
-      chkRemember = findViewById(R.id.chkRemember);
+        chkRemember = findViewById(R.id.chkRemember);
         main = findViewById(R.id.main);
 
-        if(!Constant_user_info.isCheckSplash) {
+        if (!Constant_user_info.isCheckSplash) {
             MotionScene.Transition transition = main.getTransition(R.id.transition_splash);
             transition.setAutoTransition(MotionScene.Transition.AUTO_JUMP_TO_END);
         } else {
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
-        if(sp.contains("unm")) {
+        if (sp.contains("unm")) {
             startActivity(new Intent(getApplicationContext(), MpinActivity.class));
         }
 
@@ -97,11 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (NumberFormatException err) {
                     checkEmail();
                 } catch (Error error) {
-                    Snackbar.make(main, "Error", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(mainRelative, "Error", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
-            if(flag && chkRemember.isChecked()) {
+            if (flag && chkRemember.isChecked()) {
                 editor.putString("unm", username);
                 editor.commit();
             }
@@ -109,11 +110,6 @@ public class LoginActivity extends AppCompatActivity {
         textInputEdEmailOrPhnLog.addTextChangedListener(createEmailWatcher());
         textInputEdPasswordLog.addTextChangedListener(createpasswordWatcher());
     }
-
-        btnsignup.setOnClickListener(v -> {
-            Constant_user_info.isCheckSplash = false;
-            Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
-            startActivity(intent);
 
     public void checkEmail() {
         user = textInputEdEmailOrPhnLog.getText().toString().trim();
@@ -134,23 +130,22 @@ public class LoginActivity extends AppCompatActivity {
                             flag = true;
                             startActivity(new Intent(getApplicationContext(), MpinActivity.class));
                         } else {
-                            Snackbar.make(main, "Invalid credentials ", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(mainRelative, "Invalid credentials ", Snackbar.LENGTH_SHORT).show();
                             flag = false;
                         }
                     }
                 } else {
-                    Snackbar.make(main, "User Does't Exist ", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(mainRelative, "User Does't Exist ", Snackbar.LENGTH_SHORT).show();
                     textInputLayoutEmailOrPhnLog.requestFocus();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Snackbar.make(main, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
+                Snackbar.make(mainRelative, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
             }
         });
     }
-
 
     public void checkPhone() {
 
@@ -172,23 +167,22 @@ public class LoginActivity extends AppCompatActivity {
                             flag = true;
                             startActivity(new Intent(getApplicationContext(), MpinActivity.class));
                         } else {
-                            Snackbar.make(main, "Invalid credentials ", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(mainRelative, "Invalid credentials ", Snackbar.LENGTH_SHORT).show();
                             flag = false;
                         }
                     }
                 } else {
-                    Snackbar.make(main, "User Does't Exist ", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(mainRelative, "User Does't Exist ", Snackbar.LENGTH_SHORT).show();
                     textInputLayoutEmailOrPhnLog.requestFocus();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Snackbar.make(main, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
+                Snackbar.make(mainRelative, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
             }
         });
     }
-
 
     public boolean isValidAllField() {
         boolean isEmailValid = validemailphone();
