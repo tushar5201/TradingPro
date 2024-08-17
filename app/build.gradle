@@ -36,6 +36,7 @@ dependencies {
     implementation libs.activity
     implementation libs.constraintlayout
     implementation libs.firebase.database
+    implementation libs.firebase.auth
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
@@ -43,4 +44,5 @@ dependencies {
 //    add dependency below the end of file
     implementation 'com.airbnb.android:lottie:6.4.1'
     implementation 'com.github.shuhart:stepview:1.5.1'
+    implementation 'androidx.biometric:biometric:1.2.0-alpha03'
 }

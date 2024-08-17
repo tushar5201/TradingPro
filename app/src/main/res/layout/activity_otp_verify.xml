@@ -3,49 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/bg_color"
-    tools:context=".OtpVerifyActivity"
-    android:id="@+id/main"
+    android:scrollbars="none"
     >
 
-    <LinearLayout
-
+    <RelativeLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1"
         android:paddingHorizontal="15dp"
         android:paddingVertical="30dp"
+        tools:context=".OtpVerifyActivity"
        >
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerHorizontal="true"
             app:lottie_rawRes="@raw/lottie"
             app:lottie_loop="true"
             app:lottie_autoPlay="true"
-            android:layout_weight="0.30"/>
-
-        <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="0.70"
-            >
+            />
 
             <TextView
+                android:id="@+id/tvDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/otp_desc"
                 android:fontFamily="@font/poppins_light"
                 android:textColor="@color/desc_text"
-                android:layout_gravity="center"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/lottie"
+                android:layout_centerHorizontal="true"
+                />
 
             <TextView
+                android:id="@+id/tvDesc2"
                 android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,19 +49,25 @@
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_light"
                 android:textColor="@color/desc_text"
+                android:layout_below="@id/tvDesc"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"/>
 
             <TextView
+                android:id="@+id/tvMob"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+911234567890"
                 android:textSize="20sp"
                 android:textColor="@color/primary_text"
+                android:layout_below="@id/tvDesc2"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"/>
 
 <!--otp 6 box-->
            <LinearLayout
+               android:id="@+id/linearOtp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
@@ -74,9 +76,11 @@
                android:layout_marginEnd="5dp"
                android:gravity="center"
                android:layout_marginTop="50dp"
+               android:layout_below="@id/tvMob"
                >
 
                <EditText
+                   android:id="@+id/text1"
                    android:layout_width="0dp"
                    android:layout_height="50dp"
                    android:background="@drawable/ed_style"
@@ -90,6 +94,7 @@
                    android:textColor="@color/primary_text"/>
 
                <EditText
+                   android:id="@+id/text2"
                    android:layout_width="0dp"
                    android:layout_height="50dp"
                    android:background="@drawable/ed_style"
@@ -103,6 +108,7 @@
                    android:textColor="@color/primary_text"/>
 
                <EditText
+                   android:id="@+id/text3"
                    android:layout_width="0dp"
                    android:layout_height="50dp"
                    android:background="@drawable/ed_style"
@@ -116,6 +122,7 @@
                    android:textColor="@color/primary_text"/>
 
                <EditText
+                   android:id="@+id/text4"
                    android:layout_width="0dp"
                    android:layout_height="50dp"
                    android:background="@drawable/ed_style"
@@ -129,6 +136,7 @@
                    android:textColor="@color/primary_text"/>
 
                <EditText
+                   android:id="@+id/text5"
                    android:layout_width="0dp"
                    android:layout_height="50dp"
                    android:background="@drawable/ed_style"
@@ -142,6 +150,7 @@
                    android:textColor="@color/primary_text"/>
 
                <EditText
+                   android:id="@+id/text6"
                    android:layout_width="0dp"
                    android:layout_height="50dp"
                    android:background="@drawable/ed_style"
@@ -159,7 +168,7 @@
 
 <!--            button-->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnVerify"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
@@ -169,15 +178,17 @@
                 android:textColor="@color/secondary_text"
                 android:textSize="17sp"
                 android:textStyle="bold"
+                android:layout_below="@id/linearOtp"
                 app:cornerRadius="10dp" />
 
 <!--            resend otp text-->
             <LinearLayout
+                android:id="@+id/linearResendOtp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_below="@id/btnVerify">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -197,9 +208,5 @@
                     android:fontFamily="@font/poppins_light"/>
 
             </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+    </RelativeLayout>
 </ScrollView>

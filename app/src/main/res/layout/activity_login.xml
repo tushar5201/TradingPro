@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="none"
     android:background="@color/bg_color">
 
     <RelativeLayout
@@ -115,7 +116,7 @@
             android:layout_below="@id/textInputLayoutPasswordLog"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_light"
-            android:text="@string/checkbox_desc"
+            android:text="@string/checkbox_remember"
             android:textColor="@color/desc_text"
             />
 
