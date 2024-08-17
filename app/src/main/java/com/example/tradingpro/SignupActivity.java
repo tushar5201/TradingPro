@@ -1,11 +1,14 @@
 package com.example.tradingpro;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +22,9 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +36,7 @@ import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -41,6 +48,7 @@ public class SignupActivity extends AppCompatActivity {
     String name, email, phone, password;
     RelativeLayout main;
     boolean flag;
+    ProgressBar progressBar;
 
 
     @Override
@@ -60,6 +68,7 @@ public class SignupActivity extends AppCompatActivity {
         textInputEdPassword = findViewById(R.id.textInputEdPassword);
         btnRegister = findViewById(R.id.btnRegister);
         chkRemember = findViewById(R.id.chkRemember);
+        progressBar = findViewById(R.id.progressBar);
         main = findViewById(R.id.main);
 
 //        switch to login screen
@@ -75,18 +84,18 @@ public class SignupActivity extends AppCompatActivity {
             password = textInputEdPassword.getText().toString().trim();
             phone = textInputEdPhone.getText().toString().trim();
 
-            if(isValidAllField()) {
-                if(chkRemember.isChecked()) {
+            if (isValidAllField()) {
+                if (chkRemember.isChecked()) {
                     emailFoundValidate();
-                    if(flag) {
+                    if (flag) {
+                        sendOtp();
                         insert();
-                        startActivity(new Intent(getApplicationContext(), SignupProcessActivity.class));
                     }
                 } else {
                     Snackbar.make(main, "Please accpect terms and conditionn", Snackbar.LENGTH_SHORT).show();
                 }
             } else {
-                Snackbar.make(main,"Please correct the errors", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(main, "Please correct the errors", Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -105,7 +114,7 @@ public class SignupActivity extends AppCompatActivity {
         return isNameValid && isEmailValid && isPhoneValid && isPasswordValid;
     }
 
-//    create textwatcher for all field(NAME)
+    //    create textwatcher for all field(NAME)
     public TextWatcher createNameTextWatcher() {
         return new TextWatcher() {
             @Override
@@ -125,7 +134,7 @@ public class SignupActivity extends AppCompatActivity {
         };
     }
 
-//    EMAIL
+    //    EMAIL
     public TextWatcher createEmailTextWatcher() {
         return new TextWatcher() {
             @Override
@@ -145,7 +154,7 @@ public class SignupActivity extends AppCompatActivity {
         };
     }
 
-//    PHONE
+    //    PHONE
     public TextWatcher createPhoneTextWatcher() {
         return new TextWatcher() {
             @Override
@@ -165,7 +174,7 @@ public class SignupActivity extends AppCompatActivity {
         };
     }
 
-//    PASSWORD
+    //    PASSWORD
     public TextWatcher createPasswordTextWatcher() {
         return new TextWatcher() {
             @Override
@@ -185,10 +194,10 @@ public class SignupActivity extends AppCompatActivity {
         };
     }
 
-//    name validation
+    //    name validation
     public boolean validateName() {
         String nameEd = textInputEdName.getText().toString().trim();
-        if(TextUtils.isEmpty(nameEd)) {
+        if (TextUtils.isEmpty(nameEd)) {
             textInputLayoutName.setError("Name cannot be empty");
             return false;
         } else if (!nameEd.matches("^[a-zA-Z ]+$")) {
@@ -280,15 +289,15 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void emailFoundValidate() {
-        DatabaseReference databaseReference =FirebaseDatabase.getInstance().getReference(Constant_user_info.TABLE_NAME);
-        Query queryMail =databaseReference.orderByChild(Constant_user_info.KEY_EMAIL).equalTo(email);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constant_user_info.TABLE_NAME);
+        Query queryMail = databaseReference.orderByChild(Constant_user_info.KEY_EMAIL).equalTo(email);
         Query queryPhn = databaseReference.orderByChild(Constant_user_info.KEY_PHONE).equalTo(phone);
 
 
         queryMail.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     flag = false;
                     Snackbar.make(main, "Email is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
                 } else {
@@ -301,11 +310,11 @@ public class SignupActivity extends AppCompatActivity {
                 Snackbar.make(main, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
             }
         });
-        
+
         queryPhn.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     flag = false;
                     Snackbar.make(main, "Phone number is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
                 } else {
@@ -319,5 +328,41 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void sendOtp() {
+        progressBar.setVisibility(View.VISIBLE);
+        btnRegister.setVisibility(View.INVISIBLE);
+
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+91" + phone,
+                60,
+                TimeUnit.SECONDS,
+                this,
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                        progressBar.setVisibility(View.GONE);
+                        btnRegister.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                        progressBar.setVisibility(View.GONE);
+                        btnRegister.setVisibility(View.VISIBLE);
+                        Snackbar.make(main, e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        progressBar.setVisibility(View.GONE);
+                        btnRegister.setVisibility(View.VISIBLE);
+                        Intent intent = new Intent(getApplicationContext(), OtpVerifyActivity.class);
+                        intent.putExtra("phone", phone);
+                        intent.putExtra("backendOtp", s);
+                        startActivity(intent);
+                    }
+                }
+        );
     }
 }

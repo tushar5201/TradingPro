@@ -134,8 +134,9 @@
             android:layout_below="@id/textInputLayoutPasswordLog"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_light"
-            android:text="@string/checkbox_desc"
-            android:textColor="@color/desc_text" />
+            android:text="@string/checkbox_remember"
+            android:textColor="@color/desc_text"
+            />
 
         <!--    btnLogin-->
         <com.google.android.material.button.MaterialButton

@@ -10,11 +10,13 @@
     <string name="phone_number">Phone Number</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="checkbox_remember">Remember Me.</string>
     <string name="checkbox_desc">By continuing you accept our Privacy Policy and terms of use.</string>
     <string name="register">Register</string>
     <string name="or">OR</string>
     <string name="already_have_an_account">Already have an account ?</string>
     <string name="login">Login</string>
+    <string name="Confirm">Confirm</string>
     <string name="welcome_to">Welcome to</string>
     <string name="tradingpro">TradingPro</string>
     <string name="don_t_have_an_account">Don\'t have an account ?</string>

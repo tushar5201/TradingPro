@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MpinActivity"
+    android:id="@+id/main"
+    android:background="@color/bg_color"
+    android:paddingVertical="15dp"
+    android:paddingHorizontal="15dp">
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/back"
+        />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/backBtn"
+        android:src="@drawable/yellow_logo_trans" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HI"
+        android:textColor="@color/yellow"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
+        android:fontFamily="@font/poppins"
+        android:layout_below="@id/imgLogo"
+        />
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:text="Welcome back"
+        android:layout_below="@id/tvTitle"
+        android:textColor="@color/desc_text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvSubDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter 4 digit PIN."
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/desc_text"
+        android:textSize="15sp"
+        android:layout_marginStart="50dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearPIN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvSubDesc"
+        >
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:height="50dp"
+        android:backgroundTint="@color/yellow"
+        android:fontFamily="@font/poppins"
+        android:text="@string/Confirm"
+        android:textColor="@color/secondary_text"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        android:layout_above="@id/btnFingerprint"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFingerprint"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:height="50dp"
+        android:backgroundTint="@color/yellow"
+        android:fontFamily="@font/poppins"
+        android:text="Login with Fingerprint"
+        android:textColor="@color/secondary_text"
+        app:icon="@drawable/fingerprint"
+        app:iconGravity="textStart"
+        app:iconSize="25dp"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/bg_color">
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:scrollbars="none">
 
     <RelativeLayout
         android:id="@+id/main"
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
-                android:maxLines="1"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--phone number -->
@@ -95,16 +95,16 @@
             app:helperTextEnabled="true"
             app:helperTextTextColor="@color/desc_text"
             app:hintTextColor="@color/edBorder"
-            app:startIconDrawable="@drawable/phone_call"
-            app:prefixText="+91">
+            app:prefixText="+91"
+            app:startIconDrawable="@drawable/phone_call">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:maxLength="10"
                 android:id="@+id/textInputEdPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="number"
-                android:maxLines="1"/>
+                android:maxLength="10"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--email -->
@@ -129,15 +129,15 @@
             app:helperTextEnabled="true"
             app:helperTextTextColor="@color/desc_text"
             app:hintTextColor="@color/edBorder"
-            app:startIconDrawable="@drawable/mail"
-            app:placeholderText="abc1@gmail.com">
+            app:placeholderText="abc1@gmail.com"
+            app:startIconDrawable="@drawable/mail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEdEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--password -->
@@ -169,7 +169,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
-                android:maxLines="1"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.checkbox.MaterialCheckBox
@@ -178,9 +178,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textInputLayoutPassword"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_light"
             android:text="@string/checkbox_desc"
-            android:textColor="@color/desc_text"
-            android:fontFamily="@font/poppins_light"/>
+            android:textColor="@color/desc_text" />
 
         <!--register button-->
         <com.google.android.material.button.MaterialButton
@@ -196,6 +196,12 @@
             android:textColor="@color/secondary_text"
             android:textStyle="bold"
             app:cornerRadius="10dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <!--    Divider-->
         <RelativeLayout
@@ -258,8 +264,8 @@
             android:id="@+id/linearSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
             android:layout_below="@id/divider2"
+            android:layout_marginBottom="30dp"
             android:gravity="center"
             android:orientation="horizontal">
 
