@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.tradingpro.SignupProcessFragment.BiometricsEnableFragment;
 import com.example.tradingpro.SignupProcessFragment.DisclaimerFragment;
 import com.example.tradingpro.SignupProcessFragment.IdInformationFragment;
-import com.example.tradingpro.SignupProcessFragment.MpinFragment;
+import com.example.tradingpro.SignupProcessFragment.MpinCreateFragment;
 import com.example.tradingpro.SignupProcessFragment.PersonalInformationFragment;
 import com.shuhart.stepview.StepView;
 
@@ -33,7 +33,7 @@ public class SignupProcessActivity extends AppCompatActivity {
     List<Fragment> fragments = Arrays.asList(
             new PersonalInformationFragment(),
             new IdInformationFragment(),
-            new MpinFragment(),
+            new MpinCreateFragment(),
             new BiometricsEnableFragment(),
             new DisclaimerFragment()
     );
