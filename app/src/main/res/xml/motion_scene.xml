@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
+    >
+
+    <Transition
+        android:id="@+id/transition_splash"
+        motion:duration="5000"
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetStart="@layout/splash_motion"
+        motion:constraintSetEnd="@layout/login_motion">
+
+        <KeyFrameSet>
+
+            <KeyPosition
+                motion:keyPositionType="deltaRelative"
+                motion:framePosition="65"
+                motion:motionTarget="@+id/imgLogo"
+                motion:percentY="0"
+                motion:percentX="0"
+                />
+
+            <KeyPosition
+                motion:keyPositionType="deltaRelative"
+                motion:framePosition="75"
+                motion:motionTarget="@+id/imgLogo"
+                motion:percentY="1"
+                motion:percentX="1"
+                />
+
+            <KeyAttribute
+                motion:motionTarget="@+id/tvWelcome"
+                android:alpha="0"
+                motion:framePosition="75"/>
+
+            <KeyAttribute
+                motion:motionTarget="@+id/tvWelcome"
+                android:alpha="1"
+                motion:framePosition="85"/>
+
+            <KeyAttribute
+                motion:motionTarget="@+id/tvAppname"
+                android:alpha="0"
+                motion:framePosition="75"/>
+
+            <KeyAttribute
+                motion:motionTarget="@+id/tvAppname"
+                android:alpha="1"
+                motion:framePosition="85"/>
+
+            <KeyAttribute
+                motion:motionTarget="@+id/realtiveLogin"
+                android:alpha="0"
+                motion:framePosition="75"/>
+
+            <KeyAttribute
+                motion:motionTarget="@+id/realtiveLogin"
+                android:alpha="1"
+                motion:framePosition="85"/>
+
+
+            <KeyAttribute
+                motion:motionTarget="@+id/linearSignupLog"
+                android:alpha="0"
+                motion:framePosition="75"/>
+
+            <KeyAttribute
+                motion:motionTarget="@+id/linearSignupLog"
+                android:alpha="1"
+                motion:framePosition="85"/>
+
+        </KeyFrameSet>
+
+    </Transition>
+
+
+</MotionScene>

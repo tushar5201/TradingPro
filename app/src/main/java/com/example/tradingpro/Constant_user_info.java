@@ -6,4 +6,5 @@ public class Constant_user_info {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_PHONE = "phone";
+    public static Boolean isCheckSplash = true;
 }

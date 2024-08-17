@@ -1,52 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    android:scrollbars="none">
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="30dp"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/welcome_to"
+        android:textColor="@color/desc_text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+       />
+
+    <TextView
+        android:id="@+id/tvAppname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvWelcome"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_font"
+        android:text="@string/tradingpro"
+        android:textColor="@color/primary_text"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
+        />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_below="@id/tvAppname"
+        android:src="@drawable/yellow_logo_trans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppname"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <!--    Signup Line-->
 
     <RelativeLayout
-        android:id="@+id/main"
+        android:id="@+id/realtiveLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="30dp"
-        tools:context=".SignupActivity">
+        android:layout_below="@id/imgLogo"
+        android:layout_marginTop="200dp"
+        android:alpha="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_light"
-            android:gravity="center"
-            android:text="@string/hey_there"
-            android:textColor="@color/desc_text"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tvAppname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvWelcome"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/poppins"
-            android:gravity="center"
-            android:text="@string/create_an_account"
-            android:textColor="@color/primary_text"
-            android:textSize="27sp"
-            android:textStyle="bold" />
-
-        <!--username -->
+        <!--Username-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutName"
+            android:id="@+id/textInputLayoutEmailOrPhnLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:hint="@string/fullname"
+            android:layout_marginTop="100dp"
+            android:hint="@string/login_mail_or_phn"
             app:boxBackgroundColor="@color/edText"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
@@ -64,88 +90,19 @@
             app:startIconDrawable="@drawable/user">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEdName"
+                android:id="@+id/textInputEdEmailOrPhnLog"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--phone number -->
+        <!--password-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPhone"
+            android:id="@+id/textInputLayoutPasswordLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textInputLayoutName"
-            android:layout_marginTop="5dp"
-            android:hint="@string/phone_number"
-            app:boxBackgroundColor="@color/edText"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/edBorder"
-            app:counterEnabled="true"
-            app:counterMaxLength="10"
-            app:cursorColor="@color/edBorder"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            app:errorIconDrawable="@drawable/exclamation"
-            app:helperText="@string/required"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@color/desc_text"
-            app:hintTextColor="@color/edBorder"
-            app:prefixText="+91"
-            app:startIconDrawable="@drawable/phone_call">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEdPhone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:maxLength="10"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!--email -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textInputLayoutPhone"
-            android:layout_marginTop="5dp"
-            android:hint="@string/email"
-            app:boxBackgroundColor="@color/edText"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/edBorder"
-            app:cursorColor="@color/edBorder"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            app:errorIconDrawable="@drawable/exclamation"
-            app:helperText="@string/required"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@color/desc_text"
-            app:hintTextColor="@color/edBorder"
-            app:placeholderText="abc1@gmail.com"
-            app:startIconDrawable="@drawable/mail">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEdEmail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!--password -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textInputLayoutEmail"
+            android:layout_below="@id/textInputLayoutEmailOrPhnLog"
             android:layout_marginTop="5dp"
             android:hint="@string/password"
             app:boxBackgroundColor="@color/edText"
@@ -165,7 +122,7 @@
             app:startIconDrawable="@drawable/padlock">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEdPassword"
+                android:id="@+id/textInputEdPasswordLog"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
@@ -176,39 +133,34 @@
             android:id="@+id/chkRemember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textInputLayoutPassword"
+            android:layout_below="@id/textInputLayoutPasswordLog"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_light"
             android:text="@string/checkbox_desc"
             android:textColor="@color/desc_text" />
 
-        <!--register button-->
+        <!--    btnLogin-->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/chkRemember"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:height="50dp"
             android:backgroundTint="@color/yellow"
             android:fontFamily="@font/poppins"
-            android:text="@string/register"
+            android:text="@string/login"
             android:textColor="@color/secondary_text"
+            android:textSize="17sp"
             android:textStyle="bold"
             app:cornerRadius="10dp" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
 
         <!--    Divider-->
         <RelativeLayout
             android:id="@+id/relativeOR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnRegister"
+            android:layout_below="@id/btnLogin"
             android:layout_marginTop="30dp">
 
             <com.google.android.material.divider.MaterialDivider
@@ -259,31 +211,33 @@
             android:layout_marginBottom="20dp"
             android:background="@color/desc_text" />
 
-        <!--    Signup Line-->
+
         <LinearLayout
-            android:id="@+id/linearSignup"
+            android:id="@+id/linearSignupLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/divider2"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_below="@+id/divider2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_light"
-                android:text="@string/already_have_an_account"
+                android:text="@string/don_t_have_an_account"
                 android:textColor="@color/desc_text" />
 
             <TextView
-                android:id="@+id/tvlogin"
+                android:id="@+id/btnsignup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="@string/login"
+                android:text="@string/sign_up"
                 android:textColor="@color/yellow" />
         </LinearLayout>
 
     </RelativeLayout>
-</ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

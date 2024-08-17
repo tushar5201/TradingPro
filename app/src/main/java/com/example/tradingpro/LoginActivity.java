@@ -10,11 +10,17 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.constraintlayout.motion.widget.MotionScene;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView btnsignup;
     TextInputLayout textInputLayoutEmailOrPhnLog, textInputLayoutPasswordLog;
     TextInputEditText textInputEdEmailOrPhnLog, textInputEdPasswordLog;
+    String emailOrPhone, password;
+    MotionLayout main;
     String emailOrPhone, password, user, pass, username;
     RelativeLayout main;
     MaterialCheckBox chkRemember;
@@ -52,7 +60,16 @@ public class LoginActivity extends AppCompatActivity {
         textInputLayoutPasswordLog = findViewById(R.id.textInputLayoutPasswordLog);
         textInputEdEmailOrPhnLog = findViewById(R.id.textInputEdEmailOrPhnLog);
         textInputEdPasswordLog = findViewById(R.id.textInputEdPasswordLog);
-        chkRemember = findViewById(R.id.chkRemember);
+      chkRemember = findViewById(R.id.chkRemember);
+        main = findViewById(R.id.main);
+
+        if(!Constant_user_info.isCheckSplash) {
+            MotionScene.Transition transition = main.getTransition(R.id.transition_splash);
+            transition.setAutoTransition(MotionScene.Transition.AUTO_JUMP_TO_END);
+        } else {
+            MotionScene.Transition transition = main.getTransition(R.id.transition_splash);
+            transition.setAutoTransition(MotionScene.Transition.AUTO_ANIMATE_TO_END);
+        }
 
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -93,6 +110,10 @@ public class LoginActivity extends AppCompatActivity {
         textInputEdPasswordLog.addTextChangedListener(createpasswordWatcher());
     }
 
+        btnsignup.setOnClickListener(v -> {
+            Constant_user_info.isCheckSplash = false;
+            Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
+            startActivity(intent);
 
     public void checkEmail() {
         user = textInputEdEmailOrPhnLog.getText().toString().trim();
