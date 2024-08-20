@@ -21,17 +21,16 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".SignupProcessActivity"
-            android:exported="true"></activity>
+            android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"
-            android:exported="true"></activity>
+            android:exported="false" />
         <activity
             android:name=".SignupActivity"
-            android:exported="true">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true" >
@@ -44,8 +43,7 @@
       
         <activity
             android:name=".OtpVerifyActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="false" />
 
       <activity
             android:name=".MainActivity"

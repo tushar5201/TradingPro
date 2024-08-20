@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:paddingHorizontal="15dp"
     tools:context=".SignupProcessFragment.BiometricsEnableFragment">
 
     <com.airbnb.lottie.LottieAnimationView
@@ -13,12 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/lottie" />
+        app:lottie_rawRes="@raw/fingerprint" />
 
     <TextView
+        android:id="@+id/enableText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/lottie"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/poppins"
         android:text="Enable two factor security"
@@ -27,8 +29,10 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/enableDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/enableText"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_light"
         android:paddingHorizontal="30dp"
@@ -36,39 +40,82 @@
         android:textColor="@color/desc_text"
         android:textSize="15sp" />
 
-    <LinearLayout
-        android:layout_marginTop="30dp"
+    <!--        <com.google.android.material.button.MaterialButton-->
+    <!--            android:id="@+id/btnEnable"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="60dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text="Enable"-->
+    <!--            android:fontFamily="@font/poppins"-->
+    <!--            android:textSize="20sp"-->
+    <!--            app:cornerRadius="10dp"-->
+    <!--            android:backgroundTint="@color/yellow"-->
+    <!--            android:textColor="@color/primary_text"/>-->
+
+    <!--        <com.google.android.material.button.MaterialButton-->
+    <!--            android:id="@+id/btnSkip"-->
+    <!--            android:layout_marginStart="10dp"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="60dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text="Skip"-->
+    <!--            android:fontFamily="@font/poppins"-->
+    <!--            android:textSize="20sp"-->
+    <!--            app:cornerRadius="10dp"-->
+    <!--            android:backgroundTint="@color/desc_text"-->
+    <!--            android:textColor="@color/secondary_text"-->
+    <!--            />-->
+
+    <RadioGroup
+        android:layout_below="@+id/enableDesc"
+        android:id="@+id/radioGrp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:weightSum="2"
-        android:paddingHorizontal="30dp">
+        android:weightSum="1"
+        >
+            <RadioButton
+                android:checked="true"
+                android:id="@+id/radioEnable"
+                android:layout_width="100dp"
+                android:layout_weight=".5"
+                android:layout_height="50dp"
+                android:background="@drawable/radio_selector"
+                android:layout_marginRight="5dp"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:textColor="@color/primary_text"
+                android:text="Enable" />
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="Enable"
-            android:fontFamily="@font/poppins"
-            android:textSize="20sp"
-            app:cornerRadius="10dp"
-            android:backgroundTint="@color/yellow"
-            android:textColor="@color/primary_text"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_marginStart="10dp"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="Skip"
-            android:fontFamily="@font/poppins"
-            android:textSize="20sp"
-            app:cornerRadius="10dp"
-            android:backgroundTint="@color/edText"
-            android:textColor="@color/yellow"
-            />
-
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/radioNotnow"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:layout_marginLeft="5dp"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:background="@drawable/radio_selector"
+                android:textColor="@color/primary_text"
+                android:text="Not Now" />
+    </RadioGroup>
 
 
-</LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="53dp"
+        android:backgroundTint="@color/yellow"
+        android:fontFamily="@font/poppins"
+        android:text="@string/continueNext"
+        android:textColor="@color/secondary_text"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp" />
+
+</RelativeLayout>

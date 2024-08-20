@@ -2,6 +2,7 @@ package com.example.tradingpro;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tradingpro.SignupProcessFragment.PersonalInformationFragment;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -89,7 +91,7 @@ public class SignupActivity extends AppCompatActivity {
                     emailFoundValidate();
                     if (flag) {
                         sendOtp();
-                        insert();
+                        insertShared();
                     }
                 } else {
                     Snackbar.make(main, "Please accpect terms and conditionn", Snackbar.LENGTH_SHORT).show();
@@ -267,27 +269,6 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    //    record insert method
-    public void insert() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("username", name);
-        map.put("phone", phone);
-        map.put("email", email);
-        map.put("password", password);
-
-        FirebaseDatabase.getInstance().getReference().child("user_info")
-                .push()
-                .setValue(map)
-                .addOnSuccessListener(sl -> {
-                    Snackbar.make(main, "Successfully Inserted", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                })
-                .addOnFailureListener(fl -> {
-                    Snackbar.make(main, "Something went wrong, please re-enter data!", Toast.LENGTH_SHORT).show();
-                });
-
-    }
-
     public void emailFoundValidate() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constant_user_info.TABLE_NAME);
         Query queryMail = databaseReference.orderByChild(Constant_user_info.KEY_EMAIL).equalTo(email);
@@ -364,5 +345,15 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    public void insertShared() {
+        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_ID, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(Constant_user_info.SHARED_USERNM, name);
+        editor.putString(Constant_user_info.SHARED_EMAIL, email);
+        editor.putString(Constant_user_info.SHARED_PASS, password);
+        editor.putString(Constant_user_info.SHARED_PHONE, phone);
+        editor.commit();
     }
 }

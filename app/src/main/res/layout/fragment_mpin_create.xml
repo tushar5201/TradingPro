@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SignupProcessFragment.MpinCreateFragment"
-    android:background="@color/bg_color">
+    android:background="@color/bg_color"
+    android:paddingHorizontal="15dp"
+    android:id="@+id/main">
 
   <TextView
       android:id="@+id/tvTitle"
@@ -45,10 +48,11 @@
         >
 
         <EditText
+            android:id="@+id/text1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/ed_style"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1"
             android:layout_weight="1"
             android:gravity="center"
@@ -56,47 +60,53 @@
             android:imeOptions="actionNext"
             android:layout_marginEnd="10dp"
             android:textColor="@color/primary_text"
+            android:textStyle="bold"
             />
 
         <EditText
+            android:id="@+id/text2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/ed_style"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp"
             android:imeOptions="actionNext"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/primary_text"/>
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
 
         <EditText
+            android:id="@+id/text3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/ed_style"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp"
             android:imeOptions="actionNext"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/primary_text"/>
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
 
         <EditText
+            android:id="@+id/text4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/ed_style"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1"
             android:layout_weight="1"
             android:gravity="center"
-            android:textStyle="bold"
             android:textSize="20sp"
             android:imeOptions="actionNext"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/primary_text"/>
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
@@ -127,10 +137,11 @@
         >
 
         <EditText
+            android:id="@+id/con1"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/ed_style"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1"
             android:layout_weight="1"
             android:gravity="center"
@@ -138,39 +149,45 @@
             android:imeOptions="actionNext"
             android:layout_marginEnd="10dp"
             android:textColor="@color/primary_text"
+            android:textStyle="bold"
             />
 
         <EditText
+            android:id="@+id/con2"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/ed_style"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp"
             android:imeOptions="actionNext"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/primary_text"/>
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
 
         <EditText
+            android:id="@+id/con3"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/ed_style"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp"
             android:imeOptions="actionNext"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/primary_text"/>
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
 
         <EditText
+            android:id="@+id/con4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/ed_style"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1"
             android:layout_weight="1"
             android:gravity="center"
@@ -178,10 +195,24 @@
             android:textSize="20sp"
             android:imeOptions="actionNext"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/primary_text"/>
+            android:textColor="@color/primary_text"
+            />
 
     </LinearLayout>
 
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/yellow"
+        android:fontFamily="@font/poppins"
+        android:text="@string/continueNext"
+        android:textColor="@color/secondary_text"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>
