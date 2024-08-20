@@ -1,66 +1,73 @@
 package com.example.tradingpro.SignupProcessFragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 
+import com.example.tradingpro.Constant_user_info;
 import com.example.tradingpro.R;
+import com.example.tradingpro.SignupProcessActivity;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MpinCreateFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MpinCreateFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MpinCreateFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MpinFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MpinCreateFragment newInstance(String param1, String param2) {
-        MpinCreateFragment fragment = new MpinCreateFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    View view;
+    EditText text1, text2, text3, text4, con1, con2, con3, con4;
+    MaterialButton btnContinue;
+    String mpin, confMpin;
+    RelativeLayout main;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mpin_create, container, false);
+        view = inflater.inflate(R.layout.fragment_mpin_create, container, false);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        main = view.findViewById(R.id.main);
+        text1 = view.findViewById(R.id.text1);
+        text2 = view.findViewById(R.id.text2);
+        text3 = view.findViewById(R.id.text3);
+        text4 = view.findViewById(R.id.text4);
+        con1 = view.findViewById(R.id.con1);
+        con2 = view.findViewById(R.id.con2);
+        con3 = view.findViewById(R.id.con3);
+        con4 = view.findViewById(R.id.con4);
+
+        btnContinue = view.findViewById(R.id.btnContinue);
+
+        btnContinue.setOnClickListener(v -> {
+            mpin = text1.getText().toString() + text2.getText().toString() + text3.getText().toString() + text4.getText().toString();
+            confMpin = con1.getText().toString() + con2.getText().toString() + con3.getText().toString() + con4.getText().toString();
+
+            if (mpin.equals(confMpin) && !TextUtils.isEmpty(mpin) && !TextUtils.isEmpty(confMpin) ) {
+                SharedPreferences sp = getActivity().getSharedPreferences(Constant_user_info.SHARED_ID, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString(Constant_user_info.SHARED_MPIN, mpin);
+                editor.commit();
+
+                Constant_user_info.currentStep = 3;
+                BiometricsEnableFragment biometricsEnableFragment = new BiometricsEnableFragment();
+                ((SignupProcessActivity) getActivity()).loadFragment(biometricsEnableFragment);
+            } else {
+                Snackbar.make(main, "Mpin not Matched", Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 }

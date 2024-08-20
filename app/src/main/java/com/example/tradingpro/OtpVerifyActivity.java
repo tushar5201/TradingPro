@@ -55,10 +55,10 @@ public class OtpVerifyActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String phone = intent.getStringExtra("phone");
         String backendOtp = intent.getStringExtra("backendOtp");
-        String enteredOtp = text1.getText().toString() + text2.getText().toString() + text3.getText().toString() + text4.getText().toString() + text5.getText().toString() + text6.getText().toString();
         tvMob.setText(phone);
 
         btnVerify.setOnClickListener(v -> {
+            String enteredOtp = text1.getText().toString() + text2.getText().toString() + text3.getText().toString() + text4.getText().toString() + text5.getText().toString() + text6.getText().toString();
             PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(backendOtp, enteredOtp);
             FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -92,7 +92,7 @@
 
     <RelativeLayout
         android:layout_width="410dp"
-        android:layout_height="120dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp">
         <ImageView
             android:id="@+id/ib2"
@@ -103,6 +103,7 @@
             android:layout_marginStart="60dp"/>
 
         <TextView
+            android:id="@+id/txtUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
@@ -114,5 +115,20 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/yellow"
             android:layout_below="@id/ib2"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/yellow"
+            android:fontFamily="@font/poppins"
+            android:text="@string/continueNext"
+            android:textColor="@color/secondary_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            />
     </RelativeLayout>
 </LinearLayout>

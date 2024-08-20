@@ -1,66 +1,99 @@
 package com.example.tradingpro.SignupProcessFragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.tradingpro.Constant_user_info;
+import com.example.tradingpro.LoginActivity;
 import com.example.tradingpro.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DisclaimerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public class DisclaimerFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DisclaimerFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DisclaimerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DisclaimerFragment newInstance(String param1, String param2) {
-        DisclaimerFragment fragment = new DisclaimerFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    View view;
+    MaterialButton btnContinue;
+    CheckBox chkAgree;
+    RelativeLayout main;
+    String name, phone, email, password, address, mpin, fingerprint;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_disclaimer, container, false);
+        view = inflater.inflate(R.layout.fragment_disclaimer, container, false);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        btnContinue = view.findViewById(R.id.btnContinue);
+        chkAgree = view.findViewById(R.id.chkAgree);
+        main = view.findViewById(R.id.main);
+
+
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant_user_info.SHARED_ID, Context.MODE_PRIVATE);
+        name = sp.getString(Constant_user_info.SHARED_USERNM, "");
+        phone = sp.getString(Constant_user_info.SHARED_PHONE, "");
+        email = sp.getString(Constant_user_info.SHARED_EMAIL, "");
+        password = sp.getString(Constant_user_info.SHARED_PASS, "");
+        address = sp.getString(Constant_user_info.SHARED_ADDRESS, "");
+        mpin = sp.getString(Constant_user_info.SHARED_MPIN, "");
+        fingerprint = sp.getString(Constant_user_info.SHARED_FINGERPRINT, "");
+
+        btnContinue.setOnClickListener(v -> {
+            if (chkAgree.isChecked()) {
+                insert();
+                SharedPreferences.Editor editor = sp.edit();
+                editor.clear();
+                editor.apply();
+                startActivity(new Intent(getContext(), LoginActivity.class));
+            } else {
+                Snackbar.make(main, "Please Agree Terms and Conditions", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    //    record insert method
+    public void insert() {
+        Map<String, Object> map = new HashMap<>();
+        map.put(Constant_user_info.KEY_USERNAME, name);
+        map.put(Constant_user_info.KEY_PHONE, phone);
+        map.put(Constant_user_info.KEY_EMAIL, email);
+        map.put(Constant_user_info.KEY_PASSWORD, password);
+        map.put(Constant_user_info.KEY_ADDRESS, address);
+        map.put(Constant_user_info.KEY_MPIN, mpin);
+        map.put(Constant_user_info.KEY_FINGERPRINT, fingerprint);
+
+
+        FirebaseDatabase.getInstance().getReference().child(Constant_user_info.TABLE_NAME)
+                .push()
+                .setValue(map)
+                .addOnSuccessListener(sl -> {
+                    Snackbar.make(main, "Successfully Inserted", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(fl -> {
+                    Snackbar.make(main, "Something went wrong, please re-enter data!", Toast.LENGTH_SHORT).show();
+                });
+
     }
 }
