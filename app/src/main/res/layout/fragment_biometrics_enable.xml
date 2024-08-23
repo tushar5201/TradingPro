@@ -103,19 +103,41 @@
                 android:text="Not Now" />
     </RadioGroup>
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnContinue"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="53dp"
-        android:backgroundTint="@color/yellow"
-        android:fontFamily="@font/poppins"
-        android:text="@string/continueNext"
-        android:textColor="@color/secondary_text"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:cornerRadius="10dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="0.5"
+            android:backgroundTint="@color/yellow"
+            android:fontFamily="@font/poppins"
+            android:text="@string/backNext"
+            android:textColor="@color/secondary_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinue"
+            android:layout_marginStart="10dp"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="0.5"
+            android:backgroundTint="@color/yellow"
+            android:fontFamily="@font/poppins"
+            android:text="@string/continueNext"
+            android:textColor="@color/secondary_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
 
 </RelativeLayout>
