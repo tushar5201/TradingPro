@@ -21,7 +21,7 @@ import com.google.android.material.button.MaterialButton;
 public class BiometricsEnableFragment extends Fragment {
 
     View view;
-    MaterialButton btnContinue;
+    MaterialButton btnContinue, btnBack;
     RadioButton radioEnable, radioNotnow;
 
     @Override
@@ -39,6 +39,13 @@ public class BiometricsEnableFragment extends Fragment {
         btnContinue = view.findViewById(R.id.btnContinue);
         radioEnable = view.findViewById(R.id.radioEnable);
         radioNotnow = view.findViewById(R.id.radioNotnow);
+        btnBack = view.findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(v -> {
+            Constant_user_info.currentStep -= 1;
+            MpinCreateFragment mpinCreateFragment = new MpinCreateFragment();
+            ((SignupProcessActivity) getActivity()).loadFragment(mpinCreateFragment);
+        });
 
         btnContinue.setOnClickListener(v -> {
             SharedPreferences sp = getActivity().getSharedPreferences(Constant_user_info.SHARED_ID, Context.MODE_PRIVATE);
@@ -46,7 +53,7 @@ public class BiometricsEnableFragment extends Fragment {
             editor.putString(Constant_user_info.SHARED_FINGERPRINT, String.valueOf(radioEnable.isChecked()));
             editor.commit();
 
-            Constant_user_info.currentStep = 4;
+            Constant_user_info.currentStep += 1;
             DisclaimerFragment disclaimerFragment = new DisclaimerFragment();
             ((SignupProcessActivity) getActivity()).loadFragment(disclaimerFragment);
         });

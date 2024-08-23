@@ -26,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class MpinCreateFragment extends Fragment {
     View view;
     EditText text1, text2, text3, text4, con1, con2, con3, con4;
-    MaterialButton btnContinue;
+    MaterialButton btnContinue, btnBack;
     String mpin, confMpin;
     RelativeLayout main;
 
@@ -54,6 +54,14 @@ public class MpinCreateFragment extends Fragment {
 
         btnContinue = view.findViewById(R.id.btnContinue);
 
+        btnBack = view.findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(v -> {
+            Constant_user_info.currentStep -= 1;
+            IdInformationFragment idInformationFragment = new IdInformationFragment();
+            ((SignupProcessActivity) getActivity()).loadFragment(idInformationFragment);
+        });
+
         btnContinue.setOnClickListener(v -> {
             mpin = text1.getText().toString() + text2.getText().toString() + text3.getText().toString() + text4.getText().toString();
             confMpin = con1.getText().toString() + con2.getText().toString() + con3.getText().toString() + con4.getText().toString();
@@ -64,7 +72,7 @@ public class MpinCreateFragment extends Fragment {
                 editor.putString(Constant_user_info.SHARED_MPIN, mpin);
                 editor.commit();
 
-                Constant_user_info.currentStep = 3;
+                Constant_user_info.currentStep += 1;
                 BiometricsEnableFragment biometricsEnableFragment = new BiometricsEnableFragment();
                 ((SignupProcessActivity) getActivity()).loadFragment(biometricsEnableFragment);
             } else {

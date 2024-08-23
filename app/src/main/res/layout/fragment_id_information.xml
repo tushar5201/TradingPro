@@ -129,7 +129,7 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="0.5"
-                android:backgroundTint="@color/yellow"
+                android:backgroundTint="@color/desc_text"
                 android:fontFamily="@font/poppins"
                 android:text="@string/backNext"
                 android:textColor="@color/secondary_text"

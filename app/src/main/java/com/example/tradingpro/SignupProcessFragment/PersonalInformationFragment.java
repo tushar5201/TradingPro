@@ -68,7 +68,7 @@ public class PersonalInformationFragment extends Fragment {
             if (isValidAllField()) {
                 fullAddress = edaddress.getText().toString().trim() + ", " + edcity.getText().toString().trim() + ", " + edstate.getText().toString().trim() + ", " + edcountry.getText().toString().trim() + "-" + edcode.getText().toString().trim();
                 insertShared();
-                Constant_user_info.currentStep = 1;
+                Constant_user_info.currentStep += 1;
                 IdInformationFragment idInformationFragment = new IdInformationFragment();
                 ((SignupProcessActivity) getActivity()).loadFragment(idInformationFragment);
             }

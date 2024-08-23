@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.tradingpro.Constant_user_info;
 import com.example.tradingpro.LoginActivity;
 import com.example.tradingpro.R;
+import com.example.tradingpro.SignupProcessActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,7 +30,7 @@ import java.util.Map;
 public class DisclaimerFragment extends Fragment {
 
     View view;
-    MaterialButton btnContinue;
+    MaterialButton btnContinue, btnBack;
     CheckBox chkAgree;
     RelativeLayout main;
     String name, phone, email, password, address, mpin, fingerprint;
@@ -48,7 +49,7 @@ public class DisclaimerFragment extends Fragment {
         btnContinue = view.findViewById(R.id.btnContinue);
         chkAgree = view.findViewById(R.id.chkAgree);
         main = view.findViewById(R.id.main);
-
+        btnBack = view.findViewById(R.id.btnBack);
 
         SharedPreferences sp = getActivity().getSharedPreferences(Constant_user_info.SHARED_ID, Context.MODE_PRIVATE);
         name = sp.getString(Constant_user_info.SHARED_USERNM, "");
@@ -58,6 +59,12 @@ public class DisclaimerFragment extends Fragment {
         address = sp.getString(Constant_user_info.SHARED_ADDRESS, "");
         mpin = sp.getString(Constant_user_info.SHARED_MPIN, "");
         fingerprint = sp.getString(Constant_user_info.SHARED_FINGERPRINT, "");
+
+        btnBack.setOnClickListener(v -> {
+            Constant_user_info.currentStep -= 1;
+            BiometricsEnableFragment biometricsEnableFragment = new BiometricsEnableFragment();
+            ((SignupProcessActivity) getActivity()).loadFragment(biometricsEnableFragment);
+        });
 
         btnContinue.setOnClickListener(v -> {
             if (chkAgree.isChecked()) {
