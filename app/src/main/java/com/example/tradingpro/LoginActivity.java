@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-
         mainRelative = findViewById(R.id.realtiveLogin);
         btnLogin = findViewById(R.id.btnLogin);
         btnsignup = findViewById(R.id.btnsignup);
@@ -84,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
         btnLogin.setOnClickListener(v -> {
             emailOrPhone = textInputEdEmailOrPhnLog.getText().toString().trim();
             password = textInputEdPasswordLog.getText().toString().trim();
@@ -104,7 +102,9 @@ public class LoginActivity extends AppCompatActivity {
 
             if (flag && chkRemember.isChecked()) {
                 editor.putString("unm", username);
+                editor.putString("emailOrPhone", emailOrPhone);
                 editor.commit();
+                startActivity(new Intent(getApplicationContext(), MpinActivity.class));
             }
         });
         textInputEdEmailOrPhnLog.addTextChangedListener(createEmailWatcher());
@@ -128,7 +128,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (password.equals(pass)) {
                             flag = true;
-                            startActivity(new Intent(getApplicationContext(), MpinActivity.class));
                         } else {
                             Snackbar.make(mainRelative, "Invalid credentials ", Snackbar.LENGTH_SHORT).show();
                             flag = false;
@@ -165,7 +164,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (password.equals(pass)) {
                             flag = true;
-                            startActivity(new Intent(getApplicationContext(), MpinActivity.class));
                         } else {
                             Snackbar.make(mainRelative, "Invalid credentials ", Snackbar.LENGTH_SHORT).show();
                             flag = false;
