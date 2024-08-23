@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +58,7 @@ public class MpinCreateFragment extends Fragment {
             mpin = text1.getText().toString() + text2.getText().toString() + text3.getText().toString() + text4.getText().toString();
             confMpin = con1.getText().toString() + con2.getText().toString() + con3.getText().toString() + con4.getText().toString();
 
-            if (mpin.equals(confMpin) && !TextUtils.isEmpty(mpin) && !TextUtils.isEmpty(confMpin) ) {
+            if (mpin.equals(confMpin) && !TextUtils.isEmpty(mpin) && !TextUtils.isEmpty(confMpin)) {
                 SharedPreferences sp = getActivity().getSharedPreferences(Constant_user_info.SHARED_ID, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString(Constant_user_info.SHARED_MPIN, mpin);
@@ -69,5 +71,137 @@ public class MpinCreateFragment extends Fragment {
                 Snackbar.make(main, "Mpin not Matched", Snackbar.LENGTH_SHORT).show();
             }
         });
+        text1.addTextChangedListener(otpbox1());
+        text2.addTextChangedListener(otpbox2());
+        text3.addTextChangedListener(otpbox3());
+        con1.addTextChangedListener(otpConbox1());
+        con2.addTextChangedListener(otpConbox2());
+        con3.addTextChangedListener(otpConbox3());
+    }
+
+    public TextWatcher otpbox1() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    text2.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
+
+    public TextWatcher otpbox2() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    text3.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
+
+    public TextWatcher otpbox3() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    text4.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
+
+    public TextWatcher otpConbox1() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    con2.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
+
+    public TextWatcher otpConbox2() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    con3.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
+
+    public TextWatcher otpConbox3() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    con4.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
     }
 }
