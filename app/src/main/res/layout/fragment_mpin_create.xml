@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SignupProcessFragment.MpinCreateFragment"
+    android:background="@color/bg_color"
+    android:paddingHorizontal="15dp"
+    android:id="@+id/main">
+
+  <TextView
+      android:id="@+id/tvTitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Create your secure PIN"
+      android:textColor="@color/primary_text"
+      android:textSize="25sp"
+      android:fontFamily="@font/poppins"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:id="@+id/tvSubDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter 4 digit PIN."
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/desc_text"
+        android:textSize="15sp"
+        android:layout_marginStart="50dp"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearPIN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvSubDesc"
+        >
+
+        <EditText
+            android:id="@+id/text1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/text2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/text3"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/text4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSubRedesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearPIN"
+        android:text="Please re-enter 4 digit PIN."
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/desc_text"
+        android:textSize="15sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearREPIN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvSubRedesc"
+        android:layout_marginBottom="120dp"
+        >
+
+        <EditText
+            android:id="@+id/con1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/con2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/con3"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/con4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ed_style"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/primary_text"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="0.5"
+            android:backgroundTint="@color/desc_text"
+            android:fontFamily="@font/poppins"
+            android:text="@string/backNext"
+            android:textColor="@color/secondary_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinue"
+            android:layout_marginStart="10dp"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="0.5"
+            android:backgroundTint="@color/yellow"
+            android:fontFamily="@font/poppins"
+            android:text="@string/continueNext"
+            android:textColor="@color/secondary_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
