@@ -85,7 +85,8 @@
             app:helperTextEnabled="true"
             app:helperTextTextColor="@color/desc_text"
             app:hintTextColor="@color/edBorder"
-            app:startIconDrawable="@drawable/user">
+            >
+<!--            app:startIconDrawable="@drawable/user"-->
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEdEmailOrPhnLog"
@@ -117,7 +118,8 @@
             app:helperTextEnabled="true"
             app:helperTextTextColor="@color/desc_text"
             app:hintTextColor="@color/edBorder"
-            app:startIconDrawable="@drawable/padlock">
+            >
+<!--            app:startIconDrawable="@drawable/padlock"-->
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEdPasswordLog"

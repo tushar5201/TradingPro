@@ -319,7 +319,7 @@ public class SignupActivity extends AppCompatActivity {
                 "+91" + phone,
                 60,
                 TimeUnit.SECONDS,
-                this,
+                (Activity) getApplicationContext(),
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {

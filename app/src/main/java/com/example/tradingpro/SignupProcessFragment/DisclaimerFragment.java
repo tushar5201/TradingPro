@@ -62,8 +62,7 @@ public class DisclaimerFragment extends Fragment {
 
         btnBack.setOnClickListener(v -> {
             Constant_user_info.currentStep -= 1;
-            BiometricsEnableFragment biometricsEnableFragment = new BiometricsEnableFragment();
-            ((SignupProcessActivity) getActivity()).loadFragment(biometricsEnableFragment);
+            ((SignupProcessActivity) getActivity()).loadFragment(new BiometricsEnableFragment());
         });
 
         btnContinue.setOnClickListener(v -> {

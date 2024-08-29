@@ -69,10 +69,11 @@ public class PersonalInformationFragment extends Fragment {
                 fullAddress = edaddress.getText().toString().trim() + ", " + edcity.getText().toString().trim() + ", " + edstate.getText().toString().trim() + ", " + edcountry.getText().toString().trim() + "-" + edcode.getText().toString().trim();
                 insertShared();
                 Constant_user_info.currentStep += 1;
-                IdInformationFragment idInformationFragment = new IdInformationFragment();
-                ((SignupProcessActivity) getActivity()).loadFragment(idInformationFragment);
+                ((SignupProcessActivity) getActivity()).loadFragment(new IdInformationFragment());
             }
         });
+
+
 
         edaddress.addTextChangedListener(addressTextwatcher());
         edcity.addTextChangedListener(cityTextwatcher());
@@ -96,8 +97,22 @@ public class PersonalInformationFragment extends Fragment {
         boolean isStateValid = validateState();
         boolean isCountryValid = validateCountry();
         boolean isPincodeValid = validatePincode();
+        boolean checkPincodeTemp = checkPincode();
 
-        return isAddressValid && isCityValid && isStateValid && isCountryValid && isPincodeValid;
+        return isAddressValid && isCityValid && isStateValid && isCountryValid && isPincodeValid && checkPincodeTemp;
+    }
+
+    private boolean checkPincode() {
+        String temp = edcode.getText().toString().trim();
+        if(temp.length() != 6 && !TextUtils.isEmpty(temp)) {
+            codelayout.setError("Pincode shoulde be 6 digit");
+            codelayout.setHelperText(null);
+            return false;
+        } else {
+//            codelayout.setError(null);
+//            codelayout.setHelperText(getString(R.string.required));
+            return true;
+        }
     }
 
     private TextWatcher addressTextwatcher() {
