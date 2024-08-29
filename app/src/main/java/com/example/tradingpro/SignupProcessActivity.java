@@ -57,6 +57,7 @@ public class SignupProcessActivity extends AppCompatActivity {
         Fragment PersonalInformationFragment = new PersonalInformationFragment();
         loadFragment(PersonalInformationFragment);
 
+
 //        btnContinue.setOnClickListener(v -> {
 //            if (Constant_user_info.currentStep < fragments.size() - 1) {
 //                Constant_user_info.currentStep++;
@@ -70,10 +71,28 @@ public class SignupProcessActivity extends AppCompatActivity {
 
     public void loadFragment(Fragment fragment) {
         stepView.go(Constant_user_info.currentStep, true);
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+//        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+
+        if (Constant_user_info.currentStep == 0) {
+            ft.add(R.id.fragment_container, fragment);
+            fragmentManager.popBackStack("ROOT_FRAGMENT_TAG", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            ft.addToBackStack("ROOT_FRAGMENT_TAG");
+        } else {
+            ft.replace(R.id.fragment_container, fragment);
+            ft.addToBackStack(null);
+        }
+        ft.commit();
     }
 
-//    public void loadFragment(Fragment fragment) {
+    @Override
+    public void onBackPressed() {
+        Constant_user_info.currentStep--;
+        stepView.go(Constant_user_info.currentStep, true);
+        super.onBackPressed();
+    }
+
+    //    public void loadFragment(Fragment fragment) {
 //// create a FragmentManager
 //
 //// create a FragmentTransaction to begin the transaction and replace the Fragment

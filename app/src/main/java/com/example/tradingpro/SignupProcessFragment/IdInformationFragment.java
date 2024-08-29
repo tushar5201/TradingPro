@@ -42,14 +42,12 @@ public class IdInformationFragment extends Fragment {
 
         btnBack.setOnClickListener(v -> {
             Constant_user_info.currentStep -= 1;
-            PersonalInformationFragment personalInformationFragment = new PersonalInformationFragment();
-            ((SignupProcessActivity) getActivity()).loadFragment(personalInformationFragment);
+            ((SignupProcessActivity) getActivity()).loadFragment(new PersonalInformationFragment());
         });
 
         btnContinue.setOnClickListener(v -> {
             Constant_user_info.currentStep += 1;
-            MpinCreateFragment mpinCreateFragment = new MpinCreateFragment();
-            ((SignupProcessActivity) getActivity()).loadFragment(mpinCreateFragment);
+            ((SignupProcessActivity) getActivity()).loadFragment(new MpinCreateFragment());
         });
     }
 }

@@ -7,6 +7,9 @@
     <color name="yellow">#fee83f</color>
     <color name="bg_color">#FCF8F3</color>
     <color name="desc_text">#474647</color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+
 
 <!--    <color name="colorPrimary">#fff</color>-->
 <!--    <color name="colorPrimaryDark">#fee83f</color>-->

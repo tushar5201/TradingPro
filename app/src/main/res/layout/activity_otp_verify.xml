@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="30dp"
     android:scrollbars="none"
     >
 
@@ -12,8 +14,6 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="30dp"
         tools:context=".OtpVerifyActivity"
        >
 
@@ -80,6 +80,7 @@
                >
 
                <EditText
+
                    android:id="@+id/text1"
                    android:layout_width="0dp"
                    android:layout_height="50dp"
@@ -87,6 +88,7 @@
                    android:inputType="number"
                    android:maxLength="1"
                    android:layout_weight="1"
+                   android:textStyle="bold"
                    android:gravity="center"
                    android:textSize="20sp"
                    android:imeOptions="actionNext"
@@ -101,6 +103,7 @@
                    android:inputType="number"
                    android:maxLength="1"
                    android:layout_weight="1"
+                   android:textStyle="bold"
                    android:gravity="center"
                    android:textSize="20sp"
                    android:imeOptions="actionNext"
@@ -115,6 +118,7 @@
                    android:inputType="number"
                    android:maxLength="1"
                    android:layout_weight="1"
+                   android:textStyle="bold"
                    android:gravity="center"
                    android:textSize="20sp"
                    android:imeOptions="actionNext"
@@ -127,6 +131,7 @@
                    android:layout_height="50dp"
                    android:background="@drawable/ed_style"
                    android:inputType="number"
+                   android:textStyle="bold"
                    android:maxLength="1"
                    android:layout_weight="1"
                    android:gravity="center"
@@ -142,6 +147,7 @@
                    android:background="@drawable/ed_style"
                    android:inputType="number"
                    android:maxLength="1"
+                   android:textStyle="bold"
                    android:layout_weight="1"
                    android:gravity="center"
                    android:textSize="20sp"

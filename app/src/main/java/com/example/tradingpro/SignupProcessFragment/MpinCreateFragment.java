@@ -58,8 +58,7 @@ public class MpinCreateFragment extends Fragment {
 
         btnBack.setOnClickListener(v -> {
             Constant_user_info.currentStep -= 1;
-            IdInformationFragment idInformationFragment = new IdInformationFragment();
-            ((SignupProcessActivity) getActivity()).loadFragment(idInformationFragment);
+            ((SignupProcessActivity) getActivity()).loadFragment(new IdInformationFragment());
         });
 
         btnContinue.setOnClickListener(v -> {
@@ -73,8 +72,7 @@ public class MpinCreateFragment extends Fragment {
                 editor.commit();
 
                 Constant_user_info.currentStep += 1;
-                BiometricsEnableFragment biometricsEnableFragment = new BiometricsEnableFragment();
-                ((SignupProcessActivity) getActivity()).loadFragment(biometricsEnableFragment);
+                ((SignupProcessActivity) getActivity()).loadFragment(new BiometricsEnableFragment());
             } else {
                 Snackbar.make(main, "Mpin not Matched", Snackbar.LENGTH_SHORT).show();
             }

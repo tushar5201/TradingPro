@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         chkRemember = findViewById(R.id.chkRemember);
         main = findViewById(R.id.main);
 
+//        this for motion layout - second time open splash won't open
         if (!Constant_user_info.isCheckSplash) {
             MotionScene.Transition transition = main.getTransition(R.id.transition_splash);
             transition.setAutoTransition(MotionScene.Transition.AUTO_JUMP_TO_END);
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         btnsignup.setOnClickListener(v -> {
+            Constant_user_info.isCheckSplash = false;
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
         });
@@ -244,4 +246,5 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
+
 }
