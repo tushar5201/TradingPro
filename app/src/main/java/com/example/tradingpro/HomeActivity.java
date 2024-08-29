@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,11 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.tradingpro.MainFragments.SearchFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -54,6 +60,7 @@ public class HomeActivity extends AppCompatActivity {
 //        card3
         card3.setOnClickListener(v -> {
             bottomIcon3();
+            addFragment(new SearchFragment());
         });
 
         card4.setOnClickListener(v -> {
@@ -134,7 +141,6 @@ public class HomeActivity extends AppCompatActivity {
         img2.setImageResource(R.drawable.watchlist_white);
         img4.setImageResource(R.drawable.order_white);
         img5.setImageResource(R.drawable.portfolio_white);
-
     }
 
     private void bottomIcon4() {
@@ -183,5 +189,12 @@ public class HomeActivity extends AppCompatActivity {
         img3.setImageResource(R.drawable.search_white);
         img4.setImageResource(R.drawable.order_white);
 
+    }
+
+    public void addFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.frame, fragment);
+        ft.commit();
     }
 }

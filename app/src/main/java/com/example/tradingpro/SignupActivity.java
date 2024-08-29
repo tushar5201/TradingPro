@@ -314,12 +314,12 @@ public class SignupActivity extends AppCompatActivity {
     public void sendOtp() {
         progressBar.setVisibility(View.VISIBLE);
         btnRegister.setVisibility(View.INVISIBLE);
-
+        Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+91" + phone,
                 60,
                 TimeUnit.SECONDS,
-                (Activity) getApplicationContext(),
+                SignupActivity.this,
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -332,13 +332,15 @@ public class SignupActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         btnRegister.setVisibility(View.VISIBLE);
                         Snackbar.make(main, e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, "verify fail", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         progressBar.setVisibility(View.GONE);
                         btnRegister.setVisibility(View.VISIBLE);
-                        Intent intent = new Intent(getApplicationContext(), OtpVerifyActivity.class);
+                        Intent intent = new Intent(SignupActivity.this, OtpVerifyActivity.class);
                         intent.putExtra("phone", phone);
                         intent.putExtra("backendOtp", s);
                         startActivity(intent);
