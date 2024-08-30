@@ -20,7 +20,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class IdInformationFragment extends Fragment {
     View view;
-    MaterialButton btnContinue, btnBack;
+    MaterialButton btnContinue;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,15 +38,10 @@ public class IdInformationFragment extends Fragment {
 //        String address = sp.getString(Constant_user_info.SHARED_ADDRESS, "");
 //        Toast.makeText(getContext(), address, Toast.LENGTH_SHORT).show();
         btnContinue = view.findViewById(R.id.btnContinue);
-        btnBack = view.findViewById(R.id.btnBack);
-
-        btnBack.setOnClickListener(v -> {
-            Constant_user_info.currentStep -= 1;
-            ((SignupProcessActivity) getActivity()).loadFragment(new PersonalInformationFragment());
-        });
 
         btnContinue.setOnClickListener(v -> {
             Constant_user_info.currentStep += 1;
+
             ((SignupProcessActivity) getActivity()).loadFragment(new MpinCreateFragment());
         });
     }

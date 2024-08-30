@@ -21,10 +21,9 @@ public class Constant_user_info {
     public static final String SHARED_MPIN = "mpin";
     public static final String SHARED_FINGERPRINT = "fingerprint";
 
-
-
-
-
+// for stepper
     public static int currentStep = 0;
 
+//    for closing
+    public static String isCheckFrag = "false";
 }

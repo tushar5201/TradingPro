@@ -30,7 +30,7 @@ import java.util.Map;
 public class DisclaimerFragment extends Fragment {
 
     View view;
-    MaterialButton btnContinue, btnBack;
+    MaterialButton btnContinue;
     CheckBox chkAgree;
     RelativeLayout main;
     String name, phone, email, password, address, mpin, fingerprint;
@@ -49,7 +49,6 @@ public class DisclaimerFragment extends Fragment {
         btnContinue = view.findViewById(R.id.btnContinue);
         chkAgree = view.findViewById(R.id.chkAgree);
         main = view.findViewById(R.id.main);
-        btnBack = view.findViewById(R.id.btnBack);
 
         SharedPreferences sp = getActivity().getSharedPreferences(Constant_user_info.SHARED_ID, Context.MODE_PRIVATE);
         name = sp.getString(Constant_user_info.SHARED_USERNM, "");
@@ -60,10 +59,7 @@ public class DisclaimerFragment extends Fragment {
         mpin = sp.getString(Constant_user_info.SHARED_MPIN, "");
         fingerprint = sp.getString(Constant_user_info.SHARED_FINGERPRINT, "");
 
-        btnBack.setOnClickListener(v -> {
-            Constant_user_info.currentStep -= 1;
-            ((SignupProcessActivity) getActivity()).loadFragment(new BiometricsEnableFragment());
-        });
+
 
         btnContinue.setOnClickListener(v -> {
             if (chkAgree.isChecked()) {
@@ -72,12 +68,12 @@ public class DisclaimerFragment extends Fragment {
                 editor.clear();
                 editor.apply();
                 startActivity(new Intent(getContext(), LoginActivity.class));
+                Constant_user_info.isCheckFrag = "true";
             } else {
                 Snackbar.make(main, "Please Agree Terms and Conditions", Snackbar.LENGTH_SHORT).show();
             }
         });
     }
-
 
     //    record insert method
     public void insert() {
@@ -89,7 +85,6 @@ public class DisclaimerFragment extends Fragment {
         map.put(Constant_user_info.KEY_ADDRESS, address);
         map.put(Constant_user_info.KEY_MPIN, mpin);
         map.put(Constant_user_info.KEY_FINGERPRINT, fingerprint);
-
 
         FirebaseDatabase.getInstance().getReference().child(Constant_user_info.TABLE_NAME)
                 .push()

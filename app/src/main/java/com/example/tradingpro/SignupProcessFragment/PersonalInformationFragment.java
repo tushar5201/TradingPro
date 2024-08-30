@@ -73,8 +73,6 @@ public class PersonalInformationFragment extends Fragment {
             }
         });
 
-
-
         edaddress.addTextChangedListener(addressTextwatcher());
         edcity.addTextChangedListener(cityTextwatcher());
         edstate.addTextChangedListener(stateTextwatcher());
@@ -209,7 +207,6 @@ public class PersonalInformationFragment extends Fragment {
             }
         };
     }
-
 
     public boolean validateAddress() {
         String address = edaddress.getText().toString().trim();
