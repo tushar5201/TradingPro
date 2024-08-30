@@ -57,7 +57,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String phone = intent.getStringExtra("phone");
         String backendOtp = intent.getStringExtra("backendOtp");
-        tvMob.setText(phone);
+        tvMob.setText("+91 "+phone);
 
         btnVerify.setOnClickListener(v -> {
             String enteredOtp = text1.getText().toString() + text2.getText().toString() + text3.getText().toString() + text4.getText().toString() + text5.getText().toString() + text6.getText().toString();
@@ -69,6 +69,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Snackbar.make(main, "Verified", Snackbar.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), SignupProcessActivity.class));
+                                finish();
                             } else {
                                 Snackbar.make(main, "Wrong Otp", Snackbar.LENGTH_SHORT).show();
                             }

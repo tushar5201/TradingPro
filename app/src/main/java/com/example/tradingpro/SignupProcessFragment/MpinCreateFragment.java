@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.tradingpro.Constant_user_info;
 import com.example.tradingpro.R;
@@ -26,7 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class MpinCreateFragment extends Fragment {
     View view;
     EditText text1, text2, text3, text4, con1, con2, con3, con4;
-    MaterialButton btnContinue, btnBack;
+    MaterialButton btnContinue;
     String mpin, confMpin;
     RelativeLayout main;
 
@@ -54,13 +55,6 @@ public class MpinCreateFragment extends Fragment {
 
         btnContinue = view.findViewById(R.id.btnContinue);
 
-        btnBack = view.findViewById(R.id.btnBack);
-
-        btnBack.setOnClickListener(v -> {
-            Constant_user_info.currentStep -= 1;
-            ((SignupProcessActivity) getActivity()).loadFragment(new IdInformationFragment());
-        });
-
         btnContinue.setOnClickListener(v -> {
             mpin = text1.getText().toString() + text2.getText().toString() + text3.getText().toString() + text4.getText().toString();
             confMpin = con1.getText().toString() + con2.getText().toString() + con3.getText().toString() + con4.getText().toString();
@@ -72,6 +66,7 @@ public class MpinCreateFragment extends Fragment {
                 editor.commit();
 
                 Constant_user_info.currentStep += 1;
+
                 ((SignupProcessActivity) getActivity()).loadFragment(new BiometricsEnableFragment());
             } else {
                 Snackbar.make(main, "Mpin not Matched", Snackbar.LENGTH_SHORT).show();

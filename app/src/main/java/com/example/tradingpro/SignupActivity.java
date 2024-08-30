@@ -76,6 +76,7 @@ public class SignupActivity extends AppCompatActivity {
 //        switch to login screen
         tvLogin.setOnClickListener(v -> {
             startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+            finish();
         });
 
 
@@ -94,7 +95,7 @@ public class SignupActivity extends AppCompatActivity {
                         insertShared();
                     }
                 } else {
-                    Snackbar.make(main, "Please accpect terms and conditionn", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(main, "Please accept terms and condition", Snackbar.LENGTH_SHORT).show();
                 }
             } else {
                 Snackbar.make(main, "Please correct the errors", Snackbar.LENGTH_SHORT).show();
@@ -237,6 +238,9 @@ public class SignupActivity extends AppCompatActivity {
         } else if (phoneEd.length() != 10) {
             textInputLayoutPhone.setError("Phone number should be 10 digits");
             return false;
+        } else if (!phoneEd.matches("^[6789][0-9]{9}$")) {
+            textInputLayoutPhone.setError("Invalid phone number");
+            return false;
         } else {
             textInputLayoutPhone.setError(null);
             textInputLayoutPhone.setHelperText("Valid phone number");
@@ -314,7 +318,6 @@ public class SignupActivity extends AppCompatActivity {
     public void sendOtp() {
         progressBar.setVisibility(View.VISIBLE);
         btnRegister.setVisibility(View.INVISIBLE);
-        Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+91" + phone,
                 60,
@@ -332,8 +335,6 @@ public class SignupActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         btnRegister.setVisibility(View.VISIBLE);
                         Snackbar.make(main, e.getMessage(), Snackbar.LENGTH_SHORT).show();
-                        Toast.makeText(SignupActivity.this, "verify fail", Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override

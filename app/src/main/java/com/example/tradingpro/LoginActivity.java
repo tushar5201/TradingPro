@@ -77,12 +77,14 @@ public class LoginActivity extends AppCompatActivity {
 
         if (sp.contains("unm")) {
             startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+            finish();
         }
 
         btnsignup.setOnClickListener(v -> {
             Constant_user_info.isCheckSplash = false;
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
+            finish();
         });
 
         btnLogin.setOnClickListener(v -> {
@@ -98,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (NumberFormatException err) {
                     checkEmail();
                 } catch (Error error) {
-                    Snackbar.make(mainRelative, "Error", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(mainRelative, "Something went wrong!", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
@@ -107,6 +109,10 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("emailOrPhone", emailOrPhone);
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+                finish();
+            } else if(flag && !chkRemember.isChecked()) {
+                startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+                finish();
             }
         });
         textInputEdEmailOrPhnLog.addTextChangedListener(createEmailWatcher());

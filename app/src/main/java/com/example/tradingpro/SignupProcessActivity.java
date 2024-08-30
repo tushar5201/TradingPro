@@ -49,6 +49,10 @@ public class SignupProcessActivity extends AppCompatActivity {
             return insets;
         });
 
+//        if(Constant_user_info.isCheckFrag.equals("true")) {
+//            finish();
+//        }
+
         stepView = findViewById(R.id.step_view);
 //        btnContinue = findViewById(R.id.btnContinue);
         fragmentManager = getSupportFragmentManager();
@@ -57,16 +61,6 @@ public class SignupProcessActivity extends AppCompatActivity {
         Fragment PersonalInformationFragment = new PersonalInformationFragment();
         loadFragment(PersonalInformationFragment);
 
-
-//        btnContinue.setOnClickListener(v -> {
-//            if (Constant_user_info.currentStep < fragments.size() - 1) {
-//                Constant_user_info.currentStep++;
-//                stepView.go(Constant_user_info.currentStep, true);
-//                loadFragment(Constant_user_info.currentStep);
-//            } else {
-//                Toast.makeText(this, "Completed.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     public void loadFragment(Fragment fragment) {
@@ -91,17 +85,6 @@ public class SignupProcessActivity extends AppCompatActivity {
         stepView.go(Constant_user_info.currentStep, true);
         super.onBackPressed();
     }
-
-    //    public void loadFragment(Fragment fragment) {
-//// create a FragmentManager
-//
-//// create a FragmentTransaction to begin the transaction and replace the Fragment
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//// replace the FrameLayout with new Fragment
-//        fragmentTransaction.replace(R.id.fragment_container, fragment);
-//        fragmentTransaction.commit(); // save the changes
-//    }
-
 
 //    public void insertShared() {
 //        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_ID, MODE_PRIVATE);
