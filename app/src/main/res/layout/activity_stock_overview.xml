@@ -101,6 +101,7 @@
         app:tint="@color/primary_text"/>
 
     <LinearLayout
+        android:id="@+id/linearstock"
         android:layout_below="@id/imgBtnAddWatchList"
         android:layout_marginTop="17dp"
         android:layout_width="match_parent"
@@ -133,7 +134,20 @@
             android:textColor="@color/secondary_text"
             android:textSize="15sp"/>
 
-
     </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearstock"
+        app:tabSelectedTextColor="@color/primary_text"
+        app:tabTextColor="#B4CB9C9C"
+        android:id="@+id/tabstock"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabstock"
+        android:id="@+id/viewpagerstock"/>
 
 </RelativeLayout>
