@@ -2,7 +2,6 @@ package com.example.tradingpro.SignupProcessFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -10,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextUtils;
@@ -18,12 +16,10 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.tradingpro.Constant_user_info;
+import com.example.tradingpro.Constant.Constant_user_info;
 import com.example.tradingpro.R;
-import com.example.tradingpro.SignupActivity;
-import com.example.tradingpro.SignupProcessActivity;
+import com.example.tradingpro.Activity.SignupProcessActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;

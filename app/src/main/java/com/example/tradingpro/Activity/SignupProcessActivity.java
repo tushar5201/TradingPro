@@ -1,9 +1,7 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Activity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tradingpro.Constant.Constant_user_info;
+import com.example.tradingpro.R;
 import com.example.tradingpro.SignupProcessFragment.BiometricsEnableFragment;
 import com.example.tradingpro.SignupProcessFragment.DisclaimerFragment;
 import com.example.tradingpro.SignupProcessFragment.IdInformationFragment;

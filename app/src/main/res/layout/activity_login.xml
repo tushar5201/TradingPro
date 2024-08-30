@@ -9,7 +9,7 @@
     android:paddingHorizontal="15dp"
     android:paddingVertical="30dp"
     app:layoutDescription="@xml/motion_scene"
-    tools:context=".LoginActivity">
+    tools:context=".Activity.LoginActivity">
 
     <TextView
         android:id="@+id/tvWelcome"

@@ -1,4 +1,4 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,20 +9,16 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.motion.widget.MotionScene;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.tradingpro.Constant.Constant_user_info;
+import com.example.tradingpro.R;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;

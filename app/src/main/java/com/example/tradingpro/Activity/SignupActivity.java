@@ -1,6 +1,5 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,7 +17,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tradingpro.SignupProcessFragment.PersonalInformationFragment;
+import com.example.tradingpro.Constant.Constant_user_info;
+import com.example.tradingpro.R;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,10 +34,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SignupActivity extends AppCompatActivity {

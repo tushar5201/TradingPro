@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
         android:paddingVertical="30dp"
-        tools:context=".SignupActivity">
+        tools:context=".Activity.SignupActivity">
 
         <TextView
             android:id="@+id/tvWelcome"

@@ -8,7 +8,7 @@
     android:background="@color/bg_color"
     android:paddingHorizontal="15dp"
     android:paddingVertical="15dp"
-    tools:context=".MpinActivity">
+    tools:context=".Activity.MpinActivity">
 
     <ImageView
         android:id="@+id/backBtn"

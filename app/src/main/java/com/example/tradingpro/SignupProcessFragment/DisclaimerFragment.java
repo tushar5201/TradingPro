@@ -16,10 +16,9 @@ import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.tradingpro.Constant_user_info;
-import com.example.tradingpro.LoginActivity;
+import com.example.tradingpro.Constant.Constant_user_info;
+import com.example.tradingpro.Activity.LoginActivity;
 import com.example.tradingpro.R;
-import com.example.tradingpro.SignupProcessActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;

@@ -8,7 +8,7 @@
     android:background="@color/bg_color"
     android:paddingHorizontal="15dp"
     android:paddingVertical="30dp"
-    tools:context=".LoginActivity">
+    tools:context=".Activity.LoginActivity">
 
     <TextView
         android:layout_marginTop="10dp"

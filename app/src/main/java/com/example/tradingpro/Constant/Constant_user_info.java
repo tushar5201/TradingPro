@@ -1,4 +1,4 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Constant;
 
 public class Constant_user_info {
     public static final String TABLE_NAME = "user_info";
