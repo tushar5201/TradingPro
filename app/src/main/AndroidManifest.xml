@@ -17,22 +17,7 @@
         android:theme="@style/Base.Theme.TradingPro"
         tools:targetApi="31">
         <activity
-            android:name=".MpinActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignupProcessActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SplashScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.StockOverviewActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,13 +25,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-      
         <activity
-            android:name=".OtpVerifyActivity"
+            android:name=".Activity.MpinActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SignupProcessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SplashScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:exported="true">
 
-      <activity
-            android:name=".MainActivity"
+        </activity>
+        <activity
+            android:name=".Activity.OtpVerifyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
             android:exported="false" />
 
         <meta-data
