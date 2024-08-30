@@ -282,7 +282,7 @@
             android:layout_below="@+id/l2"
             android:layout_marginHorizontal="10sp"
             android:layout_marginTop="50dp"
-            android:fontFamily="@font/poppins_light"
+            android:fontFamily="@font/poppins_light_font"
             android:text="Note: Every field counts! Let's unlock your enhanced finance world with Portfolio App!"
             android:textColor="@color/desc_text"
             android:textSize="16sp" />

@@ -49,7 +49,7 @@ public class SignupActivity extends AppCompatActivity {
     MaterialCheckBox chkRemember;
     String name, email, phone, password;
     RelativeLayout main;
-    boolean flag;
+    //    boolean Constant_user_info.flag = false;
     ProgressBar progressBar;
 
 
@@ -79,28 +79,55 @@ public class SignupActivity extends AppCompatActivity {
             finish();
         });
 
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //        get text from edittext
+                name = textInputEdName.getText().toString().trim();
+                email = textInputEdEmail.getText().toString().trim();
+                password = textInputEdPassword.getText().toString().trim();
+                phone = textInputEdPhone.getText().toString().trim();
 
-        btnRegister.setOnClickListener(v -> {
-            //        get text from edittext
-            name = textInputEdName.getText().toString().trim();
-            email = textInputEdEmail.getText().toString().trim();
-            password = textInputEdPassword.getText().toString().trim();
-            phone = textInputEdPhone.getText().toString().trim();
-
-            if (isValidAllField()) {
-                if (chkRemember.isChecked()) {
-                    emailFoundValidate();
-                    if (flag) {
-                        sendOtp();
-                        insertShared();
+                if (isValidAllField()) {
+                    if (chkRemember.isChecked()) {
+                        emailFoundValidate();
+                        if (Constant_user_info.flag) {
+                            Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
+//                            sendOtp();
+                            insertShared();
+                        } else {
+                            Toast.makeText(SignupActivity.this, "hii", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Snackbar.make(main, "Please accept terms and condition", Snackbar.LENGTH_SHORT).show();
                     }
                 } else {
-                    Snackbar.make(main, "Please accept terms and condition", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(main, "Please correct the errors", Snackbar.LENGTH_SHORT).show();
                 }
-            } else {
-                Snackbar.make(main, "Please correct the errors", Snackbar.LENGTH_SHORT).show();
             }
         });
+
+//        btnRegister.setOnClickListener(v -> {
+//            //        get text from edittext
+//            name = textInputEdName.getText().toString().trim();
+//            email = textInputEdEmail.getText().toString().trim();
+//            password = textInputEdPassword.getText().toString().trim();
+//            phone = textInputEdPhone.getText().toString().trim();
+//
+//            if (isValidAllField()) {
+//                if (chkRemember.isChecked()) {
+//                    emailFoundValidate();
+//                    if (Constant_user_info.flag) {
+//                        sendOtp();
+//                        insertShared();
+//                    }
+//                } else {
+//                    Snackbar.make(main, "Please accept terms and condition", Snackbar.LENGTH_SHORT).show();
+//                }
+//            } else {
+//                Snackbar.make(main, "Please correct the errors", Snackbar.LENGTH_SHORT).show();
+//            }
+//        });
 
         textInputEdName.addTextChangedListener(createNameTextWatcher());
         textInputEdEmail.addTextChangedListener(createEmailTextWatcher());
@@ -283,10 +310,10 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    flag = false;
+                    Constant_user_info.flag = false;
                     Snackbar.make(main, "Email is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
                 } else {
-                    flag = true;
+                    Constant_user_info.flag = true;
                 }
             }
 
@@ -300,10 +327,10 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    flag = false;
+                    Constant_user_info.flag = false;
                     Snackbar.make(main, "Phone number is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
                 } else {
-                    flag = true;
+                    Constant_user_info.flag = true;
                 }
             }
 

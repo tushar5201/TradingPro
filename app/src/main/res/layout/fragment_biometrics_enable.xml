@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/enableText"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_light"
+        android:fontFamily="@font/poppins_light_font"
         android:paddingHorizontal="30dp"
         android:text="Enable biometric device lock on the app for two factor security."
         android:textColor="@color/desc_text"

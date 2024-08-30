@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/otp_desc"
-                android:fontFamily="@font/poppins_light"
+                android:fontFamily="@font/poppins_light_font"
                 android:textColor="@color/desc_text"
                 android:textSize="15sp"
                 android:layout_marginTop="30dp"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mobile_number"
                 android:textSize="16sp"
-                android:fontFamily="@font/poppins_light"
+                android:fontFamily="@font/poppins_light_font"
                 android:textColor="@color/desc_text"
                 android:layout_below="@id/tvDesc"
                 android:layout_centerHorizontal="true"
@@ -202,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:text="Didn't receive OTP "
                     android:textSize="16sp"
-                    android:fontFamily="@font/poppins_light"
+                    android:fontFamily="@font/poppins_light_font"
                     android:textColor="@color/desc_text"/>
 
                 <TextView
@@ -212,7 +212,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/primary_text"
                     android:textStyle="bold"
-                    android:fontFamily="@font/poppins_light"/>
+                    android:fontFamily="@font/poppins_light_font"/>
 
             </LinearLayout>
     </RelativeLayout>

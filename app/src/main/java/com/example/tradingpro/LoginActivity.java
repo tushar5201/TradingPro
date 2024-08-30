@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     String emailOrPhone, password, user, pass, username;
     RelativeLayout mainRelative;
     MaterialCheckBox chkRemember;
-    Boolean flag = false;
+    Boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

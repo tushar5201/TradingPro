@@ -10,6 +10,7 @@ public class Constant_user_info {
     public static final String KEY_MPIN = "mpin";
     public static final String KEY_FINGERPRINT = "fingerprint";
     public static Boolean isCheckSplash = true;
+    public static Boolean flag = false;
 
     //User shared preference data
     public static final String SHARED_ID = "Signup";

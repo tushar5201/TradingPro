@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitle"
-        android:fontFamily="@font/poppins_light"
+        android:fontFamily="@font/poppins_light_font"
         android:text="Welcome back"
         android:textColor="@color/desc_text"
         android:textSize="15sp" />
@@ -52,7 +52,7 @@
         android:layout_below="@id/tvTitle"
         android:layout_marginStart="50dp"
         android:layout_marginTop="100dp"
-        android:fontFamily="@font/poppins_light"
+        android:fontFamily="@font/poppins_light_font"
         android:text="Please enter 4 digit PIN."
         android:textColor="@color/desc_text"
         android:textSize="15sp" />
