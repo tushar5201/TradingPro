@@ -1,4 +1,4 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Model;
 
 public class SearchModel {
     public String symbol, symbolName;

@@ -14,7 +14,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".OtpVerifyActivity"
+        tools:context=".Activity.OtpVerifyActivity"
        >
 
         <com.airbnb.lottie.LottieAnimationView
@@ -22,7 +22,7 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_centerHorizontal="true"
-            app:lottie_rawRes="@raw/lottie"
+            app:lottie_rawRes="@raw/otp"
             app:lottie_loop="true"
             app:lottie_autoPlay="true"
             />
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/otp_desc"
-                android:fontFamily="@font/poppins_light"
+                android:fontFamily="@font/poppins_light_font"
                 android:textColor="@color/desc_text"
                 android:textSize="15sp"
                 android:layout_marginTop="30dp"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mobile_number"
                 android:textSize="16sp"
-                android:fontFamily="@font/poppins_light"
+                android:fontFamily="@font/poppins_light_font"
                 android:textColor="@color/desc_text"
                 android:layout_below="@id/tvDesc"
                 android:layout_centerHorizontal="true"
@@ -55,7 +55,7 @@
 
             <TextView
                 android:id="@+id/tvMob"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+911234567890"
@@ -177,7 +177,7 @@
                 android:id="@+id/btnVerify"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="60dp"
                 android:backgroundTint="@color/yellow"
                 android:fontFamily="@font/poppins"
                 android:text="verify"
@@ -192,6 +192,7 @@
                 android:id="@+id/linearResendOtp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_below="@id/btnVerify">
@@ -201,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:text="Didn't receive OTP "
                     android:textSize="16sp"
-                    android:fontFamily="@font/poppins_light"
+                    android:fontFamily="@font/poppins_light_font"
                     android:textColor="@color/desc_text"/>
 
                 <TextView
@@ -211,7 +212,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/primary_text"
                     android:textStyle="bold"
-                    android:fontFamily="@font/poppins_light"/>
+                    android:fontFamily="@font/poppins_light_font"/>
 
             </LinearLayout>
     </RelativeLayout>

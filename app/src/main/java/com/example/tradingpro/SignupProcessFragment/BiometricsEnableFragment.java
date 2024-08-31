@@ -13,15 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 
-import com.example.tradingpro.Constant_user_info;
+import com.example.tradingpro.Constant.Constant_user_info;
 import com.example.tradingpro.R;
-import com.example.tradingpro.SignupProcessActivity;
+import com.example.tradingpro.Activity.SignupProcessActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class BiometricsEnableFragment extends Fragment {
 
     View view;
-    MaterialButton btnContinue, btnBack;
+    MaterialButton btnContinue;
     RadioButton radioEnable, radioNotnow;
 
     @Override
@@ -39,12 +39,6 @@ public class BiometricsEnableFragment extends Fragment {
         btnContinue = view.findViewById(R.id.btnContinue);
         radioEnable = view.findViewById(R.id.radioEnable);
         radioNotnow = view.findViewById(R.id.radioNotnow);
-        btnBack = view.findViewById(R.id.btnBack);
-
-        btnBack.setOnClickListener(v -> {
-            Constant_user_info.currentStep -= 1;
-            ((SignupProcessActivity) getActivity()).loadFragment(new MpinCreateFragment());
-        });
 
         btnContinue.setOnClickListener(v -> {
             SharedPreferences sp = getActivity().getSharedPreferences(Constant_user_info.SHARED_ID, Context.MODE_PRIVATE);
@@ -53,6 +47,7 @@ public class BiometricsEnableFragment extends Fragment {
             editor.commit();
 
             Constant_user_info.currentStep += 1;
+
             ((SignupProcessActivity) getActivity()).loadFragment(new DisclaimerFragment());
         });
     }

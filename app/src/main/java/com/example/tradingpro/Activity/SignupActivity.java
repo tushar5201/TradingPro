@@ -1,6 +1,5 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,7 +17,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tradingpro.SignupProcessFragment.PersonalInformationFragment;
+import com.example.tradingpro.Constant.Constant_user_info;
+import com.example.tradingpro.R;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,10 +34,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SignupActivity extends AppCompatActivity {
@@ -49,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
     MaterialCheckBox chkRemember;
     String name, email, phone, password;
     RelativeLayout main;
-    boolean flag;
+    //    boolean Constant_user_info.flag = false;
     ProgressBar progressBar;
 
 
@@ -76,30 +72,58 @@ public class SignupActivity extends AppCompatActivity {
 //        switch to login screen
         tvLogin.setOnClickListener(v -> {
             startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+            finish();
         });
 
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //        get text from edittext
+                name = textInputEdName.getText().toString().trim();
+                email = textInputEdEmail.getText().toString().trim();
+                password = textInputEdPassword.getText().toString().trim();
+                phone = textInputEdPhone.getText().toString().trim();
 
-        btnRegister.setOnClickListener(v -> {
-            //        get text from edittext
-            name = textInputEdName.getText().toString().trim();
-            email = textInputEdEmail.getText().toString().trim();
-            password = textInputEdPassword.getText().toString().trim();
-            phone = textInputEdPhone.getText().toString().trim();
-
-            if (isValidAllField()) {
-                if (chkRemember.isChecked()) {
-                    emailFoundValidate();
-                    if (flag) {
-                        sendOtp();
-                        insertShared();
+                if (isValidAllField()) {
+                    if (chkRemember.isChecked()) {
+                        emailFoundValidate();
+                        if (Constant_user_info.flag) {
+                            Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
+//                            sendOtp();
+                            insertShared();
+                        } else {
+                            Toast.makeText(SignupActivity.this, "hii", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Snackbar.make(main, "Please accept terms and condition", Snackbar.LENGTH_SHORT).show();
                     }
                 } else {
-                    Snackbar.make(main, "Please accpect terms and conditionn", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(main, "Please correct the errors", Snackbar.LENGTH_SHORT).show();
                 }
-            } else {
-                Snackbar.make(main, "Please correct the errors", Snackbar.LENGTH_SHORT).show();
             }
         });
+
+//        btnRegister.setOnClickListener(v -> {
+//            //        get text from edittext
+//            name = textInputEdName.getText().toString().trim();
+//            email = textInputEdEmail.getText().toString().trim();
+//            password = textInputEdPassword.getText().toString().trim();
+//            phone = textInputEdPhone.getText().toString().trim();
+//
+//            if (isValidAllField()) {
+//                if (chkRemember.isChecked()) {
+//                    emailFoundValidate();
+//                    if (Constant_user_info.flag) {
+//                        sendOtp();
+//                        insertShared();
+//                    }
+//                } else {
+//                    Snackbar.make(main, "Please accept terms and condition", Snackbar.LENGTH_SHORT).show();
+//                }
+//            } else {
+//                Snackbar.make(main, "Please correct the errors", Snackbar.LENGTH_SHORT).show();
+//            }
+//        });
 
         textInputEdName.addTextChangedListener(createNameTextWatcher());
         textInputEdEmail.addTextChangedListener(createEmailTextWatcher());
@@ -237,6 +261,9 @@ public class SignupActivity extends AppCompatActivity {
         } else if (phoneEd.length() != 10) {
             textInputLayoutPhone.setError("Phone number should be 10 digits");
             return false;
+        } else if (!phoneEd.matches("^[6789][0-9]{9}$")) {
+            textInputLayoutPhone.setError("Invalid phone number");
+            return false;
         } else {
             textInputLayoutPhone.setError(null);
             textInputLayoutPhone.setHelperText("Valid phone number");
@@ -279,10 +306,10 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    flag = false;
+                    Constant_user_info.flag = false;
                     Snackbar.make(main, "Email is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
                 } else {
-                    flag = true;
+                    Constant_user_info.flag = true;
                 }
             }
 
@@ -296,10 +323,10 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    flag = false;
+                    Constant_user_info.flag = false;
                     Snackbar.make(main, "Phone number is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
                 } else {
-                    flag = true;
+                    Constant_user_info.flag = true;
                 }
             }
 
@@ -314,7 +341,6 @@ public class SignupActivity extends AppCompatActivity {
     public void sendOtp() {
         progressBar.setVisibility(View.VISIBLE);
         btnRegister.setVisibility(View.INVISIBLE);
-        Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+91" + phone,
                 60,
@@ -332,8 +358,6 @@ public class SignupActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         btnRegister.setVisibility(View.VISIBLE);
                         Snackbar.make(main, e.getMessage(), Snackbar.LENGTH_SHORT).show();
-                        Toast.makeText(SignupActivity.this, "verify fail", Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override

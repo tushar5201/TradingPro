@@ -29,7 +29,7 @@
         android:textSize="15sp"
         android:text="This virtual stock app is designed for educational and informational purposes only. The app simulates stock trading and does not involve real money transactions. The information provided is not guaranteed to be accurate, complete, or up-to-date, and it does not constitute financial advice. Users should seek professional financial advice before making any investment decisions. \n\n\t\tThe creators of this app are not responsible for any losses or damages resulting from the use of this app. By using this app, you acknowledge and agree to this disclaimer."
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_light"
+        android:fontFamily="@font/poppins_light_font"
         android:textColor="@color/desc_text"/>
 
     <CheckBox
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:text="Agree &amp; Continue"
         android:layout_marginTop="50dp"
-        android:fontFamily="@font/poppins_light"
+        android:fontFamily="@font/poppins_light_font"
         android:textSize="15sp"
         android:textColor="@color/desc_text"
         android:textStyle="bold"/>
@@ -48,29 +48,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1"
         android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBack"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="0.5"
-            android:backgroundTint="@color/desc_text"
-            android:fontFamily="@font/poppins"
-            android:text="@string/backNext"
-            android:textColor="@color/secondary_text"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:cornerRadius="10dp" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnContinue"
-            android:layout_marginStart="10dp"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_weight="0.5"
             android:backgroundTint="@color/yellow"
             android:fontFamily="@font/poppins"
             android:text="@string/continueNext"

@@ -27,7 +27,7 @@
         android:text="Please enter 4 digit PIN."
         android:layout_below="@id/tvTitle"
         android:layout_marginTop="80dp"
-        android:fontFamily="@font/poppins_light"
+        android:fontFamily="@font/poppins_light_font"
         android:textColor="@color/desc_text"
         android:textSize="15sp"
         android:layout_marginStart="50dp"/>
@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearPIN"
         android:text="Please re-enter 4 digit PIN."
-        android:fontFamily="@font/poppins_light"
+        android:fontFamily="@font/poppins_light_font"
         android:textColor="@color/desc_text"
         android:textSize="15sp"
         android:layout_marginStart="50dp"
@@ -204,29 +204,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1"
         android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBack"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="0.5"
-            android:backgroundTint="@color/desc_text"
-            android:fontFamily="@font/poppins"
-            android:text="@string/backNext"
-            android:textColor="@color/secondary_text"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:cornerRadius="10dp" />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnContinue"
-            android:layout_marginStart="10dp"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_weight="0.5"
             android:backgroundTint="@color/yellow"
             android:fontFamily="@font/poppins"
             android:text="@string/continueNext"

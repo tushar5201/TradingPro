@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.StockOverviewActivity"
+    android:background="@color/bg_color"
+    android:layout_margin="15dp"
+   >
+
+    <ImageView
+        android:id="@+id/cancel_button"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/cancel"
+        app:tint="@color/primary_text"
+       />
+
+    <TextView
+        android:id="@+id/stockName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RELIANCE.NS"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:layout_below="@+id/cancel_button"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NSE"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/desc_text"
+        android:layout_below="@+id/stockName"
+        android:fontFamily="@font/poppins_light"/>
+
+    <TextView
+        android:id="@+id/stockPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="137.89"
+        android:layout_below="@+id/cancel_button"
+        android:layout_marginTop="25dp"
+        android:textSize="17sp"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/poppins"/>
+
+    <TextView
+        android:id="@+id/stockPlusMinusPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(8.37%)"
+        android:layout_below="@+id/stockPrice"
+        android:textSize="13sp"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/poppins"
+        android:textColor="#3FC33F"/>
+
+    <TextView
+        android:id="@+id/stockPlusMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+7.91"
+        android:layout_toStartOf="@+id/stockPlusMinusPercentage"
+        android:layout_below="@+id/stockPrice"
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins"
+        android:textColor="#3FC33F"/>
+
+
+
+    <ImageView
+        android:id="@+id/imgBtnAddWatchList"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/plus"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/stockPlusMinusPercentage"
+        android:layout_marginTop="10dp"
+        android:tooltipText="WatchList"
+        android:scaleType="center"
+        app:tint="@color/primary_text"/>
+
+    <ImageView
+        android:id="@+id/imgBtnNotify"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/baseline_notifications_none_24"
+        android:layout_toStartOf="@+id/imgBtnAddWatchList"
+        android:layout_below="@id/stockPlusMinusPercentage"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:tooltipText="WatchList"
+        android:scaleType="center"
+        app:tint="@color/primary_text"/>
+
+    <LinearLayout
+        android:id="@+id/linearstock"
+        android:layout_below="@id/imgBtnAddWatchList"
+        android:layout_marginTop="17dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBuy"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            app:cornerRadius="10dp"
+            android:backgroundTint="#3FC33F"
+            android:text="Buy"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/secondary_text"
+            android:textSize="15sp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSell"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            app:cornerRadius="10dp"
+            android:backgroundTint="#D53030"
+            android:layout_marginStart="10dp"
+            android:text="Sell"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/secondary_text"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearstock"
+        app:tabSelectedTextColor="@color/primary_text"
+        app:tabTextColor="#B4CB9C9C"
+        android:id="@+id/tabstock"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabstock"
+        android:id="@+id/viewpagerstock"/>
+
+</RelativeLayout>

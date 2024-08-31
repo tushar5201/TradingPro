@@ -1,4 +1,4 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Constant;
 
 public class Constant_user_info {
     public static final String TABLE_NAME = "user_info";
@@ -10,6 +10,7 @@ public class Constant_user_info {
     public static final String KEY_MPIN = "mpin";
     public static final String KEY_FINGERPRINT = "fingerprint";
     public static Boolean isCheckSplash = true;
+    public static Boolean flag = false;
 
     //User shared preference data
     public static final String SHARED_ID = "Signup";
@@ -21,10 +22,9 @@ public class Constant_user_info {
     public static final String SHARED_MPIN = "mpin";
     public static final String SHARED_FINGERPRINT = "fingerprint";
 
-
-
-
-
+// for stepper
     public static int currentStep = 0;
 
+//    for closing
+    public static String isCheckFrag = "false";
 }

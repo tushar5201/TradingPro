@@ -22,8 +22,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tradingpro.R;
-import com.example.tradingpro.SearchAdapter;
-import com.example.tradingpro.SearchModel;
+import com.example.tradingpro.Adapter.SearchAdapter;
+import com.example.tradingpro.Model.SearchModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;

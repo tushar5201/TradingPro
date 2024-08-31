@@ -1,4 +1,4 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tradingpro.R;
+import com.example.tradingpro.Model.SearchModel;
 
 import java.util.ArrayList;
 

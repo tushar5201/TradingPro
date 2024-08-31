@@ -1,4 +1,4 @@
-package com.example.tradingpro;
+package com.example.tradingpro.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.tradingpro.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -57,7 +57,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String phone = intent.getStringExtra("phone");
         String backendOtp = intent.getStringExtra("backendOtp");
-        tvMob.setText(phone);
+        tvMob.setText("+91 "+phone);
 
         btnVerify.setOnClickListener(v -> {
             String enteredOtp = text1.getText().toString() + text2.getText().toString() + text3.getText().toString() + text4.getText().toString() + text5.getText().toString() + text6.getText().toString();
@@ -69,6 +69,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Snackbar.make(main, "Verified", Snackbar.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), SignupProcessActivity.class));
+                                finish();
                             } else {
                                 Snackbar.make(main, "Wrong Otp", Snackbar.LENGTH_SHORT).show();
                             }
