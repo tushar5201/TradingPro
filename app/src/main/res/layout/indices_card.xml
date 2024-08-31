@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="210dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        android:background="@color/edText"
+        android:paddingHorizontal="10dp"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/symbolIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/nifty_icon" />
+
+            <TextView
+                android:id="@+id/tvSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NIFTY"
+                android:layout_toEndOf="@id/symbolIcon"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins"
+                android:textSize="17dp"
+                android:textColor="@color/primary_text" />
+
+            <TextView
+                android:id="@+id/tvSymbolName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nifty 50"
+                android:layout_toRightOf="@id/symbolIcon"
+                android:layout_below="@id/tvSymbol"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/desc_text" />
+
+
+            <!--            Price-->
+            <TextView
+                android:id="@+id/tvSymbolPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/symbolIcon"
+                android:text=" 24,300.70"
+                android:textColor="@color/primary_text"
+                android:fontFamily="@font/poppins"
+                android:textSize="20sp"
+                android:layout_marginTop="30dp" />
+
+            <!--            Plus Minus-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvSymbolPrice">
+
+                <TextView
+                    android:id="@+id/tvPlusMinusPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+275.55"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="15sp"
+                    android:textColor="@color/green" />
+
+                <TextView
+                    android:id="@+id/tvPlusMinusPercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(+1.14%)"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="15sp"
+                    android:textColor="@color/green" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
