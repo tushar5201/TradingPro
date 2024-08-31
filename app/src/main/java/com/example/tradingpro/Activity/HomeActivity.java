@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tradingpro.MainFragments.MarketsFragment;
 import com.example.tradingpro.MainFragments.SearchFragment;
 import com.example.tradingpro.R;
 
@@ -33,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        addFragment(new MarketsFragment());
 
         card1 = findViewById(R.id.card1);
         card2 = findViewById(R.id.card2);
@@ -50,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
 
         card1.setOnClickListener(v -> {
             BottomIcon1();
+            addFragment(new MarketsFragment());
         });
 
         card2.setOnClickListener(v -> {
