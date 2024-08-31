@@ -69,6 +69,8 @@ public class SignupActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         main = findViewById(R.id.main);
 
+
+
 //        switch to login screen
         tvLogin.setOnClickListener(v -> {
             startActivity(new Intent(SignupActivity.this, LoginActivity.class));
