@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -32,6 +33,7 @@ public class StockOverviewActivity extends AppCompatActivity {
 
     TabLayout tabstock;
     ViewPager viewpagerstock;
+    ImageView cancelButton;
     TextView stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage;
     Handler handler = new Handler();
     Runnable runnable;
@@ -55,13 +57,21 @@ public class StockOverviewActivity extends AppCompatActivity {
         stockPrice = findViewById(R.id.stockPrice);
         stockPlusMinusPoints = findViewById(R.id.stockPlusMinusPoints);
         stockPlusMinusPercentage = findViewById(R.id.stockPlusMinusPercentage);
+        cancelButton = findViewById(R.id.cancelButton);
 
+
+//        getting stock and display
         Intent i1 = getIntent();
         String symbolName = i1.getStringExtra("symbolName");
         String symbol = i1.getStringExtra("symbol");
 
         ((TextView) findViewById(R.id.symbolFullName)).setText(symbolName);
         ((TextView) findViewById(R.id.stockName)).setText(symbol);
+
+//        cancel button
+        cancelButton.setOnClickListener(v-> {
+            finish();
+        });
 
 //      tabview
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager());

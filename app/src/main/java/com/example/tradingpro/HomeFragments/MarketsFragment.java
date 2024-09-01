@@ -1,4 +1,4 @@
-package com.example.tradingpro.MainFragments;
+package com.example.tradingpro.HomeFragments;
 
 import android.os.Bundle;
 
