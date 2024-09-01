@@ -60,6 +60,7 @@ public class SearchFragment extends Fragment {
         adapter = new SearchAdapter(dataList, getContext());
         recyclerView.setAdapter(adapter);
 
+
         textInputEdSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
