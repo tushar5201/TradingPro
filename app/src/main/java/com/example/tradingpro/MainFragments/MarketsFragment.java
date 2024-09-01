@@ -58,11 +58,11 @@ public class MarketsFragment extends Fragment {
             @Override
             public void run() {
                 // Call the method to fetch stock prices
-                fetchStockPrices("^NSEI", "https://s3-symbol-logo.tradingview.com/indices/nifty-50--600.png");
-                fetchStockPrices("^NSEBANK", "https://s3-symbol-logo.tradingview.com/sector/financial--600.png");
-                fetchStockPrices("^BSESN", "https://s3-symbol-logo.tradingview.com/indices/bse-sensex--600.png");
-                fetchStockPrices("NIFTY_FIN_SERVICE.NS", "https://s3-symbol-logo.tradingview.com/indices/finnifty--600.png");
-                fetchStockPrices("^INDIAVIX", "https://s3-symbol-logo.tradingview.com/indices/india-vix--600.png");
+                fetchStockPrices(0, "^NSEI", "https://s3-symbol-logo.tradingview.com/indices/nifty-50--600.png");
+                fetchStockPrices(1, "^NSEBANK", "https://s3-symbol-logo.tradingview.com/sector/financial--600.png");
+                fetchStockPrices(2, "^BSESN", "https://s3-symbol-logo.tradingview.com/indices/bse-sensex--600.png");
+                fetchStockPrices(3, "NIFTY_FIN_SERVICE.NS", "https://s3-symbol-logo.tradingview.com/indices/finnifty--600.png");
+                fetchStockPrices(4, "^INDIAVIX", "https://s3-symbol-logo.tradingview.com/indices/india-vix--600.png");
                 handler.postDelayed(this, 10000);
             }
         };
@@ -79,7 +79,7 @@ public class MarketsFragment extends Fragment {
         super.onStop();
     }
 
-    private void fetchStockPrices(String stockSymbol, String symbolIcon) {
+    private void fetchStockPrices(int pos,String stockSymbol, String symbolIcon) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://query1.finance.yahoo.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -105,17 +105,8 @@ public class MarketsFragment extends Fragment {
                             stockPlusMinusPercentage = " (+" + decim.format(((Double.parseDouble(stockPlusMinusPoints) * 100) / Double.parseDouble(stockPrice))) + "%)";
                         }
                         ensureListSize(dataList, 5);
-                        if (symbol.equals("^NSEI")) {
-                            dataList.set(0, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
-                        } else if (symbol.equals("^NSEBANK")) {
-                            dataList.set(1, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
-                        } else if(symbol.equals("^BSESN")) {
-                            dataList.set(2, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
-                        } else if(symbol.equals("NIFTY_FIN_SERVICE.NS")) {
-                            dataList.set(3, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
-                        } else if(symbol.equals("^INDIAVIX")) {
-                            dataList.set(4, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
-                        }
+
+                            dataList.set(pos, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
                         adapter.notifyDataSetChanged();
                     } else {
                         Log.d("problem", "some Problem");

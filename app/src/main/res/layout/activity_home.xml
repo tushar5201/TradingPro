@@ -9,6 +9,8 @@
     android:fitsSystemWindows="true"
     tools:context=".Activity.HomeActivity">
 
+
+<!--    drawer-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationview"
         android:layout_width="wrap_content"
@@ -19,28 +21,22 @@
         app:headerLayout="@layout/drawer_header"
         android:layout_gravity="start">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/line1"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="1dp"
+                android:background="@color/edText"
+                android:id="@+id/divideFooter"
+                android:layout_above="@+id/textFooter"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="20dp"
-                android:textColor="#979191"/>
+                />
 
             <TextView
+                android:id="@+id/textFooter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -48,38 +44,40 @@
                 android:textSize="15sp"
                 android:fontFamily="@font/poppins_medium"
                 android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                android:textColor="@color/primary_text"/>
+                android:layout_marginBottom="50dp"
+                android:textColor="@color/primary_text"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </com.google.android.material.navigation.NavigationView>
-
 
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/buttondrawertoggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/menu"
-                android:src="@drawable/drawermenu"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="5dp"
-                android:background="@android:color/transparent"
-                android:padding="5dp"/>
+            <androidx.appcompat.widget.Toolbar
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:navigationIcon="@drawable/baseline_menu_24"
+                app:tint="@color/primary_text"
+                android:background="@color/edText">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:layout_centerHorizontal="true"
-                android:text="@string/Home"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/primary_text"
-                android:textSize="17sp" />
+                <TextView
+                    android:id="@+id/toolbarText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HELL0"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
+            </androidx.appcompat.widget.Toolbar>
+
 
             <FrameLayout
                 android:id="@+id/frame"
