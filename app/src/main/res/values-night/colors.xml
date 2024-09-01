@@ -4,10 +4,12 @@
     <color name="secondary_text">#000</color>
     <color name="edText">#474647</color>
     <color name="edBorder">#fee83f</color>
+    <color name="tabUnselect">#959595</color>
     <color name="yellow">#fee83f</color>
     <color name="bg_color">#161617</color>
     <color name="desc_text">#9D9C9C</color>
     <color name="black">#000</color>
     <color name="white">#fff</color>
-
+    <color name="green">#3FC33F</color>
+    <color name="red">#D53030</color>
 </resources>

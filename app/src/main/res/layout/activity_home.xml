@@ -5,46 +5,56 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.HomeActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".Activity.HomeActivity"
+    tools:openDrawer="start">
 
-        <RelativeLayout
+    <RelativeLayout
+        android:id="@+id/rootRelative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/bg_color"
-                app:navigationIcon="@drawable/baseline_menu_24"
-                />
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="20dp"
+            android:background="@color/bg_color"
+            app:navigationIcon="@drawable/baseline_menu_24"
+            app:title=" ">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:fontFamily="@font/poppins"
-                android:layout_centerHorizontal="true"
-                android:text="Home"
-                android:layout_marginTop="15dp"
+                android:text="Markets"
                 android:textColor="@color/primary_text"
-                android:textSize="17dp" />
+                android:textSize="17sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar">
 
             <FrameLayout
                 android:id="@+id/frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <!--            bottom navigation-->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginBottom="40dp"
+                android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="40dp"
                 android:backgroundTint="@color/black"
                 app:cardCornerRadius="50dp"
                 app:cardElevation="10dp"
-                app:contentPadding="5dp"
-                android:layout_alignParentBottom="true"
-                >
+                app:contentPadding="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -145,7 +155,6 @@
                             android:layout_height="25dp"
                             android:layout_gravity="center"
                             android:src="@drawable/portfolio" />
-
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
@@ -153,5 +162,14 @@
             </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
+    </RelativeLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer_items" />
 </androidx.drawerlayout.widget.DrawerLayout>
