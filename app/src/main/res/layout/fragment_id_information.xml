@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/camera_svg"
+            android:src="@drawable/cameraicon2"
             android:layout_marginTop="30dp" />
 
         <TextView
@@ -99,7 +99,7 @@
             android:layout_width="30dp"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/upload_svg"
+            android:src="@drawable/upload"
             android:layout_marginStart="60dp"/>
 
         <TextView
