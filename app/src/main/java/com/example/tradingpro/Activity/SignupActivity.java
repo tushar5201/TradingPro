@@ -91,7 +91,7 @@ public class SignupActivity extends AppCompatActivity {
                         emailFoundValidate();
                         if (Constant_user_info.flag) {
                             Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
-//                            sendOtp();
+                            sendOtp();
                             insertShared();
                         } else {
                             Toast.makeText(SignupActivity.this, "hii", Toast.LENGTH_SHORT).show();
