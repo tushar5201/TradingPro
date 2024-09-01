@@ -7,11 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -33,9 +33,9 @@ public class HomeActivity extends AppCompatActivity {
     CardView card1, card2, card3, card4, card5;
     ImageView img1, img2, img3, img4, img5;
     DrawerLayout drawerLayout;
-    NavigationView navigationView;
     Toolbar toolbar;
-    TextView toolbarText;
+    ImageButton buttondrawertoggle;
+    NavigationView nav_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +53,29 @@ public class HomeActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.main);
         toolbar = findViewById(R.id.toolbar);
-        toolbarText = findViewById(R.id.toolbarText);
-        navigationView = findViewById(R.id.navigationview);
-
-//        set toolbar
+        nav_view = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationOnClickListener(v->{
-            drawerLayout.open();
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(abdt);
+        abdt.syncState();
+
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return false;
+            }
         });
+//        buttondrawertoggle = findViewById(R.id.buttondrawertoggle);
+//        navigationView = findViewById(R.id.navigationview);
+
+//        buttondrawertoggle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                drawerLayout.open();
+//            }
+//        });
 
 //        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 //            @Override
@@ -106,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
 //                }
 //
 //                drawerLayout.closeDrawers();
-//
+
 //                return false;
 //            }
 //        });

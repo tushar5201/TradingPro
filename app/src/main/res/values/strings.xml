@@ -54,4 +54,8 @@
     <string name="line1">_________________________________</string>
     <string name="Home">home2</string>
 
+
+<!--    Drawer-->
+    <string name="nav_open">open</string>
+    <string name="nav_close">close</string>
 </resources>
