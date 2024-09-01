@@ -9,106 +9,42 @@
     tools:context=".Activity.HomeActivity"
     tools:openDrawer="start">
 
-    <!--    <com.google.android.material.navigation.NavigationView-->
-    <!--        android:id="@+id/navigationview"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:menu="@menu/drawer_items"-->
-    <!--        app:dividerInsetStart="60dp"-->
-    <!--        app:itemIconPadding="25dp"-->
-    <!--        app:headerLayout="@layout/drawer_header"-->
-    <!--        android:layout_gravity="start">-->
-
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:orientation="vertical">-->
-
-    <!--            <androidx.appcompat.widget.Toolbar-->
-    <!--                android:id="@+id/toolbar"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="0dp"-->
-    <!--                android:orientation="vertical"-->
-    <!--                android:layout_weight="1" />-->
-
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="@string/line1"-->
-    <!--                android:layout_gravity="center_horizontal"-->
-    <!--                android:layout_marginBottom="20dp"-->
-    <!--                android:textColor="#979191"/>-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_gravity="center_horizontal"-->
-    <!--                android:text="@string/by_tradingpro"-->
-    <!--                android:textSize="15sp"-->
-    <!--                android:fontFamily="@font/poppins_medium"-->
-    <!--                android:textStyle="bold"-->
-    <!--                android:layout_marginBottom="30dp"-->
-    <!--                android:textColor="@color/primary_text"/>-->
-
-    <!--        </LinearLayout>-->
-
-    <!--    </com.google.android.material.navigation.NavigationView>-->
-
     <RelativeLayout
         android:id="@+id/rootRelative"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:layout_marginTop="20dp"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="20dp"
             android:background="@color/bg_color"
-            app:navigationIcon="@drawable/baseline_menu_24" />
+            app:navigationIcon="@drawable/baseline_menu_24"
+            app:title=" ">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/poppins"
-            android:text="Markets"
-            android:layout_marginTop="35dp"
-            android:textColor="@color/primary_text"
-            android:textSize="17dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"
+                android:text="Markets"
+                android:textColor="@color/primary_text"
+                android:textSize="17sp" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <RelativeLayout
-            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!--            <ImageButton-->
-            <!--                android:id="@+id/buttondrawertoggle"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:contentDescription="@string/menu"-->
-            <!--                android:src="@drawable/drawermenu"-->
-            <!--                android:layout_marginTop="40dp"-->
-            <!--                android:layout_marginStart="5dp"-->
-            <!--                android:background="@android:color/transparent"-->
-            <!--                android:padding="5dp"/>-->
-
-            <!--            <TextView-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/poppins"-->
-            <!--                android:layout_centerHorizontal="true"-->
-            <!--                android:text="@string/Home"-->
-            <!--                android:layout_marginTop="15dp"-->
-            <!--                android:textColor="@color/primary_text"-->
-            <!--                android:textSize="17sp" />-->
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar">
 
             <FrameLayout
                 android:id="@+id/frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <!--            bottom navigation-->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -229,12 +165,11 @@
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/nav_view"
-        app:headerLayout="@layout/drawer_header"
         android:layout_gravity="start"
-        app:menu="@menu/drawer_items"
         android:fitsSystemWindows="true"
-        />
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer_items" />
 </androidx.drawerlayout.widget.DrawerLayout>
