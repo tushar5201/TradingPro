@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -31,8 +33,9 @@ public class HomeActivity extends AppCompatActivity {
     CardView card1, card2, card3, card4, card5;
     ImageView img1, img2, img3, img4, img5;
     DrawerLayout drawerLayout;
+    Toolbar toolbar;
     ImageButton buttondrawertoggle;
-    NavigationView navigationView;
+    NavigationView nav_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,64 +52,78 @@ public class HomeActivity extends AppCompatActivity {
 // drawer..........
 
         drawerLayout = findViewById(R.id.main);
-        buttondrawertoggle = findViewById(R.id.buttondrawertoggle);
-        navigationView = findViewById(R.id.navigationview);
+        toolbar = findViewById(R.id.toolbar);
+        nav_view = findViewById(R.id.nav_view);
+        setSupportActionBar(toolbar);
 
-        buttondrawertoggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(abdt);
+        abdt.syncState();
 
-                drawerLayout.open();
-            }
-        });
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int itemId = item.getItemId();
-
-                if (itemId == R.id.navfavourite) {
-                    Toast.makeText(HomeActivity.this, "favourite clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                if (itemId == R.id.navoders) {
-                    Toast.makeText(HomeActivity.this, "order clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                if (itemId == R.id.navmarket) {
-                    Toast.makeText(HomeActivity.this, "market clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                if (itemId == R.id.navfeedback) {
-                    Toast.makeText(HomeActivity.this, "feedback clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                if (itemId == R.id.navtnc) {
-                    Toast.makeText(HomeActivity.this, "terms and condition clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                if (itemId == R.id.navportfolio) {
-                    Toast.makeText(HomeActivity.this, "portfolio clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                if (itemId == R.id.navcontactus) {
-                    Toast.makeText(HomeActivity.this, "contact clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                if (itemId == R.id.navShare) {
-                    Toast.makeText(HomeActivity.this, "share clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                if (itemId == R.id.navlogout) {
-                    Toast.makeText(HomeActivity.this, "logout clicked", Toast.LENGTH_SHORT).show();
-                }
-
-                drawerLayout.closeDrawers();
-
                 return false;
             }
         });
+//        buttondrawertoggle = findViewById(R.id.buttondrawertoggle);
+//        navigationView = findViewById(R.id.navigationview);
+
+//        buttondrawertoggle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                drawerLayout.open();
+//            }
+//        });
+
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//
+//                int itemId = item.getItemId();
+//
+//                if (itemId == R.id.navfavourite) {
+//                    Toast.makeText(HomeActivity.this, "favourite clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                if (itemId == R.id.navoders) {
+//                    Toast.makeText(HomeActivity.this, "order clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                if (itemId == R.id.navmarket) {
+//                    Toast.makeText(HomeActivity.this, "market clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                if (itemId == R.id.navfeedback) {
+//                    Toast.makeText(HomeActivity.this, "feedback clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                if (itemId == R.id.navtnc) {
+//                    Toast.makeText(HomeActivity.this, "terms and condition clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                if (itemId == R.id.navportfolio) {
+//                    Toast.makeText(HomeActivity.this, "portfolio clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                if (itemId == R.id.navcontactus) {
+//                    Toast.makeText(HomeActivity.this, "contact clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                if (itemId == R.id.navShare) {
+//                    Toast.makeText(HomeActivity.this, "share clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                if (itemId == R.id.navlogout) {
+//                    Toast.makeText(HomeActivity.this, "logout clicked", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                drawerLayout.closeDrawers();
+
+//                return false;
+//            }
+//        });
 
 //    ...........................
 
