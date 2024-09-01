@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,6 +44,7 @@ public class MpinActivity extends AppCompatActivity {
     RelativeLayout main;
     EditText text1, text2, text3, text4;
     String mpin;
+    ImageView backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,18 @@ public class MpinActivity extends AppCompatActivity {
         text2 = findViewById(R.id.text2);
         text3 = findViewById(R.id.text3);
         text4 = findViewById(R.id.text4);
+        backBtn = findViewById(R.id.backBtn);
 
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         String unm = sp.getString("unm", "");
         String emailOrPhone = sp.getString("emailOrPhone", "");
         tvTitle.setText("\uD83D\uDC4B HI " + unm.toUpperCase());
+
+//        go to login when back click
+        backBtn.setOnClickListener(v-> {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        });
 
 
         //Mpin

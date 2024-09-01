@@ -1,6 +1,7 @@
 package com.example.tradingpro.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tradingpro.Activity.StockOverviewActivity;
 import com.example.tradingpro.R;
 import com.example.tradingpro.Model.SearchModel;
 
@@ -43,6 +45,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
 
         holder.plus.setOnClickListener(v -> {
 
+        });
+
+        holder.itemView.setOnClickListener(v-> {
+            String symbolName = searchModel.getSymbolName();
+            String symbol = searchModel.getSymbol();
+            Intent i1 = new Intent(v.getContext(), StockOverviewActivity.class);
+            i1.putExtra("symbolName", symbolName);
+            i1.putExtra("symbol", symbol);
+            v.getContext().startActivity(i1);
         });
     }
 
