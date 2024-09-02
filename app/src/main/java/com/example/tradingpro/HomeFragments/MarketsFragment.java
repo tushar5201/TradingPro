@@ -63,7 +63,7 @@ public class MarketsFragment extends Fragment {
                 fetchStockPrices(2, "^BSESN", "https://s3-symbol-logo.tradingview.com/indices/bse-sensex--600.png");
                 fetchStockPrices(3, "NIFTY_FIN_SERVICE.NS", "https://s3-symbol-logo.tradingview.com/indices/finnifty--600.png");
                 fetchStockPrices(4, "^INDIAVIX", "https://s3-symbol-logo.tradingview.com/indices/india-vix--600.png");
-                handler.postDelayed(this, 10000);
+                handler.postDelayed(this, 3000);
             }
         };
         handler.post(runnable);

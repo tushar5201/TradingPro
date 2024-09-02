@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="210dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="5dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
+        app:cardElevation="5dp"
+        android:layout_margin="5dp"
+        android:layout_marginVertical="10dp"
         android:background="@color/edText"
         android:paddingHorizontal="10dp"
         android:layout_marginTop="5dp">
@@ -44,6 +46,7 @@
                 android:id="@+id/tvSymbolName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="13sp"
                 android:text="Nifty 50"
                 android:layout_toRightOf="@id/symbolIcon"
                 android:layout_below="@id/tvSymbol"
@@ -61,7 +64,7 @@
                 android:text=" 24,300.70"
                 android:textColor="@color/primary_text"
                 android:fontFamily="@font/poppins"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 android:layout_marginTop="30dp" />
 
             <!--            Plus Minus-->
@@ -76,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="+275.55"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textColor="@color/green" />
 
                 <TextView
@@ -85,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:text="(+1.14%)"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textColor="@color/green" />
             </LinearLayout>
         </RelativeLayout>

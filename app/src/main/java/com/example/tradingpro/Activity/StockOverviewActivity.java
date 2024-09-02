@@ -84,7 +84,7 @@ public class StockOverviewActivity extends AppCompatActivity {
             @Override
             public void run() {
                 fetchStockPrice(symbol);
-                handler.postDelayed(this, 10000);
+                handler.postDelayed(this, 3000);
             }
         };
         handler.post(runnable);

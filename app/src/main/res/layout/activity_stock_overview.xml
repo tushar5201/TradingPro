@@ -52,7 +52,7 @@
         android:textStyle="bold"
         android:textColor="@color/primary_text"
         android:text=""
-        android:textSize="17sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/stockPlusMinusPercentage"
@@ -63,7 +63,7 @@
         android:textSize="13sp"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/poppins"
-        android:textColor="#3FC33F"/>
+        android:textColor="@color/green"/>
 
     <TextView
         android:id="@+id/stockPlusMinusPoints"
@@ -74,7 +74,7 @@
         android:layout_below="@+id/stockPrice"
         android:textSize="13sp"
         android:fontFamily="@font/poppins"
-        android:textColor="#3FC33F"/>
+        android:textColor="@color/green"/>
 
 
 
