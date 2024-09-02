@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp">
+
+    <TextView
+        android:id="@+id/symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RELIANCE"
+        android:textColor="@color/primary_text"
+        android:textSize="17sp"
+        android:fontFamily="@font/poppins_medium"/>
+
+    <TextView
+        android:id="@+id/symbolExchange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NSE"
+        android:textColor="@color/desc_text"
+        android:layout_below="@id/symbol"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_light"/>
+
+    <TextView
+        android:id="@+id/stockPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textSize="17sp"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/poppins"/>
+
+    <TextView
+        android:id="@+id/stockPlusMinusPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(8.90%)"
+        android:layout_below="@+id/stockPrice"
+        android:textSize="13sp"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/poppins"
+        android:textColor="#3FC33F"/>
+
+    <TextView
+        android:id="@+id/stockPlusMinusPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+8.90"
+        android:layout_toStartOf="@+id/stockPlusMinusPercentage"
+        android:layout_below="@+id/stockPrice"
+        android:fontFamily="@font/poppins"
+        android:textColor="#3FC33F"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:layout_below="@id/symbolExchange"
+        app:dividerColor="@color/edText" />
+
+</RelativeLayout>
