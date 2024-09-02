@@ -66,6 +66,7 @@
 
         <!--Username-->
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:id="@+id/textInputLayoutEmailOrPhnLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

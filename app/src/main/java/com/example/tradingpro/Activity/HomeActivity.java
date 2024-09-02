@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.tradingpro.HomeFragments.MarketsFragment;
 import com.example.tradingpro.HomeFragments.SearchFragment;
+import com.example.tradingpro.HomeFragments.WatchlistFragment;
 import com.example.tradingpro.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -87,6 +88,8 @@ public class HomeActivity extends AppCompatActivity {
 
         card2.setOnClickListener(v -> {
             bottomIcon2();
+            addFragment(new WatchlistFragment());
+
         });
 
 //        card3
