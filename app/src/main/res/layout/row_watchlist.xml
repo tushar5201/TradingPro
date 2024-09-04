@@ -7,7 +7,7 @@
     android:paddingVertical="10dp">
 
     <TextView
-        android:id="@+id/symbol"
+        android:id="@+id/symbolWatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RELIANCE"
@@ -16,17 +16,17 @@
         android:fontFamily="@font/poppins_medium"/>
 
     <TextView
-        android:id="@+id/symbolExchange"
+        android:id="@+id/symbolExchangeWatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NSE"
         android:textColor="@color/desc_text"
-        android:layout_below="@id/symbol"
+        android:layout_below="@id/symbolWatch"
         android:textSize="12sp"
         android:fontFamily="@font/poppins_light"/>
 
     <TextView
-        android:id="@+id/stockPrice"
+        android:id="@+id/stockPriceWatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Price"
@@ -36,23 +36,23 @@
         android:fontFamily="@font/poppins"/>
 
     <TextView
-        android:id="@+id/stockPlusMinusPercentage"
+        android:id="@+id/stockPlusMinusPercentageWatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(8.90%)"
-        android:layout_below="@+id/stockPrice"
+        android:layout_below="@+id/stockPriceWatch"
         android:textSize="13sp"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/poppins"
         android:textColor="#3FC33F"/>
 
     <TextView
-        android:id="@+id/stockPlusMinusPoints"
+        android:id="@+id/stockPlusMinusPointsWatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+8.90"
-        android:layout_toStartOf="@+id/stockPlusMinusPercentage"
-        android:layout_below="@+id/stockPrice"
+        android:layout_toStartOf="@+id/stockPlusMinusPercentageWatch"
+        android:layout_below="@+id/stockPriceWatch"
         android:fontFamily="@font/poppins"
         android:textColor="#3FC33F"/>
 
@@ -61,7 +61,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:paddingHorizontal="10dp"
-        android:layout_below="@id/symbolExchange"
+        android:layout_below="@id/symbolExchangeWatch"
         app:dividerColor="@color/edText" />
 
 </RelativeLayout>
