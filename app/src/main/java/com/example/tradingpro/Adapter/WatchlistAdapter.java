@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +19,11 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import java.util.ArrayList;
 
 public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.viewHolderWatchList> {
-    ArrayList<WatchlistModel> list;
+    ArrayList<WatchlistModel> list1;
     Context context;
 
     public WatchlistAdapter(ArrayList<WatchlistModel> list, Context context) {
-        this.list = list;
+        this.list1 = list;
         this.context = context;
     }
 
@@ -38,23 +39,27 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.view
 
     @Override
     public void onBindViewHolder(@NonNull viewHolderWatchList holder, int position) {
-        WatchlistModel watchlistModel = list.get(position);
+        WatchlistModel watchlistModel = list1.get(position);
         holder.symbol.setText(watchlistModel.getSymbol());
+        holder.stockPrice.setText(watchlistModel.getStockPrice());
+        holder.stockPlusMinusPercentage.setText(watchlistModel.getStockPlusMinusPercentage());
+        holder.stockPlusMinusPoints.setText(watchlistModel.getStockPlusMinusPoints());
+
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list1.size();
     }
 
     class viewHolderWatchList extends RecyclerView.ViewHolder {
         TextView symbol, stockPrice, stockPlusMinusPercentage, stockPlusMinusPoints;
         public viewHolderWatchList(@NonNull View itemView) {
             super(itemView);
-            symbol = itemView.findViewById(R.id.symbol);
-//            stockPrice = itemView.findViewById(R.id.stockPrice);
-//            stockPlusMinusPercentage = itemView.findViewById(R.id.stockPlusMinusPercentage);
-//            stockPlusMinusPoints = itemView.findViewById(R.id.stockPlusMinusPoints);
+            symbol = itemView.findViewById(R.id.symbolWatch);
+            stockPrice = itemView.findViewById(R.id.stockPriceWatch);
+            stockPlusMinusPercentage = itemView.findViewById(R.id.stockPlusMinusPercentageWatch);
+            stockPlusMinusPoints = itemView.findViewById(R.id.stockPlusMinusPointsWatch);
         }
     }
 }
