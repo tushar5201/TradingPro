@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group1">
+
+        <item
+            android:id="@+id/navmarket"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/drawermarket"
+            android:title="@string/market" />
+
+        <item
+            android:id="@+id/navfavourite"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/fav"
+            android:title="@string/favourite1" />
+
+        <item
+            android:id="@+id/navoders"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/orderbag"
+            android:title="@string/orders" />
+
+        <item
+            android:id="@+id/navportfolio"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/drawerportfolio"
+            android:title="@string/portfolio" />
+
+    </group>
+
+    <group android:id="@+id/group2">
+
+        <item
+            android:id="@+id/navtnc"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/termsandconditions"
+            android:title="@string/terms_and_conditions" />
+
+        <item
+            android:id="@+id/navfeedback"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/feedback"
+            android:title="@string/feedback" />
+
+    </group>
+
+    <group android:id="@+id/group3">
+
+        <item
+            android:id="@+id/navcontactus"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/contact"
+            android:title="@string/contact_us" />
+
+        <item
+            android:id="@+id/navShare"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/share"
+            android:title="@string/share" />
+
+        <item
+            android:id="@+id/navlogout"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/drawerlogout"
+            android:title="@string/logout" />
+
+
+    </group>
+
+
+</menu>
+

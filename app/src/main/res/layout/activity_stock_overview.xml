@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".Activity.StockOverviewActivity"
     android:background="@color/bg_color"
-    android:layout_margin="15dp"
    >
 
     <ImageView
-        android:id="@+id/cancel_button"
+        android:id="@+id/cancelButton"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/cancel"
         app:tint="@color/primary_text"
        />
@@ -26,12 +26,13 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/primary_text"
-        android:layout_below="@+id/cancel_button"
+        android:layout_below="@+id/cancelButton"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/poppins"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/symbolFullName"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="NSE"
         android:textSize="15sp"
@@ -44,34 +45,36 @@
         android:id="@+id/stockPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="137.89"
-        android:layout_below="@+id/cancel_button"
-        android:layout_marginTop="25dp"
-        android:textSize="17sp"
+        android:layout_below="@+id/cancelButton"
         android:layout_alignParentEnd="true"
-        android:fontFamily="@font/poppins"/>
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:text=""
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/stockPlusMinusPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(8.37%)"
+        android:text=""
         android:layout_below="@+id/stockPrice"
         android:textSize="13sp"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/poppins"
-        android:textColor="#3FC33F"/>
+        android:textColor="@color/green"/>
 
     <TextView
-        android:id="@+id/stockPlusMinus"
+        android:id="@+id/stockPlusMinusPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+7.91"
+        android:text=""
         android:layout_toStartOf="@+id/stockPlusMinusPercentage"
         android:layout_below="@+id/stockPrice"
         android:textSize="13sp"
         android:fontFamily="@font/poppins"
-        android:textColor="#3FC33F"/>
+        android:textColor="@color/green"/>
 
 
 
@@ -82,19 +85,6 @@
         android:src="@drawable/plus"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/stockPlusMinusPercentage"
-        android:layout_marginTop="10dp"
-        android:tooltipText="WatchList"
-        android:scaleType="center"
-        app:tint="@color/primary_text"/>
-
-    <ImageView
-        android:id="@+id/imgBtnNotify"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:src="@drawable/baseline_notifications_none_24"
-        android:layout_toStartOf="@+id/imgBtnAddWatchList"
-        android:layout_below="@id/stockPlusMinusPercentage"
-        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:tooltipText="WatchList"
         android:scaleType="center"
@@ -137,11 +127,12 @@
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearstock"
         app:tabSelectedTextColor="@color/primary_text"
-        app:tabTextColor="#B4CB9C9C"
+        app:tabTextColor="@color/tabUnselect"
         android:id="@+id/tabstock"/>
 
     <androidx.viewpager.widget.ViewPager

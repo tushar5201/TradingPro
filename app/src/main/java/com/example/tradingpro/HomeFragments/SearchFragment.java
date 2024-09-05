@@ -1,4 +1,4 @@
-package com.example.tradingpro.MainFragments;
+package com.example.tradingpro.HomeFragments;
 
 import android.os.Bundle;
 
@@ -59,6 +59,7 @@ public class SearchFragment extends Fragment {
         dataList = new ArrayList<>();
         adapter = new SearchAdapter(dataList, getContext());
         recyclerView.setAdapter(adapter);
+
 
         textInputEdSearch.addTextChangedListener(new TextWatcher() {
             @Override

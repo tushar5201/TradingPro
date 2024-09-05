@@ -4,43 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainFragments.MarketsFragment"
+    tools:context=".HomeFragments.MarketsFragment"
     android:background="@color/bg_color"
     android:orientation="vertical"
     android:paddingHorizontal="10dp"
     android:paddingTop="20dp">
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/bg_color"
-                app:navigationIcon="@drawable/baseline_menu_24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/poppins"
-                android:text="Markets"
-                android:textColor="@color/primary_text"
-                android:textSize="17dp" />
-
-        </RelativeLayout>
-    </androidx.drawerlayout.widget.DrawerLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/shape"
         android:paddingHorizontal="20dp"
         android:paddingTop="35dp">

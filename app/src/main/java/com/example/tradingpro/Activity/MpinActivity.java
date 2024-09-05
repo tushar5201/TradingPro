@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,6 +44,8 @@ public class MpinActivity extends AppCompatActivity {
     RelativeLayout main;
     EditText text1, text2, text3, text4;
     String mpin;
+    ImageView backBtn;
+    String emailOrPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class MpinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mpin);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(30, systemBars.top, 30, systemBars.bottom);
+            v.setPadding(30, systemBars.top, 30, 30);
             return insets;
         });
 
@@ -63,15 +66,22 @@ public class MpinActivity extends AppCompatActivity {
         text2 = findViewById(R.id.text2);
         text3 = findViewById(R.id.text3);
         text4 = findViewById(R.id.text4);
+        backBtn = findViewById(R.id.backBtn);
 
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         String unm = sp.getString("unm", "");
-        String emailOrPhone = sp.getString("emailOrPhone", "");
+        emailOrPhone = sp.getString("emailOrPhone", "");
         tvTitle.setText("\uD83D\uDC4B HI " + unm.toUpperCase());
 
+//        go to login when back click
+        backBtn.setOnClickListener(v-> {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        });
+
+        fingerPrintCheck();
 
         //Mpin
-
         btnConfirm.setOnClickListener(v -> {
             mpin = text1.getText().toString().trim() + text2.getText().toString().trim() + text3.getText().toString().trim() + text4.getText().toString().trim();
             try {
@@ -85,10 +95,18 @@ public class MpinActivity extends AppCompatActivity {
         });
 
 
+        btnFingerprint.setOnClickListener(v -> {
+            biometricPrompt.authenticate(promptInfo);
+        });
 
+        text1.addTextChangedListener(otpbox1());
+        text2.addTextChangedListener(otpbox2());
+        text3.addTextChangedListener(otpbox3());
+        text4.addTextChangedListener(otpbox4());
+    }
 
-
-//        fingerprint
+    public void fingerPrint() {
+        //        fingerprint
         BiometricManager biometricManager = BiometricManager.from(this);
 
         switch (biometricManager.canAuthenticate()) {
@@ -129,18 +147,35 @@ public class MpinActivity extends AppCompatActivity {
                 .setDescription("Use Fingerprint To Login").setDeviceCredentialAllowed(true).build();
         biometricPrompt.authenticate(promptInfo);
 
-
-        btnFingerprint.setOnClickListener(v -> {
-            biometricPrompt.authenticate(promptInfo);
-        });
-
-        text1.addTextChangedListener(otpbox1());
-        text2.addTextChangedListener(otpbox2());
-        text3.addTextChangedListener(otpbox3());
     }
 
+    public void fingerPrintCheck() {
+        //        check fingerprint
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_info");
+        Query query = databaseReference.orderByChild(Constant_user_info.KEY_PHONE).equalTo(emailOrPhone);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        String finger = data.child(Constant_user_info.KEY_FINGERPRINT).getValue(String.class);
 
+                        if (finger.equals("true")) {
+                            fingerPrint();
+                        } else {
+                            btnFingerprint.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Snackbar.make(main, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 
     public void verifyMpin(String emailOrPhone, String inputMpin) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_info");
@@ -168,9 +203,6 @@ public class MpinActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
     public TextWatcher otpbox1() {
         return new TextWatcher() {
@@ -225,12 +257,32 @@ public class MpinActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if ((charSequence.toString().trim()).length() == 1) {
                     text4.requestFocus();
+
                 }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        };
+    }
+
+    public TextWatcher otpbox4() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                mpin = text1.getText().toString().trim() + text2.getText().toString().trim() + text3.getText().toString().trim() + text4.getText().toString().trim();
+                verifyMpin(emailOrPhone, mpin);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
             }
         };
     }

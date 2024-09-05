@@ -3,26 +3,38 @@ package com.example.tradingpro.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.tradingpro.MainFragments.MarketsFragment;
-import com.example.tradingpro.MainFragments.SearchFragment;
+import com.example.tradingpro.HomeFragments.MarketsFragment;
+import com.example.tradingpro.HomeFragments.SearchFragment;
+import com.example.tradingpro.HomeFragments.WatchlistFragment;
 import com.example.tradingpro.R;
+import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
     CardView card1, card2, card3, card4, card5;
     ImageView img1, img2, img3, img4, img5;
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+    ImageButton buttondrawertoggle;
+    NavigationView nav_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +48,25 @@ public class HomeActivity extends AppCompatActivity {
         });
         addFragment(new MarketsFragment());
 
+// drawer..........
+
+        drawerLayout = findViewById(R.id.main);
+        toolbar = findViewById(R.id.toolbar);
+        nav_view = findViewById(R.id.nav_view);
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(abdt);
+        abdt.syncState();
+
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return false;
+            }
+        });
+
+//        bottom navigation
         card1 = findViewById(R.id.card1);
         card2 = findViewById(R.id.card2);
         card3 = findViewById(R.id.card3);
@@ -57,6 +88,8 @@ public class HomeActivity extends AppCompatActivity {
 
         card2.setOnClickListener(v -> {
             bottomIcon2();
+            addFragment(new WatchlistFragment());
+
         });
 
 //        card3

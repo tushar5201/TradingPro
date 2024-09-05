@@ -29,5 +29,33 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="continueNext">Continue</string>
     <string name="backNext">Back</string>
+    <string name="home">Home</string>
+    <string name="orders">Orders</string>
+    <string name="favourite">Favourite</string>
+    <string name="history">History</string>
+    <string name="feedback">Feedback</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="refer">Refer</string>
+    <string name="contact_us">Contact us</string>
+    <string name="share">Share</string>
+    <string name="trading_pro">trading pro</string>
+    <string name="tadingpro12_gmail_com">tadingpro12@gmail.com</string>
+    <string name="menu">menu</string>
+    <string name="personimage">personimage</string>
+    <string name="home1">Home</string>
+    <string name="tradingpro_gmail_com">tradingpro@gmail.com</string>
+    <string name="hi">HI</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="market">Market</string>
+    <string name="favourite1">Favourite</string>
+    <string name="portfolio">portfolio</string>
+    <string name="logout">Logout</string>
+    <string name="by_tradingpro">By TradingPro</string>
+    <string name="line1">_________________________________</string>
+    <string name="Home">home2</string>
 
+
+<!--    Drawer-->
+    <string name="nav_open">open</string>
+    <string name="nav_close">close</string>
 </resources>
