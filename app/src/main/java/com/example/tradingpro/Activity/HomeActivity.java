@@ -4,14 +4,12 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -23,8 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.tradingpro.MainFragments.MarketsFragment;
-import com.example.tradingpro.MainFragments.SearchFragment;
+import com.example.tradingpro.HomeFragments.MarketsFragment;
+import com.example.tradingpro.HomeFragments.SearchFragment;
+import com.example.tradingpro.HomeFragments.WatchlistFragment;
 import com.example.tradingpro.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -33,9 +32,9 @@ public class HomeActivity extends AppCompatActivity {
     CardView card1, card2, card3, card4, card5;
     ImageView img1, img2, img3, img4, img5;
     DrawerLayout drawerLayout;
-    NavigationView navigationView;
     Toolbar toolbar;
-    TextView toolbarText;
+    ImageButton buttondrawertoggle;
+    NavigationView nav_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,66 +52,21 @@ public class HomeActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.main);
         toolbar = findViewById(R.id.toolbar);
-        toolbarText = findViewById(R.id.toolbarText);
-        navigationView = findViewById(R.id.navigationview);
-
-//        set toolbar
+        nav_view = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationOnClickListener(v->{
-            drawerLayout.open();
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(abdt);
+        abdt.syncState();
+
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return false;
+            }
         });
 
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//                int itemId = item.getItemId();
-//
-//                if (itemId == R.id.navfavourite) {
-//                    Toast.makeText(HomeActivity.this, "favourite clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (itemId == R.id.navoders) {
-//                    Toast.makeText(HomeActivity.this, "order clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (itemId == R.id.navmarket) {
-//                    Toast.makeText(HomeActivity.this, "market clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (itemId == R.id.navfeedback) {
-//                    Toast.makeText(HomeActivity.this, "feedback clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (itemId == R.id.navtnc) {
-//                    Toast.makeText(HomeActivity.this, "terms and condition clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (itemId == R.id.navportfolio) {
-//                    Toast.makeText(HomeActivity.this, "portfolio clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (itemId == R.id.navcontactus) {
-//                    Toast.makeText(HomeActivity.this, "contact clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (itemId == R.id.navShare) {
-//                    Toast.makeText(HomeActivity.this, "share clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                if (itemId == R.id.navlogout) {
-//                    Toast.makeText(HomeActivity.this, "logout clicked", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                drawerLayout.closeDrawers();
-//
-//                return false;
-//            }
-//        });
-
-//    ...........................
-
+//        bottom navigation
         card1 = findViewById(R.id.card1);
         card2 = findViewById(R.id.card2);
         card3 = findViewById(R.id.card3);
@@ -134,6 +88,8 @@ public class HomeActivity extends AppCompatActivity {
 
         card2.setOnClickListener(v -> {
             bottomIcon2();
+            addFragment(new WatchlistFragment());
+
         });
 
 //        card3
