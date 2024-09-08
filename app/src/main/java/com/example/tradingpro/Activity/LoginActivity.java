@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -90,32 +91,34 @@ public class LoginActivity extends AppCompatActivity {
             if (isValidAllField()) {
                 try {
                     Double isPhone = Double.parseDouble(emailOrPhone);
-                    if (isPhone.getClass() == Double.class) {
-                        checkPhone();
-                    }
+                    isPhone.getClass();
+                    checkPhone(editor);
                 } catch (NumberFormatException err) {
-                    checkEmail();
+                    checkEmail(editor);
+                    if (flag && chkRemember.isChecked()) {
+                        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+                        editor.putString("unm", username);
+                        editor.putString("emailOrPhone", emailOrPhone);
+                        editor.commit();
+                        startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+                        finish();
+                    } else if (flag && !chkRemember.isChecked()) {
+                        Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Error error) {
                     Snackbar.make(mainRelative, "Something went wrong!", Snackbar.LENGTH_SHORT).show();
                 }
-            }
-
-            if (flag && chkRemember.isChecked()) {
-                editor.putString("unm", username);
-                editor.putString("emailOrPhone", emailOrPhone);
-                editor.commit();
-                startActivity(new Intent(getApplicationContext(), MpinActivity.class));
-                finish();
-            } else if(flag && !chkRemember.isChecked()) {
-                startActivity(new Intent(getApplicationContext(), MpinActivity.class));
-                finish();
             }
         });
         textInputEdEmailOrPhnLog.addTextChangedListener(createEmailWatcher());
         textInputEdPasswordLog.addTextChangedListener(createpasswordWatcher());
     }
 
-    public void checkEmail() {
+    public void checkEmail(SharedPreferences.Editor editor) {
         user = textInputEdEmailOrPhnLog.getText().toString().trim();
         pass = textInputEdPasswordLog.getText().toString().trim();
 
@@ -132,6 +135,16 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (password.equals(pass)) {
                             flag = true;
+                            if (chkRemember.isChecked()) {
+                                editor.putString("unm", username);
+                                editor.putString("emailOrPhone", emailOrPhone);
+                                editor.commit();
+                                startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+                                finish();
+                            } else if (flag && !chkRemember.isChecked()) {
+                                startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+                                finish();
+                            }
                         } else {
                             Snackbar.make(mainRelative, "Invalid credentials ", Snackbar.LENGTH_SHORT).show();
                             flag = false;
@@ -150,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void checkPhone() {
+    public void checkPhone(SharedPreferences.Editor editor) {
 
         user = textInputEdEmailOrPhnLog.getText().toString().trim();
         pass = textInputEdPasswordLog.getText().toString().trim();
@@ -168,6 +181,16 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (password.equals(pass)) {
                             flag = true;
+                            if (chkRemember.isChecked()) {
+                                editor.putString("unm", username);
+                                editor.putString("emailOrPhone", emailOrPhone);
+                                editor.commit();
+                                startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+                                finish();
+                            } else if (flag && !chkRemember.isChecked()) {
+                                startActivity(new Intent(getApplicationContext(), MpinActivity.class));
+                                finish();
+                            }
                         } else {
                             Snackbar.make(mainRelative, "Invalid credentials ", Snackbar.LENGTH_SHORT).show();
                             flag = false;

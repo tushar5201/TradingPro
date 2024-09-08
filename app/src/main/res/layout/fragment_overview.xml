@@ -1,15 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#758AAA"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    android:paddingVertical="20dp"
     tools:context=".OverviewTabFragment.OverviewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+<!--    Today High/Low-->
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- Left Text (Low Value) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="Today's Low"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="12sp" />
+
+        <!-- Right Text (High Value) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Today's High"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- Left Text (Low Value) -->
+        <TextView
+            android:id="@+id/tvTodayLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp" />
+
+        <!-- Right Text (High Value) -->
+        <TextView
+            android:id="@+id/tvTodayHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+
+        <!-- Horizontal ProgressBar -->
+        <ProgressBar
+            android:id="@+id/progress_bar_today"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:backgroundTint="#666666"
+            android:max="100"
+            android:progressTint="#FFFFFF" />
+
+        <!-- Indicator (Triangle or Icon) -->
+        <ImageView
+            android:id="@+id/indicator_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/triangle" />
+    </FrameLayout>
+
+    <!--   End Today High/Low-->
+
+<!--    52 Week High/Low -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- Left Text (Low Value) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="52 weeks Low"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="12sp" />
+
+        <!-- Right Text (High Value) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="52 weeks High"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- Left Text (Low Value) -->
+        <TextView
+            android:id="@+id/tv52Low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp" />
+
+        <!-- Right Text (High Value) -->
+        <TextView
+            android:id="@+id/tv52High"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+
+        <!-- Horizontal ProgressBar -->
+        <ProgressBar
+            android:id="@+id/progress_bar_52"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:backgroundTint="#666666"
+            android:max="100"
+            android:progressTint="#FFFFFF" />
+
+        <!-- Indicator (Triangle or Icon) -->
+        <ImageView
+            android:id="@+id/indicator_52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/triangle" />
+    </FrameLayout>
+
+<!--    End 52 Week High/Low-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- Left Text (Low Value) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="Volume"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="12sp" />
+
+        <!-- Right Text (High Value) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Previous Day Close"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- Left Text (Low Value) -->
+        <TextView
+            android:id="@+id/tvVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp" />
+
+        <!-- Right Text (High Value) -->
+        <TextView
+            android:id="@+id/tvPrevClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

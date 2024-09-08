@@ -51,7 +51,7 @@ public class WatchlistFragment extends Fragment {
     RecyclerView recycleWatchlist;
     WatchlistAdapter adapter;
     ArrayList<WatchlistModel> list = new ArrayList<>();
-    String stockPlusMinusPercentage, stockPlusMinusPoints, symbol, stockPrice, previousClose;
+    String stockPlusMinusPercentage, stockPlusMinusPoints, symbol, symbolName, stockPrice, previousClose;
     ArrayList<WatchlistModel> dataList = new ArrayList<>();
     private Handler handler = new Handler();
     private Runnable runnable;
@@ -161,6 +161,7 @@ public class WatchlistFragment extends Fragment {
                         previousClose = stockResponse.chart.result[0].meta.previousClose;
                         stockPrice = stockResponse.chart.result[0].meta.regularMarketPrice;
                         symbol = stockResponse.chart.result[0].meta.symbol;
+                        symbolName = stockResponse.chart.result[0].meta.symbolFullname;
                         stockPlusMinusPoints = decim.format(Double.parseDouble(stockPrice) - Double.parseDouble(previousClose));
                         stockPlusMinusPercentage = "  (" + decim.format(((Double.parseDouble(stockPlusMinusPoints) * 100) / Double.parseDouble(stockPrice))) + "%)";
                         if (Double.parseDouble(stockPlusMinusPoints) > 0) {
@@ -170,7 +171,7 @@ public class WatchlistFragment extends Fragment {
 //                        Toast.makeText(getContext(), stockPrice, Toast.LENGTH_SHORT).show();
                         ensureListSize(dataList, arrayListTemp.size());
 
-                        dataList.set(position, new WatchlistModel(symbol, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage));
+                        dataList.set(position, new WatchlistModel(symbol, symbolName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage));
 //                        dataList.add(stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage);
 //                        adapter.notifyDataSetChanged();
                         adapter.notifyItemChanged(position);
@@ -192,7 +193,7 @@ public class WatchlistFragment extends Fragment {
 
     private void ensureListSize(ArrayList<WatchlistModel> list, int size) {
         while (list.size() < size) {
-            list.add(new WatchlistModel("", "0", "0", "0"));
+            list.add(new WatchlistModel("", "", "0", "0", "0"));
         }
     }
 

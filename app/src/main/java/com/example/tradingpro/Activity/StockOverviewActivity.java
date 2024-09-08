@@ -13,11 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.tradingpro.Adapter.TabAdapter;
 import com.example.tradingpro.Interfaces.StockPrice;
 import com.example.tradingpro.Model.StockPriceModel;
+import com.example.tradingpro.OverviewTabFragment.CompanyProfileFragment;
+import com.example.tradingpro.OverviewTabFragment.OverviewFragment;
 import com.example.tradingpro.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -65,6 +69,13 @@ public class StockOverviewActivity extends AppCompatActivity {
         String symbolName = i1.getStringExtra("symbolName");
         String symbol = i1.getStringExtra("symbol");
 
+        OverviewFragment overviewFragment = new OverviewFragment();
+        CompanyProfileFragment companyProfileFragment = new CompanyProfileFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("symbol", symbol);
+        companyProfileFragment.setArguments(bundle);
+        overviewFragment.setArguments(bundle);
+
         ((TextView) findViewById(R.id.symbolFullName)).setText(symbolName);
         ((TextView) findViewById(R.id.stockName)).setText(symbol);
 
@@ -75,8 +86,9 @@ public class StockOverviewActivity extends AppCompatActivity {
 
 //      tabview
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
+        adapter.addFragment(overviewFragment);
+        adapter.addFragment(companyProfileFragment);
         viewpagerstock.setAdapter(adapter);
-
         tabstock.setupWithViewPager(viewpagerstock);
 
 //        price
