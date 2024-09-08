@@ -107,8 +107,8 @@ public class MarketsFragment extends Fragment {
                         ensureListSize(dataList, 5);
 
                             dataList.set(pos, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
-//                        adapter.notifyDataSetChanged();
-                        adapter.notifyItemChanged(pos);
+                        adapter.notifyDataSetChanged();
+//                        adapter.notifyItemChanged(pos);
                     } else {
                         Log.d("problem", "some Problem");
                     }

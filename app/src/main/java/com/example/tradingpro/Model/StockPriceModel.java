@@ -12,7 +12,7 @@ public class StockPriceModel {
     }
 
     public static class Meta {
-        public String regularMarketPrice, previousClose;
+        public String regularMarketPrice, previousClose, fiftyTwoWeekHigh, fiftyTwoWeekLow, regularMarketDayHigh, regularMarketDayLow, regularMarketVolume;
     }
 
 }
