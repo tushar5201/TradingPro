@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.tradingpro.Adapter.SearchAdapter;
@@ -56,7 +57,7 @@ public class WatchlistFragment extends Fragment {
     private Handler handler = new Handler();
     private Runnable runnable;
     ArrayList<String> arrayListTemp = new ArrayList<>();
-
+    ProgressBar watchlistPbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +72,8 @@ public class WatchlistFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recycleWatchlist = view.findViewById(R.id.recycleWatchlist);
-
+        watchlistPbar = view.findViewById(R.id.watchlistPbar);
+        watchlistPbar.setVisibility(View.VISIBLE);
 
 //        shared preferences name
         SharedPreferences sp = getContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
@@ -135,7 +137,6 @@ public class WatchlistFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getContext(), "cancel", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -175,18 +176,21 @@ public class WatchlistFragment extends Fragment {
 //                        dataList.add(stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage);
 //                        adapter.notifyDataSetChanged();
                         adapter.notifyItemChanged(position);
-
+                        watchlistPbar.setVisibility(View.GONE);
                     } else {
                         Log.d("problem", "some Problem");
+                        watchlistPbar.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    watchlistPbar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<IndicesResponseModel> call, Throwable t) {
                 t.printStackTrace();
+                watchlistPbar.setVisibility(View.GONE);
             }
         });
     }

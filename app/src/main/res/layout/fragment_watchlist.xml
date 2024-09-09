@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragments.WatchlistFragment"
-    android:orientation="vertical"
     android:background="@color/bg_color">
+
+    <ProgressBar
+        android:id="@+id/watchlistPbar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/yellow"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -13,4 +22,4 @@
         android:id="@+id/recycleWatchlist"
         android:padding="15dp"/>
 
-</LinearLayout>
+</RelativeLayout>
