@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragments.MarketsFragment"
     android:background="@color/bg_color"
     android:orientation="vertical"
     android:paddingHorizontal="10dp"
-    android:paddingTop="20dp">
+    android:paddingTop="20dp"
+    tools:context=".HomeFragments.MarketsFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -114,10 +114,24 @@
         android:textSize="20sp" />
 
     <!--    RecycleView-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcylIndices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <ProgressBar
+            android:id="@+id/marketsPbar"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/yellow"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcylIndices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 </LinearLayout>
