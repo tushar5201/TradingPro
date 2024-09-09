@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -38,6 +39,7 @@ public class SearchFragment extends Fragment {
     SearchAdapter adapter;
     TextView tvHello;
     private ArrayList<SearchModel> dataList;
+    ProgressBar searchPbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +55,7 @@ public class SearchFragment extends Fragment {
 
         textInputEdSearch = view.findViewById(R.id.textInputEdSearch);
         recyclerView = view.findViewById(R.id.recycleSearch);
-//        tvHello = view.findViewById(R.id.tvHello);
+        searchPbar = view.findViewById(R.id.searchPbar);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dataList = new ArrayList<>();
@@ -69,6 +71,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchPbar.setVisibility(View.VISIBLE);
                 fetchDataFromApi(charSequence);
             }
 
@@ -100,14 +103,17 @@ public class SearchFragment extends Fragment {
                             }
 
                             adapter.notifyDataSetChanged();
+                            searchPbar.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
+                            searchPbar.setVisibility(View.GONE);
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // Handle error
+                searchPbar.setVisibility(View.GONE);
             }
         });
 
