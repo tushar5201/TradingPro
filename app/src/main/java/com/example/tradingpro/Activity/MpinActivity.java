@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -58,6 +59,7 @@ public class MpinActivity extends AppCompatActivity {
             return insets;
         });
 
+
         tvTitle = findViewById(R.id.tvTitle);
         btnFingerprint = findViewById(R.id.btnFingerprint);
         btnConfirm = findViewById(R.id.btnConfirm);
@@ -68,37 +70,71 @@ public class MpinActivity extends AppCompatActivity {
         text4 = findViewById(R.id.text4);
         backBtn = findViewById(R.id.backBtn);
 
+        fingerPrint();
+
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         String unm = sp.getString("unm", "");
         emailOrPhone = sp.getString("emailOrPhone", "");
         tvTitle.setText("\uD83D\uDC4B HI " + unm.toUpperCase());
 
-//        go to login when back click
-        backBtn.setOnClickListener(v-> {
+        // Go to login when back click
+        backBtn.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
         });
 
+        // Initialize BiometricPrompt and PromptInfo
+        Executor executor = ContextCompat.getMainExecutor(this);
+        biometricPrompt = new BiometricPrompt(MpinActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                main.setVisibility(View.VISIBLE);
+                startActivity(new Intent(MpinActivity.this, HomeActivity.class));
+            }
+
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+            }
+        });
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("TradingPro")
+                .setDescription("Use Fingerprint To Login")
+                .setDeviceCredentialAllowed(true) // This allows fallback to PIN/pattern/password if biometric fails
+                .build();
+
+        // Set the fingerprint button click listener
+        btnFingerprint.setOnClickListener(v -> {
+            if (biometricPrompt != null && promptInfo != null) {
+                biometricPrompt.authenticate(promptInfo);
+            }
+        });
+
+        // Call fingerPrintCheck() to manage visibility of the button
         fingerPrintCheck();
 
-        //Mpin
+        // MPin confirmation logic
         btnConfirm.setOnClickListener(v -> {
             mpin = text1.getText().toString().trim() + text2.getText().toString().trim() + text3.getText().toString().trim() + text4.getText().toString().trim();
             try {
                 Double phone = Double.parseDouble(emailOrPhone);
                 verifyMpin(emailOrPhone, mpin);
             } catch (NumberFormatException err) {
-
+                // Handle case when emailOrPhone is not a phone number
+                verifyMpin(emailOrPhone, mpin);
             } catch (Error error) {
                 Snackbar.make(main, "Error", Snackbar.LENGTH_SHORT).show();
             }
         });
 
-
-        btnFingerprint.setOnClickListener(v -> {
-            biometricPrompt.authenticate(promptInfo);
-        });
-
+        // OTP TextWatchers for MPIN
         text1.addTextChangedListener(otpbox1());
         text2.addTextChangedListener(otpbox2());
         text3.addTextChangedListener(otpbox3());
@@ -146,7 +182,6 @@ public class MpinActivity extends AppCompatActivity {
         promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("TradingPro")
                 .setDescription("Use Fingerprint To Login").setDeviceCredentialAllowed(true).build();
         biometricPrompt.authenticate(promptInfo);
-
     }
 
     public void fingerPrintCheck() {
@@ -179,7 +214,13 @@ public class MpinActivity extends AppCompatActivity {
 
     public void verifyMpin(String emailOrPhone, String inputMpin) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_info");
-        Query query = databaseReference.orderByChild(Constant_user_info.KEY_PHONE).equalTo(emailOrPhone);
+        Query query;
+        try {
+            Double isPhone = Double.parseDouble(emailOrPhone);
+            query = databaseReference.orderByChild(Constant_user_info.KEY_PHONE).equalTo(emailOrPhone);
+        } catch (NumberFormatException err) {
+            query = databaseReference.orderByChild(Constant_user_info.KEY_EMAIL).equalTo(emailOrPhone);
+        }
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

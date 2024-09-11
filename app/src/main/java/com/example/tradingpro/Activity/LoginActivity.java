@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), MpinActivity.class));
                         finish();
                     } else {
-                        Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Error error) {
                     Snackbar.make(mainRelative, "Something went wrong!", Snackbar.LENGTH_SHORT).show();
