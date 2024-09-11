@@ -1,10 +1,12 @@
 package com.example.tradingpro.OverviewTabFragment;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -16,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,11 +28,20 @@ import com.android.volley.toolbox.Volley;
 import com.example.tradingpro.Interfaces.StockPrice;
 import com.example.tradingpro.Model.StockPriceModel;
 import com.example.tradingpro.R;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +68,9 @@ public class OverviewFragment extends Fragment {
     String receivedSymbol;
     String volume;
     private static final String BASE_YAHOO_URL = "https://query1.finance.yahoo.com/";
+    LineChart lineChart;
+    ArrayList<Integer> timestamps = new ArrayList<>();
+    ArrayList<Float> prices = new ArrayList<>();
 
 
     @Override
@@ -83,6 +98,9 @@ public class OverviewFragment extends Fragment {
         tv52Low = view.findViewById(R.id.tv52Low);
         tvVolume = view.findViewById(R.id.tvVolume);
         tvPrevClose = view.findViewById(R.id.tvPrevClose);
+        lineChart = view.findViewById(R.id.chart);
+
+        setupChart();
 
         runnable = new Runnable() {
             @Override
@@ -134,6 +152,17 @@ public class OverviewFragment extends Fragment {
             }
         };
         handler.post(runnable);
+
+
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                fetchChartData(receivedSymbol);
+                handler.postDelayed(this, 60000);
+            }
+        };
+        handler.post(runnable);
+
     }
 
     public void fetchStockData(String symbol) {
@@ -166,6 +195,98 @@ public class OverviewFragment extends Fragment {
                         tvTodayLow.setText(todayLow.toString());
                         tvVolume.setText(volume.toString());
                         tvPrevClose.setText(previousClose.toString());
+                    }
+                } else {
+                    Log.e("Retrofit", "Request failed with status code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StockPriceModel> call, Throwable t) {
+                Log.e("Retrofit", "Network request failed", t);
+            }
+        });
+
+    }
+
+
+    public void setupChart() {
+        lineChart.getDescription().setEnabled(false);
+        lineChart.setDrawGridBackground(false);
+
+        // Customize X-Axis
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+//        xAxis.setAxisMaximum(345f);
+//        xAxis.setAxisMinimum(0f);
+
+
+        // Customize Y-Axis (left)
+        YAxis leftAxis = lineChart.getAxisLeft();
+        leftAxis.setDrawGridLines(true);
+        leftAxis.setTextColor(Color.LTGRAY);  // Label color
+
+        // Disable the right Y-Axis
+        lineChart.getAxisRight().setEnabled(false);
+    }
+
+    public void fetchChartData(String symbol) {
+        timestamps.clear();
+        prices.clear();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_YAHOO_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        StockPrice apiService = retrofit.create(StockPrice.class);
+        Call<StockPriceModel> call = apiService.getChartData(symbol);
+        call.enqueue(new Callback<StockPriceModel>() {
+            @Override
+            public void onResponse(Call<StockPriceModel> call, Response<StockPriceModel> response) {
+                if (response.isSuccessful()) {
+                    StockPriceModel stockPriceModel = response.body();
+                    if (stockPriceModel != null) {
+                        timestamps.addAll(stockPriceModel.chart.result[0].timestamp);
+                        prices.addAll(stockPriceModel.chart.result[0].indicators.quote[0].close);
+
+                        // Create a dataset with the data
+                        ArrayList<Entry> values = new ArrayList<>();
+//                        Toast.makeText(getContext(), String.valueOf(prices.size()), Toast.LENGTH_SHORT).show();
+                        for (int i = 0; i < timestamps.size(); i++) {
+                            Float price = prices.get(i);
+                            Integer time = timestamps.get(i);
+                            if (price != null) {
+                                values.add(new Entry(time, price));
+                            }
+                        }
+                        LineDataSet lineDataSet = new LineDataSet(values, "Stock Prices");
+
+                        // Customize dataset appearance
+                        if ((current - previousClose) >= 0.0) {
+                            lineDataSet.setColor(Color.GREEN);
+                        } else {
+                            lineDataSet.setColor(Color.RED);  // Fill color
+                        }
+                        lineDataSet.setLineWidth(2f);  // Line width
+                        lineDataSet.setDrawCircles(false);  // No circles at data points
+                        lineDataSet.setDrawValues(false);  // No values at data points
+                        lineDataSet.setDrawFilled(true);  // Fill the area under the line
+                        // Customize fill for gradient effect (optional)
+                        lineDataSet.setFillAlpha(110);
+                        if (current - previousClose >= 0) {
+                            Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.green_gradiant_fill);
+                            lineDataSet.setFillDrawable(drawable);
+                        } else {
+                            Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.red_gradiant_fill);
+                            lineDataSet.setFillDrawable(drawable);
+                        }
+
+                        // Set the data to the chart
+                        LineData lineData = new LineData(lineDataSet);
+                        lineChart.setData(lineData);
+                        // Refresh the chart
+                        lineChart.invalidate();
                     }
                 } else {
                     Log.e("Retrofit", "Request failed with status code: " + response.code());

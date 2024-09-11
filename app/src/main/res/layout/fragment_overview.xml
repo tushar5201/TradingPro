@@ -8,6 +8,17 @@
     android:paddingVertical="20dp"
     tools:context=".OverviewTabFragment.OverviewFragment">
 
+
+<!--    Chart-->
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/chart">
+    </com.github.mikephil.charting.charts.LineChart>
+
+    <!--    End Chart-->
+
 <!--    Today High/Low-->
 
     <LinearLayout
