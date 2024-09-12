@@ -133,5 +133,20 @@
             android:id="@+id/rcylIndices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rcylIndices"
+            app:tabSelectedTextColor="@color/primary_text"
+            app:tabTextColor="@color/tabUnselect"
+            android:id="@+id/tabMarkets"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabMarkets"
+            android:id="@+id/viewpagerMarkets"/>
     </RelativeLayout>
 </LinearLayout>

@@ -13,11 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.tradingpro.Adapter.TabAdapter;
+import com.example.tradingpro.Adapter.OverviewTabAdapter;
 import com.example.tradingpro.Interfaces.StockPrice;
 import com.example.tradingpro.Model.StockPriceModel;
 import com.example.tradingpro.OverviewTabFragment.CompanyProfileFragment;
@@ -85,7 +83,7 @@ public class StockOverviewActivity extends AppCompatActivity {
         });
 
 //      tabview
-        TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
+        OverviewTabAdapter adapter = new OverviewTabAdapter(getSupportFragmentManager());
         adapter.addFragment(overviewFragment);
         adapter.addFragment(companyProfileFragment);
         viewpagerstock.setAdapter(adapter);
