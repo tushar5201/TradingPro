@@ -6,17 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.tradingpro.OverviewTabFragment.ChartFragment;
-import com.example.tradingpro.OverviewTabFragment.CompanyProfileFragment;
-import com.example.tradingpro.OverviewTabFragment.OverviewFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabAdapter extends FragmentPagerAdapter {
+public class MarketsTabAdapter extends FragmentPagerAdapter {
     private final List<Fragment> fragmentList = new ArrayList<>();
 
-    public TabAdapter(@NonNull FragmentManager fm) {
+    public MarketsTabAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
 
@@ -38,14 +34,14 @@ public class TabAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        if (position==0){
-            return "Overview";
-        }
-//        else if (position==1) {
-//            return "Chart";
+//        if (position==0){
+//            return "Top Movers";
 //        }
+         if (position==0) {
+            return "Top Gainers";
+        }
         else {
-            return "Company Profile";
+            return "Top Losers";
         }
     }
 }
