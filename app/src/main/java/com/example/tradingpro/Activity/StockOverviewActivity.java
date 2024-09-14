@@ -1,10 +1,14 @@
 package com.example.tradingpro.Activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,9 +25,19 @@ import com.example.tradingpro.Model.StockPriceModel;
 import com.example.tradingpro.OverviewTabFragment.CompanyProfileFragment;
 import com.example.tradingpro.OverviewTabFragment.OverviewFragment;
 import com.example.tradingpro.R;
+import com.github.mikephil.charting.charts.CandleStickChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.CandleData;
+import com.github.mikephil.charting.data.CandleDataSet;
+import com.github.mikephil.charting.data.CandleEntry;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.tabs.TabLayout;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +55,8 @@ public class StockOverviewActivity extends AppCompatActivity {
     Runnable runnable;
     private static final String BASE_YAHOO_URL = "https://query1.finance.yahoo.com/";
     String previousClose, price, plusMinusPoints, plusMinusPercentage;
+    CandleStickChart candleStickChart;
+    MaterialButton btnBuy, btnSell;
 
 
     @Override
@@ -60,6 +76,9 @@ public class StockOverviewActivity extends AppCompatActivity {
         stockPlusMinusPoints = findViewById(R.id.stockPlusMinusPoints);
         stockPlusMinusPercentage = findViewById(R.id.stockPlusMinusPercentage);
         cancelButton = findViewById(R.id.cancelButton);
+        candleStickChart = findViewById(R.id.candleChart);
+        btnSell = findViewById(R.id.btnSell);
+        btnBuy = findViewById(R.id.btnBuy);
 
 
 //        getting stock and display
@@ -78,16 +97,47 @@ public class StockOverviewActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.stockName)).setText(symbol);
 
 //        cancel button
-        cancelButton.setOnClickListener(v-> {
+        cancelButton.setOnClickListener(v -> {
             finish();
         });
 
+//        buy and sell btn
+        btnBuy.setOnClickListener(v-> {
+            DialogPlus dialogPlus = DialogPlus.newDialog(this)
+                    .setExpanded(true)
+                    .setContentHeight(ViewGroup.LayoutParams.MATCH_PARENT)
+                    .setContentHolder(new ViewHolder(R.layout.dialog_buy))
+//                    .setHeader(R.layout.dialog_buy)
+                    .create();
+            dialogPlus.show();
+
+//            View view = dialogPlus.getHolderView();
+//            TextView tvText = view.findViewById(R.id.tvText);
+
+//            tvText.setOnClickListener(v1-> {
+//                dialogPlus.dismiss();
+//            });
+
+        });
+
+//        for orientation change
+        int orientation = getResources().getConfiguration().orientation;
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // The screen is in landscape mode
+            candlechart();
+
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // The screen is in portrait mode
+
 //      tabview
-        OverviewTabAdapter adapter = new OverviewTabAdapter(getSupportFragmentManager());
-        adapter.addFragment(overviewFragment);
-        adapter.addFragment(companyProfileFragment);
-        viewpagerstock.setAdapter(adapter);
-        tabstock.setupWithViewPager(viewpagerstock);
+          OverviewTabAdapter adapter = new OverviewTabAdapter(getSupportFragmentManager());
+          adapter.addFragment(overviewFragment);
+          adapter.addFragment(companyProfileFragment);
+          viewpagerstock.setAdapter(adapter);
+          tabstock.setupWithViewPager(viewpagerstock);
+        }
+        
 
 //        price
         runnable = new Runnable() {
@@ -99,8 +149,6 @@ public class StockOverviewActivity extends AppCompatActivity {
         };
         handler.post(runnable);
     }
-
-
 
     public void fetchStockPrice(String symbol) {
         Retrofit retrofit = new Retrofit.Builder()
@@ -145,6 +193,49 @@ public class StockOverviewActivity extends AppCompatActivity {
                 Log.e("Retrofit", "Network request failed", t);
             }
         });
-
     }
+
+    public void candlechart() {
+        ArrayList<CandleEntry> candleEntries = new ArrayList<>();
+        // Add your data here
+        // Example data:
+        candleEntries.add(new CandleEntry(0, 270f, 250f, 260f, 255f));
+        candleEntries.add(new CandleEntry(1, 280f, 240f, 270f, 250f));
+        candleEntries.add(new CandleEntry(2, 290f, 260f, 280f, 275f));
+        candleEntries.add(new CandleEntry(3, 300f, 270f, 290f, 285f));
+        candleEntries.add(new CandleEntry(4, 270f, 250f, 260f, 255f));
+        candleEntries.add(new CandleEntry(5, 280f, 240f, 270f, 250f));
+        candleEntries.add(new CandleEntry(6, 290f, 260f, 280f, 275f));
+        candleEntries.add(new CandleEntry(7, 300f, 270f, 290f, 285f));
+        candleEntries.add(new CandleEntry(8, 320f, 290f, 310f, 305f));
+        candleEntries.add(new CandleEntry(9, 340f, 310f, 330f, 325f));
+        candleEntries.add(new CandleEntry(10, 280f, 240f, 340f, 320f));
+
+        CandleDataSet set = new CandleDataSet(candleEntries, "Data Set");
+        set.setColor(Color.rgb(80, 80, 80));
+        set.setShadowColor(Color.DKGRAY);
+        set.setShadowWidth(0.7f);
+        set.setIncreasingColor(Color.GREEN);
+        set.setIncreasingPaintStyle(Paint.Style.FILL);
+        set.setDecreasingColor(Color.RED);
+        set.setDecreasingPaintStyle(Paint.Style.FILL);
+        set.setNeutralColor(Color.BLUE);
+        set.setValueTextColor(Color.WHITE);
+
+        CandleData data = new CandleData(set);
+
+        candleStickChart.setData(data);
+        candleStickChart.invalidate(); // Refresh the chart
+
+        XAxis xAxis = candleStickChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+
+        YAxis leftAxis = candleStickChart.getAxisLeft();
+        leftAxis.setEnabled(false);
+
+        YAxis rightAxis = candleStickChart.getAxisRight();
+        rightAxis.setDrawGridLines(false);
+    }
+
 }
