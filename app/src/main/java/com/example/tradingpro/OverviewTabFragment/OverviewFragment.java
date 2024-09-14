@@ -275,11 +275,19 @@ public class OverviewFragment extends Fragment {
                         // Customize fill for gradient effect (optional)
                         lineDataSet.setFillAlpha(110);
                         if (current - previousClose >= 0) {
-                            Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.green_gradiant_fill);
-                            lineDataSet.setFillDrawable(drawable);
+                            try {
+                                Drawable drawable = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.green_gradiant_fill);
+                                lineDataSet.setFillDrawable(drawable);
+                            } catch (Exception ex) {
+
+                            }
                         } else {
-                            Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.red_gradiant_fill);
-                            lineDataSet.setFillDrawable(drawable);
+                            try {
+                                Drawable drawable = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.red_gradiant_fill);
+                                lineDataSet.setFillDrawable(drawable);
+                            } catch (Exception ex) {
+
+                            }
                         }
 
                         // Set the data to the chart
