@@ -1,9 +1,9 @@
 package com.example.tradingpro.Model;
 
-public class GainersModel {
+public class GainerLosersModel {
     public String symbol, symbolName, price, change, changesPercentage;
 
-    public GainersModel(String symbol, String symbolName, String price, String change, String changesPercentage) {
+    public GainerLosersModel(String symbol, String symbolName, String price, String change, String changesPercentage) {
         this.symbol = symbol;
         this.price = price;
         this.change = change;
@@ -11,7 +11,7 @@ public class GainersModel {
         this.symbolName = symbolName;
     }
 
-    public GainersModel() {
+    public GainerLosersModel() {
     }
 
     public String getSymbol() {

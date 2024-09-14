@@ -18,10 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.tradingpro.Adapter.GainersAdapter;
-import com.example.tradingpro.Adapter.WatchlistAdapter;
-import com.example.tradingpro.Model.GainersModel;
-import com.example.tradingpro.Model.SearchModel;
+import com.example.tradingpro.Adapter.GainerLosersAdapter;
+import com.example.tradingpro.Model.GainerLosersModel;
 import com.example.tradingpro.R;
 
 import org.json.JSONArray;
@@ -34,8 +32,8 @@ public class TopGainersFragment extends Fragment {
 
     View view;
     RecyclerView rcylGainers;
-    GainersAdapter adapter;
-    private ArrayList<GainersModel> dataList;
+    GainerLosersAdapter adapter;
+    private ArrayList<GainerLosersModel> dataList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,10 +51,10 @@ public class TopGainersFragment extends Fragment {
 
         rcylGainers.setLayoutManager(new LinearLayoutManager(getContext()));
         dataList = new ArrayList<>();
-        adapter = new GainersAdapter(dataList, getContext());
+        adapter = new GainerLosersAdapter(dataList, getContext());
         rcylGainers.setAdapter(adapter);
 
-        fetchDataFromApi();
+//        fetchDataFromApi();
     }
 
     private void fetchDataFromApi() {
@@ -78,7 +76,7 @@ public class TopGainersFragment extends Fragment {
                                 String changesPercentage = jsonObject.getString("changesPercentage");
                                 String price = jsonObject.getString("price");
 
-                                dataList.add(new GainersModel(symbol, symbolName, change, changesPercentage, price));
+                                dataList.add(new GainerLosersModel(symbol, symbolName, change, changesPercentage, price));
                             }
 
                             adapter.notifyDataSetChanged();
