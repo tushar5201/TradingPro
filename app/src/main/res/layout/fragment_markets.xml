@@ -116,22 +116,58 @@
     <!--    RecycleView-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <ProgressBar
             android:id="@+id/marketsPbar"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminateTint="@color/yellow"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            />
+            android:indeterminateTint="@color/yellow"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcylIndices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <!--        Movers Section-->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardMovers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rcylIndices"
+            android:layout_marginTop="30dp"
+            android:background="@color/bg_color"
+            android:paddingHorizontal="20dp"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Markets Movers"
+                android:textColor="@color/primary_text"
+                android:textSize="20dp" />
+        </androidx.cardview.widget.CardView>
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabMarkets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardMovers"
+            app:tabSelectedTextColor="@color/primary_text"
+            app:tabTextColor="@color/tabUnselect" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpagerMarkets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabMarkets" />
+
+        <!--       End Movers Section-->
     </RelativeLayout>
 </LinearLayout>
