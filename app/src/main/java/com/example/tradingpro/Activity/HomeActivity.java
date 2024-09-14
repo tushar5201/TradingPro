@@ -65,7 +65,17 @@ public class HomeActivity extends AppCompatActivity {
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return false;
+
+                if (item.getItemId() == R.id.navmarket) {
+                    addFragment(new MarketsFragment());
+                } else if (item.getItemId() == R.id.navportfolio) {
+                } else if (item.getItemId() == R.id.navfavourite) {
+                    addFragment(new WatchlistFragment());
+                } else if (item.getItemId() == R.id.navoders) {
+                }
+
+
+                return true;
             }
         });
 
@@ -86,19 +96,19 @@ public class HomeActivity extends AppCompatActivity {
 
         card1.setOnClickListener(v -> {
             BottomIcon1();
-            addFragment(new MarketsFragment());
+            replaceFragment(new MarketsFragment());
         });
 
         card2.setOnClickListener(v -> {
             bottomIcon2();
-            addFragment(new WatchlistFragment());
+            replaceFragment(new WatchlistFragment());
             tvToolbarHeading.setText("Watchlist");
         });
 
 //        card3
         card3.setOnClickListener(v -> {
             bottomIcon3();
-            addFragment(new SearchFragment());
+            replaceFragment(new SearchFragment());
             tvToolbarHeading.setText("Search");
         });
 
@@ -236,4 +246,12 @@ public class HomeActivity extends AppCompatActivity {
         ft.add(R.id.frame, fragment);
         ft.commit();
     }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frame, fragment);
+        ft.commit();
+    }
+
 }
