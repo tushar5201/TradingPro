@@ -30,12 +30,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-import io.finnhub.api.apis.DefaultApi;
-import io.finnhub.api.infrastructure.ApiClient;
-import io.finnhub.api.models.CompanyProfile;
-import io.finnhub.api.models.CompanyProfile2;
-import kotlinx.serialization.json.Json;
+//import de.hdodenhof.circleimageview.CircleImageView;
+//import io.finnhub.api.apis.DefaultApi;
+//import io.finnhub.api.infrastructure.ApiClient;
+//import io.finnhub.api.models.CompanyProfile;
+//import io.finnhub.api.models.CompanyProfile2;
+//import kotlinx.serialization.json.Json;
 
 public class CompanyProfileFragment extends Fragment {
 
