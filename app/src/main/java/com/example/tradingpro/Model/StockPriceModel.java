@@ -28,6 +28,9 @@ public class StockPriceModel {
 
         public static class Quote {
             public ArrayList<Float> close;
+            public ArrayList<Float> open;
+            public ArrayList<Float> high;
+            public ArrayList<Float> low;
         }
     }
 }
