@@ -217,7 +217,7 @@ public class OverviewFragment extends Fragment {
         // Customize X-Axis
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
+        xAxis.setDrawGridLines(true);
 //        xAxis.setAxisMaximum(345f);
 //        xAxis.setAxisMinimum(0f);
 
@@ -268,7 +268,7 @@ public class OverviewFragment extends Fragment {
                         } else {
                             lineDataSet.setColor(Color.RED);  // Fill color
                         }
-                        lineDataSet.setLineWidth(2f);  // Line width
+                        lineDataSet.setLineWidth(1f);  // Line width
                         lineDataSet.setDrawCircles(false);  // No circles at data points
                         lineDataSet.setDrawValues(false);  // No values at data points
                         lineDataSet.setDrawFilled(true);  // Fill the area under the line
