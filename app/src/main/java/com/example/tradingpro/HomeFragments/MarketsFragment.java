@@ -7,18 +7,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.tradingpro.Adapter.IndicesAdapter;
+import com.example.tradingpro.Adapter.MarketsTabAdapter;
+import com.example.tradingpro.HomeFragments.marketFragments.TopGainersFragment;
+import com.example.tradingpro.HomeFragments.marketFragments.TopLosersFragment;
 import com.example.tradingpro.Interfaces.IndicesApi;
 import com.example.tradingpro.Model.IndicesModel;
 import com.example.tradingpro.Model.IndicesResponseModel;
 import com.example.tradingpro.R;
+import com.google.android.material.tabs.TabLayout;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -33,9 +39,12 @@ public class MarketsFragment extends Fragment {
     RecyclerView recyclerView;
     IndicesAdapter adapter;
     String symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, previousClose;
+    ProgressBar marketsPbar;
     private ArrayList<IndicesModel> dataList;
     private Handler handler = new Handler();
     private Runnable runnable;
+    TabLayout tabMarkets;
+    ViewPager viewpagerMarkets;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +56,12 @@ public class MarketsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         recyclerView = view.findViewById(R.id.rcylIndices);
+        marketsPbar = view.findViewById(R.id.marketsPbar);
+        marketsPbar.setVisibility(View.VISIBLE);
+        tabMarkets = view.findViewById(R.id.tabMarkets);
+        viewpagerMarkets = view.findViewById(R.id.viewpagerMarkets);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         dataList = new ArrayList<>(5);
@@ -67,6 +81,15 @@ public class MarketsFragment extends Fragment {
             }
         };
         handler.post(runnable);
+
+        TopGainersFragment topGainersFragment = new TopGainersFragment();
+        TopLosersFragment topLosersFragment = new TopLosersFragment();
+
+        MarketsTabAdapter adapter = new MarketsTabAdapter(getActivity().getSupportFragmentManager());
+        adapter.addFragment(topGainersFragment);
+        adapter.addFragment(topLosersFragment);
+        viewpagerMarkets.setAdapter(adapter);
+        tabMarkets.setupWithViewPager(viewpagerMarkets);
     }
 
     @Override
@@ -79,7 +102,7 @@ public class MarketsFragment extends Fragment {
         super.onStop();
     }
 
-    private void fetchStockPrices(int pos,String stockSymbol, String symbolIcon) {
+    private void fetchStockPrices(int pos, String stockSymbol, String symbolIcon) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://query1.finance.yahoo.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -106,20 +129,25 @@ public class MarketsFragment extends Fragment {
                         }
                         ensureListSize(dataList, 5);
 
-                            dataList.set(pos, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
-//                        adapter.notifyDataSetChanged();
-                        adapter.notifyItemChanged(pos);
+                        dataList.set(pos, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
+                        adapter.notifyDataSetChanged();
+//                        adapter.notifyItemChanged(pos);
+                        marketsPbar.setVisibility(View.GONE);
+
                     } else {
                         Log.d("problem", "some Problem");
+                        marketsPbar.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    marketsPbar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<IndicesResponseModel> call, Throwable t) {
                 t.printStackTrace();
+                marketsPbar.setVisibility(View.GONE);
             }
         });
     }

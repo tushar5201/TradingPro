@@ -45,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
     MaterialCheckBox chkRemember;
     String name, email, phone, password;
     RelativeLayout main;
-    //    boolean Constant_user_info.flag = false;
+    boolean flag = false;
     ProgressBar progressBar;
 
 
@@ -89,13 +89,13 @@ public class SignupActivity extends AppCompatActivity {
                 if (isValidAllField()) {
                     if (chkRemember.isChecked()) {
                         emailFoundValidate();
-                        if (Constant_user_info.flag) {
-                            Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                            sendOtp();
-                            insertShared();
-                        } else {
-                            Toast.makeText(SignupActivity.this, "hii", Toast.LENGTH_SHORT).show();
-                        }
+//                        if (flag) {
+//                            Toast.makeText(SignupActivity.this, "hello", Toast.LENGTH_SHORT).show();
+//                            sendOtp();
+//                            insertShared();
+//                        } else {
+//                            Toast.makeText(SignupActivity.this, "hii", Toast.LENGTH_SHORT).show();
+//                        }
                     } else {
                         Snackbar.make(main, "Please accept terms and condition", Snackbar.LENGTH_SHORT).show();
                     }
@@ -303,39 +303,35 @@ public class SignupActivity extends AppCompatActivity {
         Query queryMail = databaseReference.orderByChild(Constant_user_info.KEY_EMAIL).equalTo(email);
         Query queryPhn = databaseReference.orderByChild(Constant_user_info.KEY_PHONE).equalTo(phone);
 
-
         queryMail.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Constant_user_info.flag = false;
                     Snackbar.make(main, "Email is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
                 } else {
-                    Constant_user_info.flag = true;
+                    queryPhn.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                Snackbar.make(main, "Phone number is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
+                            } else {
+                                // Both email and phone are not registered, proceed with OTP and SharedPreferences
+                                sendOtp();
+                                insertShared();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Snackbar.make(main, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Snackbar.make(main, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
-            }
-        });
-
-        queryPhn.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    Constant_user_info.flag = false;
-                    Snackbar.make(main, "Phone number is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
-                } else {
-                    Constant_user_info.flag = true;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Snackbar.make(main, "Something went wrong ", BaseTransientBottomBar.LENGTH_SHORT).show();
-
             }
         });
     }

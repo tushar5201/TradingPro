@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageButton buttondrawertoggle;
     NavigationView nav_view;
+    TextView tvToolbarHeading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.main);
         toolbar = findViewById(R.id.toolbar);
         nav_view = findViewById(R.id.nav_view);
+        tvToolbarHeading = findViewById(R.id.tvToolbarHeading);
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
@@ -62,7 +65,17 @@ public class HomeActivity extends AppCompatActivity {
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return false;
+
+                if (item.getItemId() == R.id.navmarket) {
+                    addFragment(new MarketsFragment());
+                } else if (item.getItemId() == R.id.navportfolio) {
+                } else if (item.getItemId() == R.id.navfavourite) {
+                    addFragment(new WatchlistFragment());
+                } else if (item.getItemId() == R.id.navoders) {
+                }
+
+
+                return true;
             }
         });
 
@@ -83,19 +96,20 @@ public class HomeActivity extends AppCompatActivity {
 
         card1.setOnClickListener(v -> {
             BottomIcon1();
-            addFragment(new MarketsFragment());
+            replaceFragment(new MarketsFragment());
         });
 
         card2.setOnClickListener(v -> {
             bottomIcon2();
-            addFragment(new WatchlistFragment());
-
+            replaceFragment(new WatchlistFragment());
+            tvToolbarHeading.setText("Watchlist");
         });
 
 //        card3
         card3.setOnClickListener(v -> {
             bottomIcon3();
-            addFragment(new SearchFragment());
+            replaceFragment(new SearchFragment());
+            tvToolbarHeading.setText("Search");
         });
 
         card4.setOnClickListener(v -> {
@@ -232,4 +246,12 @@ public class HomeActivity extends AppCompatActivity {
         ft.add(R.id.frame, fragment);
         ft.commit();
     }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frame, fragment);
+        ft.commit();
+    }
+
 }
