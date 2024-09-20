@@ -284,7 +284,8 @@ public class StockOverviewActivity extends AppCompatActivity {
 
                         XAxis xAxis = candleStickChart.getXAxis();
                         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                        xAxis.setDrawGridLines(false);
+                        xAxis.setDrawGridLines(true);
+                        xAxis.setGridColor(Color.LTGRAY);
 
                         xAxis.setValueFormatter(new ValueFormatter() {
                             @Override
@@ -313,7 +314,8 @@ public class StockOverviewActivity extends AppCompatActivity {
                         leftAxis.setEnabled(false);
 
                         YAxis rightAxis = candleStickChart.getAxisRight();
-                        rightAxis.setDrawGridLines(false);
+                        rightAxis.setDrawGridLines(true);
+                        rightAxis.setGridColor(Color.LTGRAY);
 
                     } else {
                         Log.e("Retrofit", "Request failed with status code: " + response.code());
