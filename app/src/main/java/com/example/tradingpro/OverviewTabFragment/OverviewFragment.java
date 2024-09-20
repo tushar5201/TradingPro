@@ -218,6 +218,7 @@ public class OverviewFragment extends Fragment {
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
+        //
 //        xAxis.setAxisMaximum(345f);
 //        xAxis.setAxisMinimum(0f);
 

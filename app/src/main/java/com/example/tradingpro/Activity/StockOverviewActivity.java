@@ -286,6 +286,7 @@ public class StockOverviewActivity extends AppCompatActivity {
                         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                         xAxis.setDrawGridLines(true);
                         xAxis.setGridColor(Color.LTGRAY);
+                        //
 
                         xAxis.setValueFormatter(new ValueFormatter() {
                             @Override
