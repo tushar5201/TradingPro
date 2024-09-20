@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.tradingpro.Adapter.SearchAdapter;
+import com.example.tradingpro.Adapter.SwipeToDelete;
 import com.example.tradingpro.Adapter.WatchlistAdapter;
 import com.example.tradingpro.Constant.Constant_user_info;
 import com.example.tradingpro.Interfaces.IndicesApi;
@@ -26,6 +28,8 @@ import com.example.tradingpro.Model.IndicesModel;
 import com.example.tradingpro.Model.IndicesResponseModel;
 import com.example.tradingpro.Model.WatchlistModel;
 import com.example.tradingpro.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -86,6 +90,9 @@ public class WatchlistFragment extends Fragment {
         recycleWatchlist.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new WatchlistAdapter(dataList, getContext());
         recycleWatchlist.setAdapter(adapter);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDelete(adapter, getContext()));
+        itemTouchHelper.attachToRecyclerView(recycleWatchlist);
     }
 
     public void fetchWatchlist(String username) {
