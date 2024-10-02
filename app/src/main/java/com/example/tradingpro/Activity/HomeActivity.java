@@ -1,11 +1,13 @@
 package com.example.tradingpro.Activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +35,8 @@ import com.example.tradingpro.HomeFragments.TermsAndConditionFragment;
 import com.example.tradingpro.HomeFragments.WatchlistFragment;
 import com.example.tradingpro.R;
 import com.google.android.material.navigation.NavigationView;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -73,15 +77,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 if (item.getItemId() == R.id.navmarket) {
+                    tvToolbarHeading.setText("Markets");
                     addFragment(new MarketsFragment());
-                } else if (item.getItemId() == R.id.navportfolio) {
                 } else if (item.getItemId() == R.id.navfavourite) {
+                    tvToolbarHeading.setText("Watchlist");
                     addFragment(new WatchlistFragment());
-                } else if (item.getItemId() == R.id.navoders) {
                 } else if (item.getItemId() == R.id.navtnc) {
+                    tvToolbarHeading.setText("Terms and Conditions");
                     addFragment(new TermsAndConditionFragment());
-                }else if (item.getItemId() ==  R.id.navcontactus){
+                } else if (item.getItemId() == R.id.navcontactus) {
+                    tvToolbarHeading.setText("Contact Us");
                     addFragment(new ContactUsFragment());
+                } else if (item.getItemId() == R.id.navlogout) {
+                    DialogPlus dialog = DialogPlus.newDialog(HomeActivity.this)
+                            .setExpanded(true, 700)
+                            .setContentHolder(new ViewHolder(R.layout.dialog_logout))
+                            .create();
+
+                    View view =dialog.getHolderView();
+
+                    Button btnLogoutYes = view.findViewById(R.id.btnLogoutYes);
+                    Button btnLogoutNo = view.findViewById(R.id.btnLogoutNo);
+
+                    btnLogoutYes.setOnClickListener(v -> {
+                        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.clear();
+                        editor.commit();
+                        dialog.dismiss();
+                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    });
+
+                    btnLogoutNo.setOnClickListener(v -> {
+                        dialog.dismiss();
+                    });
+                    dialog.show();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
 

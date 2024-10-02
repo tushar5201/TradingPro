@@ -48,7 +48,7 @@
             <!--            bottom navigation-->
             <androidx.cardview.widget.CardView
                 android:layout_width="250dp"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="40dp"
@@ -85,23 +85,6 @@
                     </androidx.cardview.widget.CardView>
 
                     <!--            search-->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/card2"
-                        android:layout_width="0dp"
-                        android:layout_height="55dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        app:cardCornerRadius="50dp">
-
-                        <ImageView
-                            android:id="@+id/img2"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/watchlist" />
-
-                    </androidx.cardview.widget.CardView>
 
                     <!--            bag1-->
                     <androidx.cardview.widget.CardView
@@ -119,6 +102,23 @@
                             android:layout_height="25dp"
                             android:layout_gravity="center"
                             android:src="@drawable/search_" />
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card2"
+                        android:layout_width="0dp"
+                        android:layout_height="55dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        app:cardCornerRadius="50dp">
+
+                        <ImageView
+                            android:id="@+id/img2"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/watchlist" />
 
                     </androidx.cardview.widget.CardView>
 
