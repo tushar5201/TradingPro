@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,13 +23,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tradingpro.HomeFragments.ContactUsFragment;
 import com.example.tradingpro.HomeFragments.MarketsFragment;
 import com.example.tradingpro.HomeFragments.SearchFragment;
+import com.example.tradingpro.HomeFragments.TermsAndConditionFragment;
 import com.example.tradingpro.HomeFragments.WatchlistFragment;
 import com.example.tradingpro.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     CardView card1, card2, card3, card4, card5;
     ImageView img1, img2, img3, img4, img5;
@@ -49,7 +52,6 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
         addFragment(new MarketsFragment());
-
 // drawer..........
 
         drawerLayout = findViewById(R.id.main);
@@ -61,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(abdt);
         abdt.syncState();
+        nav_view.setNavigationItemSelectedListener(this);
 
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -72,8 +75,12 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.navfavourite) {
                     addFragment(new WatchlistFragment());
                 } else if (item.getItemId() == R.id.navoders) {
+                } else if (item.getItemId() == R.id.navtnc) {
+                    addFragment(new TermsAndConditionFragment());
+                }else if (item.getItemId() ==  R.id.navcontactus){
+                    addFragment(new ContactUsFragment());
                 }
-
+                drawerLayout.closeDrawer(GravityCompat.START);
 
                 return true;
             }
@@ -254,4 +261,9 @@ public class HomeActivity extends AppCompatActivity {
         ft.commit();
     }
 
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
 }

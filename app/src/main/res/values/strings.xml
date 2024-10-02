@@ -58,4 +58,74 @@
     <!--    Drawer-->
     <string name="nav_open">open</string>
     <string name="nav_close">close</string>
+    <string name="tnc">Terms and Conditions</string>
+
+    <!--    Terms_And_Condition  -->
+
+    <string name="terms">Terms and Condition</string>
+
+    <string name="Terms_And_Conditions">
+        "\n\n1. Introduction\nWelcome to TradingPro. By using this virtual trading app, you agree to comply with and be bound by the following terms and conditions. Please review them carefully before using the app. If you do not agree to these terms, you should not use the app\n\n2. Eligibility\nYou must be at least 18 years old to use the app. By using the app, you represent that you meet the eligibility requirements.\n
+
+3. Virtual Nature of Trading\nThe app is a virtual trading platform that simulates stock, forex, crypto, or other asset trading. All transactions are conducted with virtual currency and have no real-world financial value. You acknowledge that no actual money is earned, invested, or lost through the use of this app.\n
+
+4. No Financial Advice\nTradingPro does not provide any form of financial advice or recommendations. All content, features, and services are for educational and entertainment purposes only. You should not interpret any data, analytics, or information as investment advice.
+
+5. Account Registration and Security
+To use certain features of the app, you may need to create an account. You agree to:
+Provide accurate and up-to-date information.
+Maintain the confidentiality of your account and password.
+Notify us immediately of any unauthorized use of your account.
+
+6. User Conduct
+When using the app, you agree to:
+Use the app only for lawful purposes.
+Refrain from engaging in harmful or disruptive behavior, including hacking, spamming, or attempts to interfere with the app's operations.
+
+7. Proprietary Rights
+All content, design, and intellectual property in the app, including logos, trademarks, and text, are the exclusive property of [App Name] and its affiliates. You are not permitted to copy, distribute, or modify any of the app’s content without our prior written consent.
+
+8. Third-Party Services
+The app may contain links or connections to third-party websites, services, or content. TradingPro is not responsible for the content, privacy policies, or practices of any third-party services.
+
+9. Limitation of Liability
+TradingPro is not liable for any indirect, incidental, special, or consequential damages resulting from:
+Your use of or inability to use the app.
+Errors, inaccuracies, or omissions in the app’s content.
+Any suspension, interruption, or discontinuation of the app.
+
+10. Indemnification
+You agree to indemnify and hold TradingPro and its affiliates harmless from any claims, damages, or costs, including legal fees, arising from your use of the app or violation of these terms.
+
+11. Modification of Terms
+We reserve the right to modify these terms and conditions at any time. Changes will be posted within the app, and it is your responsibility to review the terms periodically.
+
+12. Termination
+We may suspend or terminate your access to the app at our discretion if we believe you have violated these terms or for any other reason, with or without notice.
+
+13. Governing Law
+These terms and conditions shall be governed and interpreted in accordance with the laws of courts of India. Any disputes will be resolved exclusively in the courts of courts of India.
+
+14. Contact Information
+If you have any questions regarding these terms, please contact us at tragingpro@gmail.com.\n\n\n\n\n"
+    </string>
+
+    <!--    Contact_us   -->
+
+    <string name="contact">Contact Us</string>
+
+    <string name="ContactUS">
+        "\n\nEmail: support@tradingpro.com\nPhone: +91 6969696969\nAvailable Monday - Friday, 9 AM - 6 PM (IST)\nCompany Address:
+TradingPro Inc.
+123 Wall Street, Suite 456
+New York, NY 10005, USA
+
+Social Media:
+Twitter: @TradingPro
+Facebook: TradingPro
+Instagram: @TradingProApp
+
+FAQ: Visit our FAQ page
+    </string>
+
 </resources>
