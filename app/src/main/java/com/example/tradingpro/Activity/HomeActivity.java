@@ -97,13 +97,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         TextView navEmail = headerView.findViewById(R.id.DrawerHeaderEmail);
 
 //        get name from shared preferences
-        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_ID, MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
 
-        String headerName = sp.getString(Constant_user_info.SHARED_USERNM, String.valueOf(false));
-        String headerEmail = sp.getString(Constant_user_info.SHARED_EMAIL, String.valueOf(false));
+        String headerName = sp.getString(Constant_user_info.SHARED_LOGIN_USERNM, String.valueOf(false));
+        String headerEmail = sp.getString(Constant_user_info.SHARED_LOGIN_EMAILORPHONE, String.valueOf(false));
 
 //       set name in header drawerlayout
-        navUserName.setText(headerName);
+        navUserName.setText(headerName.toUpperCase());
         navEmail.setText(headerEmail);
 
 //        bottom navigation
