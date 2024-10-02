@@ -21,6 +21,11 @@ public class Constant_user_info {
     public static final String SHARED_MPIN = "mpin";
     public static final String SHARED_FINGERPRINT = "fingerprint";
 
+    //User shared preference login
+    public static final String SHARED_LOGIN_ID ="Login";
+    public static final String SHARED_LOGIN_USERNM ="unm";
+    public static final String SHARED_LOGIN_EMAILORPHONE ="emailOrPhone";
+
 // for stepper
     public static int currentStep = 0;
 

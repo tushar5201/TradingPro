@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             transition.setAutoTransition(MotionScene.Transition.AUTO_ANIMATE_TO_END);
         }
 
-        SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
         if (sp.contains("unm")) {
@@ -97,8 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                     checkEmail(editor);
                     if (flag && chkRemember.isChecked()) {
                         Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
-                        editor.putString("unm", username);
-                        editor.putString("emailOrPhone", emailOrPhone);
+                        editor.putString(Constant_user_info.SHARED_LOGIN_USERNM, username);
+                        editor.putString(Constant_user_info.SHARED_LOGIN_EMAILORPHONE, emailOrPhone);
                         editor.commit();
                         startActivity(new Intent(getApplicationContext(), MpinActivity.class));
                         finish();
