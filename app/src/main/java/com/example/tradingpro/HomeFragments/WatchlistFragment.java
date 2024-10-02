@@ -30,6 +30,7 @@ import com.example.tradingpro.Model.WatchlistModel;
 import com.example.tradingpro.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -121,6 +122,9 @@ public class WatchlistFragment extends Fragment {
                             list.add(model);
 //                            Toast.makeText(getContext(), arrayListTemp.toString(), Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        watchlistPbar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "No stocks added in watchlist", Toast.LENGTH_SHORT).show();
                     }
                     adapter.notifyDataSetChanged();
                 }

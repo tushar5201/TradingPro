@@ -10,104 +10,103 @@
     android:paddingTop="20dp"
     tools:context=".HomeFragments.MarketsFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="35dp">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/shape"-->
+<!--        android:paddingHorizontal="20dp"-->
+<!--        android:paddingTop="35dp">-->
 
-        <TextView
-            android:id="@+id/tvInvested"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Invested"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvInvested"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/poppins_medium"-->
+<!--            android:text="Invested"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="15sp" />-->
 
-        <TextView
-            android:id="@+id/tvInvestedValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvInvested"
-            android:fontFamily="@font/poppins"
-            android:text="50,560"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-
-        <TextView
-            android:id="@+id/tvCurrent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Current"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/tvCurrentValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvCurrent"
-            android:layout_alignParentEnd="true"
-            android:fontFamily="@font/poppins"
-            android:text="60,112"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvInvestedValue"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/tvInvested"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            android:text="50,560"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp" />-->
 
 
-        <!--        Divider-->
+<!--        <TextView-->
+<!--            android:id="@+id/tvCurrent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:fontFamily="@font/poppins_medium"-->
+<!--            android:text="Current"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="15sp" />-->
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/tvCurrentValue"
-            android:layout_marginTop="10dp"
-            app:dividerColor="@color/black" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvCurrentValue"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/tvCurrent"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            android:text="60,112"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp" />-->
 
-        <TextView
-            android:id="@+id/tvPnl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/divider"
-            android:layout_marginTop="15sp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="P&amp;L"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
 
-        <TextView
-            android:id="@+id/tvPnlValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/divider"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10sp"
-            android:fontFamily="@font/poppins"
-            android:text="9,552"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+<!--        &lt;!&ndash;        Divider&ndash;&gt;-->
 
-        <TextView
-            android:id="@+id/tvPlusMinus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvPnlValue"
-            android:layout_alignParentEnd="true"
-            android:fontFamily="@font/poppins_medium"
-            android:text="(+18.56%)"
-            android:textColor="@color/green"
-            android:textSize="15sp" />
-    </RelativeLayout>
+<!--        <com.google.android.material.divider.MaterialDivider-->
+<!--            android:id="@+id/divider"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_below="@id/tvCurrentValue"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            app:dividerColor="@color/black" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvPnl"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/divider"-->
+<!--            android:layout_marginTop="15sp"-->
+<!--            android:fontFamily="@font/poppins_medium"-->
+<!--            android:text="P&amp;L"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="17sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvPnlValue"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/divider"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginTop="10sp"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            android:text="9,552"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvPlusMinus"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/tvPnlValue"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:fontFamily="@font/poppins_medium"-->
+<!--            android:text="(+18.56%)"-->
+<!--            android:textColor="@color/green"-->
+<!--            android:textSize="15sp" />-->
+<!--    </RelativeLayout>-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Market Indices"
         android:textColor="@color/primary_text"
@@ -155,6 +154,7 @@
 
 
         <com.google.android.material.tabs.TabLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/tabMarkets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -316,7 +316,7 @@ public class SignupActivity extends AppCompatActivity {
                                 Snackbar.make(main, "Phone number is already registered", BaseTransientBottomBar.LENGTH_SHORT).show();
                             } else {
                                 // Both email and phone are not registered, proceed with OTP and SharedPreferences
-                                sendOtp();
+//                                sendOtp();
                                 insertShared();
                             }
                         }
@@ -379,5 +379,7 @@ public class SignupActivity extends AppCompatActivity {
         editor.putString(Constant_user_info.SHARED_PASS, password);
         editor.putString(Constant_user_info.SHARED_PHONE, phone);
         editor.commit();
+        Intent i1 = new Intent(getApplicationContext(), SignupProcessActivity.class);
+        startActivity(i1);
     }
 }
