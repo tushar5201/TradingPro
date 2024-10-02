@@ -1,9 +1,11 @@
 package com.example.tradingpro.Activity;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tradingpro.Constant.Constant_user_info;
 import com.example.tradingpro.HomeFragments.ContactUsFragment;
 import com.example.tradingpro.HomeFragments.MarketsFragment;
 import com.example.tradingpro.HomeFragments.SearchFragment;
@@ -86,18 +89,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+//        get header view of drawer
+        View headerView = nav_view.getHeaderView(0);
+
+//        bind the textview for set name n email
+        TextView navUserName = headerView.findViewById(R.id.DrawerHeaderUserName);
+        TextView navEmail = headerView.findViewById(R.id.DrawerHeaderEmail);
+
+//        get name from shared preferences
+        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_ID, MODE_PRIVATE);
+
+        String headerName = sp.getString(Constant_user_info.SHARED_USERNM, String.valueOf(false));
+        String headerEmail = sp.getString(Constant_user_info.SHARED_EMAIL, String.valueOf(false));
+
+//       set name in header drawerlayout
+        navUserName.setText(headerName);
+        navEmail.setText(headerEmail);
+
 //        bottom navigation
         card1 = findViewById(R.id.card1);
         card2 = findViewById(R.id.card2);
         card3 = findViewById(R.id.card3);
-        card4 = findViewById(R.id.card4);
-        card5 = findViewById(R.id.card5);
+//        card4 = findViewById(R.id.card4);
+//        card5 = findViewById(R.id.card5);
 
         img1 = findViewById(R.id.img1);
         img2 = findViewById(R.id.img2);
         img3 = findViewById(R.id.img3);
-        img4 = findViewById(R.id.img4);
-        img5 = findViewById(R.id.img5);
+//        img4 = findViewById(R.id.img4);
+//        img5 = findViewById(R.id.img5);
 
         BottomIcon1();
 
@@ -119,13 +139,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             tvToolbarHeading.setText("Search");
         });
 
-        card4.setOnClickListener(v -> {
-            bottomIcon4();
-        });
-
-        card5.setOnClickListener(v -> {
-            bottomIcon5();
-        });
+//        card4.setOnClickListener(v -> {
+//            bottomIcon4();
+//        });
+//
+//        card5.setOnClickListener(v -> {
+//            bottomIcon5();
+//        });
     }
 
     private void BottomIcon1() {
@@ -141,14 +161,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         backgroundDrawableOther.setColor(Color.parseColor("#000000"));
         card2.setBackground(backgroundDrawableOther);
         card3.setBackground(backgroundDrawableOther);
-        card4.setBackground(backgroundDrawableOther);
-        card5.setBackground(backgroundDrawableOther);
 
 //            other icon color change
         img2.setImageResource(R.drawable.watchlist_white);
         img3.setImageResource(R.drawable.search_white);
-        img4.setImageResource(R.drawable.order_white);
-        img5.setImageResource(R.drawable.portfolio_white);
 
     }
 
@@ -165,14 +181,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         backgroundDrawableOther.setColor(Color.parseColor("#000000"));
         card1.setBackground(backgroundDrawableOther);
         card3.setBackground(backgroundDrawableOther);
-        card4.setBackground(backgroundDrawableOther);
-        card5.setBackground(backgroundDrawableOther);
 
 //            other icon color change
         img1.setImageResource(R.drawable.market_white);
         img3.setImageResource(R.drawable.search_white);
-        img4.setImageResource(R.drawable.order_white);
-        img5.setImageResource(R.drawable.portfolio_white);
 
     }
 
@@ -189,62 +201,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         backgroundDrawableOther.setColor(Color.parseColor("#000000"));
         card1.setBackground(backgroundDrawableOther);
         card2.setBackground(backgroundDrawableOther);
-        card4.setBackground(backgroundDrawableOther);
-        card5.setBackground(backgroundDrawableOther);
 
 //            other icon color change
         img1.setImageResource(R.drawable.market_white);
         img2.setImageResource(R.drawable.watchlist_white);
-        img4.setImageResource(R.drawable.order_white);
-        img5.setImageResource(R.drawable.portfolio_white);
-    }
-
-    private void bottomIcon4() {
-        GradientDrawable backgroundDrawable = new GradientDrawable();
-        backgroundDrawable.setCornerRadius(80f);
-        card4.setBackground(backgroundDrawable);
-        backgroundDrawable.setColor(Color.parseColor("#fee83f"));
-        img4.setImageResource(R.drawable.order);
-
-//            other icon bg remove
-        GradientDrawable backgroundDrawableOther = new GradientDrawable();
-        backgroundDrawableOther.setCornerRadius(80f);
-        backgroundDrawableOther.setColor(Color.parseColor("#000000"));
-        card1.setBackground(backgroundDrawableOther);
-        card2.setBackground(backgroundDrawableOther);
-        card3.setBackground(backgroundDrawableOther);
-        card5.setBackground(backgroundDrawableOther);
-
-//            other icon color change
-        img1.setImageResource(R.drawable.market_white);
-        img2.setImageResource(R.drawable.watchlist_white);
-        img3.setImageResource(R.drawable.search_white);
-        img5.setImageResource(R.drawable.portfolio_white);
-
-    }
-
-    private void bottomIcon5() {
-        GradientDrawable backgroundDrawable = new GradientDrawable();
-        backgroundDrawable.setCornerRadius(80f);
-        card5.setBackground(backgroundDrawable);
-        backgroundDrawable.setColor(Color.parseColor("#fee83f"));
-        img5.setImageResource(R.drawable.portfolio);
-
-//            other icon bg remove
-        GradientDrawable backgroundDrawableOther = new GradientDrawable();
-        backgroundDrawableOther.setCornerRadius(80f);
-        backgroundDrawableOther.setColor(Color.parseColor("#000000"));
-        card1.setBackground(backgroundDrawableOther);
-        card2.setBackground(backgroundDrawableOther);
-        card3.setBackground(backgroundDrawableOther);
-        card4.setBackground(backgroundDrawableOther);
-
-//            other icon color change
-        img1.setImageResource(R.drawable.market_white);
-        img2.setImageResource(R.drawable.watchlist_white);
-        img3.setImageResource(R.drawable.search_white);
-        img4.setImageResource(R.drawable.order_white);
-
     }
 
     public void addFragment(Fragment fragment) {
