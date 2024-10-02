@@ -17,7 +17,7 @@
         android:theme="@style/Base.Theme.TradingPro"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.MpinActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.StockOverviewActivity"
@@ -36,7 +36,7 @@
             android:name=".Activity.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MpinActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
 
             <intent-filter>
