@@ -53,5 +53,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:8.0.2'
     implementation 'io.finnhub:kotlin-client:2.0.20'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.orhanobut:dialogplus:1.11'
+    implementation 'com.orhanobut:dialogplus:1.11@aar'
 }

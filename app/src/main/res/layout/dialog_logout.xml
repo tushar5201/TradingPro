@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="700dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_color">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins"
+        android:textSize="20sp"
+        android:layout_marginVertical="20dp"
+        android:text="Logout" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        app:dividerColor="@color/yellow"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you sure want to LOGOUT ?"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:paddingHorizontal="10dp"
+        >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogoutYes"
+            android:layout_weight="0.45"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:height="50dp"
+            android:backgroundTint="@color/yellow"
+            android:fontFamily="@font/poppins"
+            android:text="Yes"
+            android:textColor="@color/secondary_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogoutNo"
+            android:layout_weight="0.45"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:height="50dp"
+            android:backgroundTint="@color/desc_text"
+            android:fontFamily="@font/poppins"
+            android:text="No"
+            android:textColor="@color/secondary_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+</LinearLayout>

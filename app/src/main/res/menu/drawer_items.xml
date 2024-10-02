@@ -4,28 +4,34 @@
     <group android:id="@+id/group1">
 
         <item
+            android:id="@+id/navProfile"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/user"
+            android:title="User Profile"
+            />
+        <item
             android:id="@+id/navmarket"
             android:fontFamily="@font/poppins_light"
-            android:icon="@drawable/drawermarket"
+            android:icon="@drawable/market"
             android:title="@string/market" />
 
         <item
             android:id="@+id/navfavourite"
             android:fontFamily="@font/poppins_light"
-            android:icon="@drawable/fav"
+            android:icon="@drawable/watchlist"
             android:title="@string/favourite1" />
 
-        <item
-            android:id="@+id/navoders"
-            android:fontFamily="@font/poppins_light"
-            android:icon="@drawable/orderbag"
-            android:title="@string/orders" />
+<!--        <item-->
+<!--            android:id="@+id/navoders"-->
+<!--            android:fontFamily="@font/poppins_light"-->
+<!--            android:icon="@drawable/orderbag"-->
+<!--            android:title="@string/orders" />-->
 
-        <item
-            android:id="@+id/navportfolio"
-            android:fontFamily="@font/poppins_light"
-            android:icon="@drawable/drawerportfolio"
-            android:title="@string/portfolio" />
+<!--        <item-->
+<!--            android:id="@+id/navportfolio"-->
+<!--            android:fontFamily="@font/poppins_light"-->
+<!--            android:icon="@drawable/drawerportfolio"-->
+<!--            android:title="@string/portfolio" />-->
 
     </group>
 
