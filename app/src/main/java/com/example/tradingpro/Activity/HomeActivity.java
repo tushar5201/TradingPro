@@ -124,6 +124,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         card1.setOnClickListener(v -> {
             BottomIcon1();
             replaceFragment(new MarketsFragment());
+            tvToolbarHeading.setText("Markets");
         });
 
         card2.setOnClickListener(v -> {

@@ -31,8 +31,8 @@ public class SignupProcessActivity extends AppCompatActivity {
     Button btnContinue;
 
     List<Fragment> fragments = Arrays.asList(
-            new PersonalInformationFragment(),
-            new IdInformationFragment(),
+//            new PersonalInformationFragment(),
+//            new IdInformationFragment(),
             new MpinCreateFragment(),
             new BiometricsEnableFragment(),
             new DisclaimerFragment()
@@ -58,8 +58,8 @@ public class SignupProcessActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         stepView.setStepsNumber(fragments.size());
-        Fragment PersonalInformationFragment = new PersonalInformationFragment();
-        loadFragment(PersonalInformationFragment);
+        Fragment MpinCreateFragment = new MpinCreateFragment();
+        loadFragment(MpinCreateFragment);
 
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -63,8 +64,8 @@ public class MarketsFragment extends Fragment {
         tabMarkets = view.findViewById(R.id.tabMarkets);
         viewpagerMarkets = view.findViewById(R.id.viewpagerMarkets);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        dataList = new ArrayList<>(5);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        dataList = new ArrayList<>(4);
         adapter = new IndicesAdapter(getContext(), dataList);
         recyclerView.setAdapter(adapter);
 
@@ -75,8 +76,7 @@ public class MarketsFragment extends Fragment {
                 fetchStockPrices(0, "^NSEI", "https://s3-symbol-logo.tradingview.com/indices/nifty-50--600.png");
                 fetchStockPrices(1, "^NSEBANK", "https://s3-symbol-logo.tradingview.com/sector/financial--600.png");
                 fetchStockPrices(2, "^BSESN", "https://s3-symbol-logo.tradingview.com/indices/bse-sensex--600.png");
-                fetchStockPrices(3, "NIFTY_FIN_SERVICE.NS", "https://s3-symbol-logo.tradingview.com/indices/finnifty--600.png");
-                fetchStockPrices(4, "^INDIAVIX", "https://s3-symbol-logo.tradingview.com/indices/india-vix--600.png");
+                fetchStockPrices(3, "^INDIAVIX", "https://s3-symbol-logo.tradingview.com/indices/india-vix--600.png");
                 handler.postDelayed(this, 3000);
             }
         };
@@ -127,7 +127,7 @@ public class MarketsFragment extends Fragment {
                             stockPlusMinusPoints = "+" + stockPlusMinusPoints;
                             stockPlusMinusPercentage = " (+" + decim.format(((Double.parseDouble(stockPlusMinusPoints) * 100) / Double.parseDouble(stockPrice))) + "%)";
                         }
-                        ensureListSize(dataList, 5);
+                        ensureListSize(dataList, 4);
 
                         dataList.set(pos, new IndicesModel(symbol, symbolFullName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage, symbolIcon));
                         adapter.notifyDataSetChanged();
