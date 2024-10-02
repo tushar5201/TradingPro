@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -88,6 +89,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 } else if (item.getItemId() == R.id.navcontactus) {
                     tvToolbarHeading.setText("Contact Us");
                     addFragment(new ContactUsFragment());
+                } else if (item.getItemId() == R.id.navProfile) {
+                    Toast.makeText(HomeActivity.this, "hello", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(HomeActivity.this,UserProfileActivity.class);
+                    startActivity(i);
                 } else if (item.getItemId() == R.id.navlogout) {
                     DialogPlus dialog = DialogPlus.newDialog(HomeActivity.this)
                             .setExpanded(true, 700)
