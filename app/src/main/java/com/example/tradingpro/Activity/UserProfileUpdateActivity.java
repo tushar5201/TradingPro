@@ -4,6 +4,10 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -30,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +46,7 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
     TextInputEditText textInputEdUpdateName,textInputEdUpdatePhone,textInputEdUpdateEmail,textInputEdUpdatePassword;
     RadioButton updateradioEnable, updateradioNotnow;
     MaterialButton btnProfileUpdate;
+    EditText text1, text2, text3, text4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +79,13 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
         String email = i1.getStringExtra("email");
         String password = i1.getStringExtra("password");
         String finger = i1.getStringExtra("finger");
+        String mpin = i1.getStringExtra("mpin");
 
         textInputEdUpdateName.setText(name);
         textInputEdUpdateEmail.setText(email);
         textInputEdUpdatePhone.setText(phone);
         textInputEdUpdatePassword.setText(password);
 
-        Toast.makeText(this, finger, Toast.LENGTH_SHORT).show();
         if (Objects.equals(finger, "true")) {
             updateradioEnable.setChecked(true);
             updateradioNotnow.setChecked(false);
@@ -90,71 +96,135 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
 
         btnProfileUpdate.setOnClickListener(v -> {
 
+            DialogPlus dialog = DialogPlus.newDialog(UserProfileUpdateActivity.this)
+                    .setExpanded(true, 900)
+                    .setContentHolder(new ViewHolder(R.layout.mpin_dialog))
+                    .create();
 
-            Map<String, Object> map = new HashMap<>();
-            map.put("email", textInputEdUpdateEmail.getText().toString());
-            map.put("fingerprint", String.valueOf(updateradioEnable.isChecked()));
-            map.put("password", textInputEdUpdatePassword.getText().toString());
-            map.put("phone", textInputEdUpdatePhone.getText().toString());
-            map.put("username", textInputEdUpdateName.getText().toString());
+            View view = dialog.getHolderView();
 
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_info");
-            Query query = databaseReference.orderByChild("email").equalTo(textInputEdUpdateEmail.getText().toString());
+            text1 = view.findViewById(R.id.text1);
+            text2 = view.findViewById(R.id.text2);
+            text3 = view.findViewById(R.id.text3);
+            text4 = view.findViewById(R.id.text4);
+            MaterialButton btnDialogMpin = view.findViewById(R.id.btnDialogMpin);
 
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()){
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                            snapshot.getRef().updateChildren(map).addOnCompleteListener(task -> {
-                               if (task.isSuccessful()){
-                                   Toast.makeText(UserProfileUpdateActivity.this, "Record Updated", Toast.LENGTH_SHORT).show();
+            text1.addTextChangedListener(otpbox1());
+            text2.addTextChangedListener(otpbox2());
+            text3.addTextChangedListener(otpbox3());
 
-                                   SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
-                                   SharedPreferences.Editor ed = sp.edit();
-                                   ed.putString(Constant_user_info.SHARED_LOGIN_USERNM, textInputEdUpdateName.getText().toString());
-                                   ed.commit();
+            btnDialogMpin.setOnClickListener(v1 -> {
+                String userMpin = text1.getText().toString().trim() + text2.getText().toString().trim() + text3.getText().toString().trim() + text4.getText().toString().trim();
+                if (mpin.equals(userMpin)) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("email", textInputEdUpdateEmail.getText().toString());
+                    map.put("fingerprint", String.valueOf(updateradioEnable.isChecked()));
+                    map.put("password", textInputEdUpdatePassword.getText().toString());
+                    map.put("phone", textInputEdUpdatePhone.getText().toString());
+                    map.put("username", textInputEdUpdateName.getText().toString());
 
-                                   Intent intent = new Intent(UserProfileUpdateActivity.this, UserProfileActivity.class);
-                                   startActivity(intent);
-                               } else {
-                                    Toast.makeText(UserProfileUpdateActivity.this, "Record updated failed", Toast.LENGTH_SHORT).show();
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_info");
+                    Query query = databaseReference.orderByChild("email").equalTo(textInputEdUpdateEmail.getText().toString());
+
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                    snapshot.getRef().updateChildren(map).addOnCompleteListener(task -> {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(UserProfileUpdateActivity.this, "Record Updated", Toast.LENGTH_SHORT).show();
+
+                                            SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
+                                            SharedPreferences.Editor ed = sp.edit();
+                                            ed.putString(Constant_user_info.SHARED_LOGIN_USERNM, textInputEdUpdateName.getText().toString());
+                                            ed.commit();
+
+                                            Intent intent = new Intent(UserProfileUpdateActivity.this, UserProfileActivity.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(UserProfileUpdateActivity.this, "Record updated failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
-                            });
+                            } else {
+                                Toast.makeText(UserProfileUpdateActivity.this, "No Record Found", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    } else {
-                        Toast.makeText(UserProfileUpdateActivity.this, "No Record Found", Toast.LENGTH_SHORT).show();
-                    }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(UserProfileUpdateActivity.this, "Error" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(UserProfileUpdateActivity.this, "Error" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-
-                }
             });
-
-//          FirebaseDatabase.getInstance().getReference().child("user_info")
-//                          .child(getRef(position).getKey()).updateChildren(map)
-//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                @Override
-//                                public void onSuccess(Void unused) {
-//                                    Toast.makeText(UserProfileUpdateActivity.this, "Update Success", Toast.LENGTH_SHORT).show();
-//                                }
-//                            })
-//                            .addOnFailureListener(new OnFailureListener() {
-//                                @Override
-//                                public void onFailure(@NonNull Exception e) {
-//                                    Toast.makeText(UserProfileUpdateActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
+            dialog.show();
         });
+    }
 
+    public TextWatcher otpbox1() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    text2.requestFocus();
+                }
+            }
 
+            @Override
+            public void afterTextChanged(Editable editable) {
 
+            }
+        };
+    }
 
+    public TextWatcher otpbox2() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    text3.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
+
+    public TextWatcher otpbox3() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((charSequence.toString().trim()).length() == 1) {
+                    text4.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
     }
 }
