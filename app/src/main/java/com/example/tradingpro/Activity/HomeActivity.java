@@ -90,7 +90,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     tvToolbarHeading.setText("Contact Us");
                     addFragment(new ContactUsFragment());
                 } else if (item.getItemId() == R.id.navProfile) {
-                    Toast.makeText(HomeActivity.this, "hello", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(HomeActivity.this,UserProfileActivity.class);
                     startActivity(i);
                 } else if (item.getItemId() == R.id.navlogout) {

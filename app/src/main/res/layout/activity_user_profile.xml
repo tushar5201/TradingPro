@@ -171,6 +171,7 @@
         android:textSize="15sp"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnProfileEdit"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:text="Edit Profile"
