@@ -103,30 +103,30 @@
         android:orientation="horizontal"
         android:layout_alignParentEnd="true">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBuy"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:cornerRadius="10dp"
-            android:backgroundTint="@color/green"
-            android:text="Buy"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/secondary_text"
-            android:textSize="15sp"/>
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnBuy"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_weight="1"-->
+<!--            app:cornerRadius="10dp"-->
+<!--            android:backgroundTint="@color/green"-->
+<!--            android:text="Buy"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            android:textColor="@color/secondary_text"-->
+<!--            android:textSize="15sp"/>-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSell"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:cornerRadius="10dp"
-            android:backgroundTint="@color/red"
-            android:layout_marginStart="10dp"
-            android:text="Sell"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/secondary_text"
-            android:textSize="15sp"/>
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnSell"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_weight="1"-->
+<!--            app:cornerRadius="10dp"-->
+<!--            android:backgroundTint="@color/red"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="Sell"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            android:textColor="@color/secondary_text"-->
+<!--            android:textSize="15sp"/>-->
     </LinearLayout>
 
     <com.github.mikephil.charting.charts.CandleStickChart
