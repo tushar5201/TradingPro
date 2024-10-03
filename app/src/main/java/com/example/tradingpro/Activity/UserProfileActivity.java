@@ -85,6 +85,7 @@ public class UserProfileActivity extends AppCompatActivity {
                                 i1.putExtra("phone",phone);
                                 i1.putExtra("password",password);
                                 i1.putExtra("finger",fingerprint);
+                                i1.putExtra("mpin", mpin);
                             }
                         }
                     }
