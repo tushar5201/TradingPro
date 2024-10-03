@@ -52,7 +52,7 @@ import com.orhanobut.dialogplus.ViewHolder;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    CardView card1, card2, card3, card4, card5;
+    CardView card1, card2, card3, card4, card5, cardBottomNav;
     ImageView img1, img2, img3, img4, img5;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -76,6 +76,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar);
         nav_view = findViewById(R.id.nav_view);
         tvToolbarHeading = findViewById(R.id.tvToolbarHeading);
+        cardBottomNav = findViewById(R.id.cardBottomNav);
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
@@ -88,21 +89,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 if (item.getItemId() == R.id.navmarket) {
+                    cardBottomNav.setVisibility(View.VISIBLE);
                     tvToolbarHeading.setText("Markets");
                     addFragment(new MarketsFragment());
                 } else if (item.getItemId() == R.id.navfavourite) {
+                    cardBottomNav.setVisibility(View.VISIBLE);
                     tvToolbarHeading.setText("Watchlist");
                     addFragment(new WatchlistFragment());
                 } else if (item.getItemId() == R.id.navtnc) {
                     tvToolbarHeading.setText("Terms and Conditions");
+                    cardBottomNav.setVisibility(View.GONE);
                     addFragment(new TermsAndConditionFragment());
                 } else if (item.getItemId() == R.id.navcontactus) {
-                    tvToolbarHeading.setText("Contact Us");
-                    addFragment(new ContactUsFragment());
+                    cardBottomNav.setVisibility(View.VISIBLE);
+//                    tvToolbarHeading.setText("Contact Us");
+//                    addFragment(new ContactUsFragment());
+                    Intent i1 = new Intent(Intent.ACTION_DIAL);
+                    i1.setData(Uri.parse("tel:+916351650589"));
+                    startActivity(i1);
+                } else if (item.getItemId() == R.id.navShare) {
+                    Intent i1 = new Intent(Intent.ACTION_SEND);
+                    i1.setType("text/plain");
+                    i1.putExtra(Intent.EXTRA_TEXT, "https://github.com/tushar5201/TradingPro");
+                    startActivity(Intent.createChooser(i1, "TradingPro"));
                 } else if (item.getItemId() == R.id.navProfile) {
+                    cardBottomNav.setVisibility(View.VISIBLE);
                     Intent i = new Intent(HomeActivity.this,UserProfileActivity.class);
                     startActivity(i);
                 }else if(item.getItemId() == R.id.navfeedback){
+                    cardBottomNav.setVisibility(View.VISIBLE);
                     DialogPlus dialogPlus = DialogPlus.newDialog(HomeActivity.this)
                             .setExpanded(true, 1200)
                             .setContentHolder(new ViewHolder(R.layout.dialog_feedback))
@@ -137,7 +152,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                     SmsManager sms = SmsManager.getDefault();
                                     sms.sendTextMessage("+91"+nameOrEmail, null, textInputEdMsg.getText().toString().trim(), null, null);
                                 Snackbar.make(drawerLayout, "Feedback sent successfully", Snackbar.LENGTH_SHORT).show();
-
+                                dialogPlus.dismiss();
                             }
 
 
@@ -148,7 +163,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"tusharlakadiya@gmail.com"});
                             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
                             emailIntent.putExtra(Intent.EXTRA_TEXT, textInputEdMsg.getText().toString().trim());
-                            startActivity(emailIntent);
+                            startActivity(Intent.createChooser(emailIntent, "TradingPro"));
+                            dialogPlus.dismiss();
                         }catch (Error err){
                             Snackbar.make(drawerLayout, "Something went wrong!", Snackbar.LENGTH_SHORT).show();
                         }
@@ -157,6 +173,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                 }
                 else if (item.getItemId() == R.id.navlogout) {
+                    cardBottomNav.setVisibility(View.VISIBLE);
                     DialogPlus dialog = DialogPlus.newDialog(HomeActivity.this)
                             .setExpanded(true, 700)
                             .setContentHolder(new ViewHolder(R.layout.dialog_logout))

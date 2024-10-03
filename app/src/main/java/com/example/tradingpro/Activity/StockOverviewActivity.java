@@ -69,7 +69,7 @@ public class StockOverviewActivity extends AppCompatActivity {
     private static final String BASE_YAHOO_URL = "https://query1.finance.yahoo.com/";
     String previousClose, price, plusMinusPoints, plusMinusPercentage, symbol;
     CandleStickChart candleStickChart;
-    MaterialButton btnBuy, btnSell;
+//    MaterialButton btnBuy, btnSell;
     ArrayList<Integer> timestamps = new ArrayList<>();
     ArrayList<Float> highs = new ArrayList<>();
     ArrayList<Float> lows = new ArrayList<>();
@@ -95,8 +95,8 @@ public class StockOverviewActivity extends AppCompatActivity {
         stockPlusMinusPercentage = findViewById(R.id.stockPlusMinusPercentage);
         cancelButton = findViewById(R.id.cancelButton);
         candleStickChart = findViewById(R.id.candleChart);
-        btnSell = findViewById(R.id.btnSell);
-        btnBuy = findViewById(R.id.btnBuy);
+//        btnSell = findViewById(R.id.btnSell);
+//        btnBuy = findViewById(R.id.btnBuy);
 
 
 //        getting stock and display
@@ -120,14 +120,14 @@ public class StockOverviewActivity extends AppCompatActivity {
         });
 
 //        buy and sell btn
-        btnBuy.setOnClickListener(v -> {
-            DialogPlus dialogPlus = DialogPlus.newDialog(this)
-                    .setExpanded(true)
-                    .setContentHeight(ViewGroup.LayoutParams.MATCH_PARENT)
-                    .setContentHolder(new ViewHolder(R.layout.dialog_buy))
+//        btnBuy.setOnClickListener(v -> {
+//            DialogPlus dialogPlus = DialogPlus.newDialog(this)
+//                    .setExpanded(true)
+//                    .setContentHeight(ViewGroup.LayoutParams.MATCH_PARENT)
+//                    .setContentHolder(new ViewHolder(R.layout.dialog_buy))
 //                    .setHeader(R.layout.dialog_buy)
-                    .create();
-            dialogPlus.show();
+//                    .create();
+//            dialogPlus.show();
 
 //            View view = dialogPlus.getHolderView();
 //            TextView tvText = view.findViewById(R.id.tvText);
@@ -136,7 +136,7 @@ public class StockOverviewActivity extends AppCompatActivity {
 //                dialogPlus.dismiss();
 //            });
 
-        });
+//        });
 
 //        for orientation change
         int orientation = getResources().getConfiguration().orientation;

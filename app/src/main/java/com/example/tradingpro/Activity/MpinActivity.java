@@ -70,7 +70,7 @@ public class MpinActivity extends AppCompatActivity {
         text4 = findViewById(R.id.text4);
         backBtn = findViewById(R.id.backBtn);
 
-        fingerPrint();
+//        fingerPrint();
 
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         String unm = sp.getString("unm", "");

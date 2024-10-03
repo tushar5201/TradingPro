@@ -47,6 +47,7 @@
 
             <!--            bottom navigation-->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardBottomNav"
                 android:layout_width="250dp"
                 android:layout_height="70dp"
                 android:layout_alignParentBottom="true"
