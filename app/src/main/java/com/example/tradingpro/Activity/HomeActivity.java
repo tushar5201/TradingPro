@@ -111,7 +111,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     Intent i1 = new Intent(Intent.ACTION_SEND);
                     i1.setType("text/plain");
                     i1.putExtra(Intent.EXTRA_TEXT, "https://github.com/tushar5201/TradingPro");
-                    startActivity(Intent.createChooser(i1, "TradingPro"));
+                    startActivity(Intent.createChooser(i1, "Share with"));
                 } else if (item.getItemId() == R.id.navProfile) {
                     cardBottomNav.setVisibility(View.VISIBLE);
                     Intent i = new Intent(HomeActivity.this,UserProfileActivity.class);
