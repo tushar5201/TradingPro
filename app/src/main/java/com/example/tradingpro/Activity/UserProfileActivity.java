@@ -1,7 +1,10 @@
 package com.example.tradingpro.Activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,16 +17,21 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tradingpro.Constant.Constant_user_info;
 import com.example.tradingpro.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
 
 public class UserProfileActivity extends AppCompatActivity {
 
-    TextView profileUserName,profilePhone,profileEmail,profileMpin,profileFingerprint,profilePass;
-    String username,phone,email,password,fingerprint,mpin;
+    TextView profileUserName, profilePhone, profileEmail, profileMpin, profileFingerprint, profilePass;
+    String username, phone, email, password, fingerprint, mpin;
+    MaterialButton btnProfileDel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +43,13 @@ public class UserProfileActivity extends AppCompatActivity {
             return insets;
         });
 
-        profileUserName=findViewById(R.id.profileUserName);
-        profilePhone=findViewById(R.id.profilePhone);
-        profileEmail=findViewById(R.id.profileEmail);
-        profileMpin=findViewById(R.id.profileMpin);
-        profileFingerprint=findViewById(R.id.profileFingerprint);
-        profilePass=findViewById(R.id.profilePass);
+        profileUserName = findViewById(R.id.profileUserName);
+        profilePhone = findViewById(R.id.profilePhone);
+        profileEmail = findViewById(R.id.profileEmail);
+        profileMpin = findViewById(R.id.profileMpin);
+        profileFingerprint = findViewById(R.id.profileFingerprint);
+        profilePass = findViewById(R.id.profilePass);
+        btnProfileDel = findViewById(R.id.btnProfileDel);
 
         SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
 
@@ -51,8 +60,8 @@ public class UserProfileActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()){
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 phone = snapshot.child("phone").getValue(String.class);
                                 email = snapshot.child("email").getValue(String.class);
                                 username = snapshot.child("username").getValue(String.class);
@@ -77,5 +86,49 @@ public class UserProfileActivity extends AppCompatActivity {
                     }
                 });
 
+        btnProfileDel.setOnClickListener(v -> {
+
+            DialogPlus dialog = DialogPlus.newDialog(UserProfileActivity.this)
+                    .setExpanded(true, 700)
+                    .setContentHolder(new ViewHolder(R.layout.dialog_profile_delete))
+                    .create();
+
+            View view = dialog.getHolderView();
+
+            Button btnDeleteYes = view.findViewById(R.id.btnDeleteYes);
+            Button btnDeleteNo = view.findViewById(R.id.btnDeleteNo);
+
+            btnDeleteYes.setOnClickListener(v1 -> {
+                databaseReference.orderByChild("email").equalTo(email)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                                    String userId = userSnapshot.getKey();
+
+                                    databaseReference.child(userId).removeValue()
+                                            .addOnCompleteListener(task -> {
+                                                SharedPreferences.Editor editor = sp.edit();
+                                                editor.clear();
+                                                editor.commit();
+                                                dialog.dismiss();
+                                                Intent intent = new Intent(UserProfileActivity.this, LoginActivity.class);
+                                                startActivity(intent);
+                                            });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(UserProfileActivity.this, "Account deletion failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            });
+
+            btnDeleteNo.setOnClickListener(v1 -> {
+                dialog.dismiss();
+            });
+            dialog.show();
+        });
     }
 }
