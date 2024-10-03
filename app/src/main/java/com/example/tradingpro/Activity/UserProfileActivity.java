@@ -29,8 +29,9 @@ import com.orhanobut.dialogplus.ViewHolder;
 public class UserProfileActivity extends AppCompatActivity {
 
     TextView profileUserName, profilePhone, profileEmail, profileMpin, profileFingerprint, profilePass;
-    String username, phone, email, password, fingerprint, mpin;
-    MaterialButton btnProfileDel;
+    String username = "", phone = "", email = "", password = "", fingerprint = "", mpin = "";
+    MaterialButton btnProfileDel,btnProfileEdit;
+    Intent i1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class UserProfileActivity extends AppCompatActivity {
             return insets;
         });
 
+
         profileUserName = findViewById(R.id.profileUserName);
         profilePhone = findViewById(R.id.profilePhone);
         profileEmail = findViewById(R.id.profileEmail);
@@ -50,11 +52,11 @@ public class UserProfileActivity extends AppCompatActivity {
         profileFingerprint = findViewById(R.id.profileFingerprint);
         profilePass = findViewById(R.id.profilePass);
         btnProfileDel = findViewById(R.id.btnProfileDel);
+        btnProfileEdit = findViewById(R.id.btnProfileEdit);
 
         SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
 
         String matchUnm = sp.getString(Constant_user_info.SHARED_LOGIN_USERNM, String.valueOf(false));
-
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_info");
         databaseReference.orderByChild("username").equalTo(matchUnm)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -76,6 +78,13 @@ public class UserProfileActivity extends AppCompatActivity {
                                 profileFingerprint.setText(fingerprint);
                                 profilePhone.setText(phone);
                                 profilePass.setText(password);
+
+                                i1 = new Intent(getApplicationContext(), UserProfileUpdateActivity.class);
+                                i1.putExtra("username", username);
+                                i1.putExtra("email", email);
+                                i1.putExtra("phone",phone);
+                                i1.putExtra("password",password);
+                                i1.putExtra("finger",fingerprint);
                             }
                         }
                     }
@@ -85,6 +94,16 @@ public class UserProfileActivity extends AppCompatActivity {
 
                     }
                 });
+
+
+        btnProfileEdit.setOnClickListener(v -> {
+//            Intent i1 = new Intent(UserProfileActivity.this, UserProfileUpdateActivity.class);
+//            Toast.makeText(this, "username", Toast.LENGTH_SHORT).show();
+//
+//            //i1.putExtra("username",profileUserName.getText());
+//            startActivity(i1);
+            startActivity(i1);
+        });
 
         btnProfileDel.setOnClickListener(v -> {
 
