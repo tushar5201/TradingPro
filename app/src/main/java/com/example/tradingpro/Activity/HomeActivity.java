@@ -1,10 +1,15 @@
 package com.example.tradingpro.Activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Telephony;
+import android.telephony.SmsManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +24,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
@@ -35,7 +42,11 @@ import com.example.tradingpro.HomeFragments.SearchFragment;
 import com.example.tradingpro.HomeFragments.TermsAndConditionFragment;
 import com.example.tradingpro.HomeFragments.WatchlistFragment;
 import com.example.tradingpro.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
@@ -61,7 +72,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
         addFragment(new MarketsFragment());
 // drawer..........
-
         drawerLayout = findViewById(R.id.main);
         toolbar = findViewById(R.id.toolbar);
         nav_view = findViewById(R.id.nav_view);
@@ -92,7 +102,61 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 } else if (item.getItemId() == R.id.navProfile) {
                     Intent i = new Intent(HomeActivity.this,UserProfileActivity.class);
                     startActivity(i);
-                } else if (item.getItemId() == R.id.navlogout) {
+                }else if(item.getItemId() == R.id.navfeedback){
+                    DialogPlus dialogPlus = DialogPlus.newDialog(HomeActivity.this)
+                            .setExpanded(true, 1200)
+                            .setContentHolder(new ViewHolder(R.layout.dialog_feedback))
+                            .create()
+                            ;
+
+                    dialogPlus.show();
+
+                    View view = dialogPlus.getHolderView();
+
+                    TextInputEditText textInputEdMsg = view.findViewById(R.id.textInputEdMsg);
+                    MaterialButton btnSubmitFeedback = view.findViewById(R.id.btnSubmitFeedback);
+                    TextInputLayout textInputLayoutMsg = view.findViewById(R.id.textInputLayoutMsg);
+                    TextView tvEmailorPhn = view.findViewById(R.id.tvEmailorPhn);
+
+                    SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
+                    String nameOrEmail = sp.getString(Constant_user_info.SHARED_LOGIN_EMAILORPHONE, String.valueOf(false));
+
+                    tvEmailorPhn.setText(nameOrEmail);
+
+                    btnSubmitFeedback.setOnClickListener(v -> {
+
+                        try{
+
+                            Double isPhone = Double.parseDouble(nameOrEmail);
+                            isPhone.getClass();
+
+                            if(ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                                ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.SEND_SMS}, 1);
+                                Snackbar.make(drawerLayout, "Permission Denied!", Snackbar.LENGTH_SHORT).show();
+                            } else {
+                                    SmsManager sms = SmsManager.getDefault();
+                                    sms.sendTextMessage("+91"+nameOrEmail, null, textInputEdMsg.getText().toString().trim(), null, null);
+                                Snackbar.make(drawerLayout, "Feedback sent successfully", Snackbar.LENGTH_SHORT).show();
+
+                            }
+
+
+                        }catch(NumberFormatException err){
+
+                            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                            emailIntent.setData(Uri.parse("mailto:"));
+                            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"tusharlakadiya@gmail.com"});
+                            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                            emailIntent.putExtra(Intent.EXTRA_TEXT, textInputEdMsg.getText().toString().trim());
+                            startActivity(emailIntent);
+                        }catch (Error err){
+                            Snackbar.make(drawerLayout, "Something went wrong!", Snackbar.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+                }
+                else if (item.getItemId() == R.id.navlogout) {
                     DialogPlus dialog = DialogPlus.newDialog(HomeActivity.this)
                             .setExpanded(true, 700)
                             .setContentHolder(new ViewHolder(R.layout.dialog_logout))
