@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     android:paddingHorizontal="15dp"
     android:paddingVertical="30dp"
+    android:background="@color/bg_color"
     tools:context=".Activity.SignupActivity">
 
     <TextView
