@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tradingpro.Activity.StockOverviewActivity;
 import com.example.tradingpro.Constant.Constant_user_info;
+import com.example.tradingpro.HomeFragments.WatchlistFragment;
 import com.example.tradingpro.Model.SearchModel;
 import com.example.tradingpro.Model.WatchlistModel;
 import com.example.tradingpro.R;
@@ -40,6 +43,7 @@ import java.util.Set;
 public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.viewHolderWatchList> {
     ArrayList<WatchlistModel> list1;
     Context context;
+    String symbol;
 
     public WatchlistAdapter(ArrayList<WatchlistModel> list, Context context) {
         this.list1 = list;
@@ -73,7 +77,7 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.view
 
         holder.itemView.setOnClickListener(v -> {
             String symbolName = watchlistModel.getSymbolName();
-            String symbol = watchlistModel.getSymbol();
+            symbol = watchlistModel.getSymbol();
             Intent i1 = new Intent(v.getContext(), StockOverviewActivity.class);
             i1.putExtra("symbolName", symbolName);
             i1.putExtra("symbol", symbol);
@@ -87,14 +91,16 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.view
             list1.remove(position);
             notifyItemRemoved(position);
             // Notify any potential changes in item positions
-            notifyItemRangeChanged(position, list1.size());
+//            notifyItemRangeChanged(position, list1.size());
         } else {
             // Handle invalid position, if needed
             Toast.makeText(context, "Invalid position", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void removeFromFirebase(int position, String username) {
+    public void removeFromFirebase(int pos) {
+        String symbol1 = list1.get(pos).getSymbol();
+//        Toast.makeText(context, symbol1, Toast.LENGTH_SHORT).show();
         SharedPreferences sp = context.getSharedPreferences("Login", Context.MODE_PRIVATE);
         String unm = sp.getString("unm", "");
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constant_user_info.TABLE_NAME);
@@ -105,20 +111,31 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.view
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    snapshot.child("watchlist");
-                    databaseReference.child(String.valueOf(position)).removeValue()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(context, "item delted", Toast.LENGTH_SHORT).show();
+
+                    Query q1 = databaseReference.child(snapshot.getKey()).child("watchlist");
+
+                    q1.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                                if (itemSnapshot.getValue(String.class).equals(symbol1)) {
+                                    itemSnapshot.getRef().removeValue().addOnCompleteListener(task -> {
+                                        if (task.isSuccessful()) {
+//                                            Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(context, "Failed to delete item", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    break; // Stop searching once we've found the item
                                 }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(context, "item delted fail", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             }
 
@@ -127,41 +144,6 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.view
 
             }
         });
-
-
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                List<String> itemList = new ArrayList<>();
-//                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
-//                    itemList.add(String.valueOf(snapshot.getValue(HashMap.class)));
-//                }
-//
-//                // Step 2: Remove the specific item
-//                String delItem = String.valueOf(list1.get(position));
-//                itemList.remove(delItem);
-//
-//                // Step 3: Update the ArrayList back to the database
-//                databaseReference.child("watchlist").setValue(itemList)
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void unused) {
-//                                Toast.makeText(context, "item removed", Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Toast.makeText(context, "item remove failed", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(context, "item remove cancelled", Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     @Override

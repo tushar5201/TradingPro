@@ -1,5 +1,7 @@
 package com.example.tradingpro.HomeFragments;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -56,6 +59,13 @@ public class SearchFragment extends Fragment {
         textInputEdSearch = view.findViewById(R.id.textInputEdSearch);
         recyclerView = view.findViewById(R.id.recycleSearch);
         searchPbar = view.findViewById(R.id.searchPbar);
+
+        textInputEdSearch.requestFocus();
+        // show the keyboard
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(textInputEdSearch, InputMethodManager.SHOW_IMPLICIT);
+        }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dataList = new ArrayList<>();

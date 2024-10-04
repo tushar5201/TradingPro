@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tradingpro.Adapter.SearchAdapter;
@@ -63,6 +64,7 @@ public class WatchlistFragment extends Fragment {
     private Runnable runnable;
     ArrayList<String> arrayListTemp = new ArrayList<>();
     ProgressBar watchlistPbar;
+    RelativeLayout watchlistRelative;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,6 +81,7 @@ public class WatchlistFragment extends Fragment {
         recycleWatchlist = view.findViewById(R.id.recycleWatchlist);
         watchlistPbar = view.findViewById(R.id.watchlistPbar);
         watchlistPbar.setVisibility(View.VISIBLE);
+        watchlistRelative = view.findViewById(R.id.watchlistRelative);
 
 //        shared preferences name
         SharedPreferences sp = getContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
@@ -124,7 +127,7 @@ public class WatchlistFragment extends Fragment {
                         }
                     } else {
                         watchlistPbar.setVisibility(View.GONE);
-                        Toast.makeText(getContext(), "No stocks added in watchlist", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(watchlistRelative, "No stocks added in watchlist", Snackbar.LENGTH_SHORT).show();
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -212,4 +215,8 @@ public class WatchlistFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }
