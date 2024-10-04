@@ -376,21 +376,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
             super.onBackPressed();
-            Toast.makeText(this, "if", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "if", Toast.LENGTH_SHORT).show();
 
         } else {
+            if((tvToolbarHeading.getText().toString()).equals("Markets")) {
+                super.onBackPressed();
+//                Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
+            }
+
+//            Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
             BottomIcon1();
             cardBottomNav.setVisibility(View.VISIBLE);
             getSupportFragmentManager().popBackStack();
             tvToolbarHeading.setText("Markets");
 
-            if((tvToolbarHeading.getText().toString()).equals("Markets")) {
-                super.onBackPressed();
-                Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
 
-            }
 
         }
     }
