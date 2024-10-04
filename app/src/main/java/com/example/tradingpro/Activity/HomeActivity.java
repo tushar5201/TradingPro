@@ -70,7 +70,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        addFragment(new MarketsFragment());
+
+
+
+
+        if(savedInstanceState == null) {
+            addFragment(new MarketsFragment());
+        }
+
+
+
+
+
+
+
+
+
 // drawer..........
         drawerLayout = findViewById(R.id.main);
         toolbar = findViewById(R.id.toolbar);
@@ -91,15 +106,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 if (item.getItemId() == R.id.navmarket) {
                     cardBottomNav.setVisibility(View.VISIBLE);
                     tvToolbarHeading.setText("Markets");
-                    addFragment(new MarketsFragment());
+                    replaceFragment(new MarketsFragment());
                 } else if (item.getItemId() == R.id.navfavourite) {
                     cardBottomNav.setVisibility(View.VISIBLE);
                     tvToolbarHeading.setText("Watchlist");
-                    addFragment(new WatchlistFragment());
+                    replaceFragment(new WatchlistFragment());
                 } else if (item.getItemId() == R.id.navtnc) {
                     tvToolbarHeading.setText("Terms and Conditions");
                     cardBottomNav.setVisibility(View.GONE);
-                    addFragment(new TermsAndConditionFragment());
+                    replaceFragment(new TermsAndConditionFragment());
                 } else if (item.getItemId() == R.id.navcontactus) {
                     cardBottomNav.setVisibility(View.VISIBLE);
 //                    tvToolbarHeading.setText("Contact Us");
@@ -324,20 +339,47 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         img2.setImageResource(R.drawable.watchlist_white);
     }
 
-    public void addFragment(Fragment fragment) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.frame, fragment);
-        ft.commit();
-    }
 
-    public void replaceFragment(Fragment fragment) {
+
+
+
+
+    public void addFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frame, fragment);
         ft.commit();
     }
 
+
+
+
+    public void replaceFragment(Fragment fragment) {
+        clearStackToRoot();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frame, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+
+    public void clearStackToRoot() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+
+        } else {
+            getSupportFragmentManager().popBackStack();
+
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
