@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class UserProfileActivity extends AppCompatActivity {
     String username = "", phone = "", email = "", password = "", fingerprint = "", mpin = "";
     MaterialButton btnProfileDel,btnProfileEdit;
     Intent i1;
+    ImageView profileBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,12 @@ public class UserProfileActivity extends AppCompatActivity {
         profilePass = findViewById(R.id.profilePass);
         btnProfileDel = findViewById(R.id.btnProfileDel);
         btnProfileEdit = findViewById(R.id.btnProfileEdit);
+        profileBack = findViewById(R.id.profileBack);
+
+        profileBack.setOnClickListener(v -> {
+            Intent intent = new Intent(UserProfileActivity.this, HomeActivity.class);
+            startActivity(intent);
+        });
 
         SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
 
@@ -78,6 +86,9 @@ public class UserProfileActivity extends AppCompatActivity {
                                 profileFingerprint.setText(fingerprint);
                                 profilePhone.setText(phone);
                                 profilePass.setText(password);
+
+                                btnProfileEdit.setEnabled(true);
+                                btnProfileDel.setEnabled(true);
 
                                 i1 = new Intent(getApplicationContext(), UserProfileUpdateActivity.class);
                                 i1.putExtra("username", username);

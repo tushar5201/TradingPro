@@ -8,8 +8,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,6 +28,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +51,8 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
     RadioButton updateradioEnable, updateradioNotnow;
     MaterialButton btnProfileUpdate;
     EditText text1, text2, text3, text4;
+    RelativeLayout main;
+    ImageView profileUpdateBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,13 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
         updateradioEnable=findViewById(R.id.updateradioEnable);
         updateradioNotnow=findViewById(R.id.updateradioNotnow);
         btnProfileUpdate=findViewById(R.id.btnProfileUpdate);
+        main = findViewById(R.id.main);
+        profileUpdateBack = findViewById(R.id.profileUpdateBack);
+
+        profileUpdateBack.setOnClickListener(v -> {
+            Intent intent = new Intent(UserProfileUpdateActivity.this, UserProfileActivity.class);
+            startActivity(intent);
+        });
 
 
         Intent i1 = getIntent();
@@ -108,12 +121,15 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
             text3 = view.findViewById(R.id.text3);
             text4 = view.findViewById(R.id.text4);
             MaterialButton btnDialogMpin = view.findViewById(R.id.btnDialogMpin);
+            ProgressBar pbarUpdate = view.findViewById(R.id.pbarUpdate);
 
             text1.addTextChangedListener(otpbox1());
             text2.addTextChangedListener(otpbox2());
             text3.addTextChangedListener(otpbox3());
 
             btnDialogMpin.setOnClickListener(v1 -> {
+                btnDialogMpin.setVisibility(View.GONE);
+                pbarUpdate.setVisibility(View.VISIBLE);
                 String userMpin = text1.getText().toString().trim() + text2.getText().toString().trim() + text3.getText().toString().trim() + text4.getText().toString().trim();
                 if (mpin.equals(userMpin)) {
                     Map<String, Object> map = new HashMap<>();
@@ -133,7 +149,9 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                                     snapshot.getRef().updateChildren(map).addOnCompleteListener(task -> {
                                         if (task.isSuccessful()){
-                                            Toast.makeText(UserProfileUpdateActivity.this, "Record Updated", Toast.LENGTH_SHORT).show();
+                                            btnDialogMpin.setVisibility(View.VISIBLE);
+                                            pbarUpdate.setVisibility(View.GONE);
+                                            Snackbar.make(main, "Record Updated", Snackbar.LENGTH_SHORT).show();
 
                                             SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
                                             SharedPreferences.Editor ed = sp.edit();
@@ -158,6 +176,8 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
 
                         }
                     });
+                } else {
+                    Snackbar.make(main, "Wrong MPIN", Snackbar.LENGTH_SHORT).show();
                 }
 
             });

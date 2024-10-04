@@ -6,51 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="15dp"
-    tools:context=".Activity.UserProfileUpdateActivity">
+    tools:context=".Activity.UserProfileUpdateActivity"
+    android:background="@color/bg_color"
+    >
 
-    <TextView
-        android:id="@+id/tvAppname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30sp"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Update Profile"
-        android:textColor="@color/primary_text"
-        android:textSize="27sp"
-        android:textStyle="bold" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutUpdateName"
+    <LinearLayout
+        android:id="@+id/backLinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:hint="@string/fullname"
-        app:boxBackgroundColor="@color/edText"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxStrokeColor="@color/edBorder"
-        app:cursorColor="@color/edBorder"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:errorIconDrawable="@drawable/exclamation"
-        app:helperText=""
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/desc_text"
-        app:hintTextColor="@color/edBorder"
-        app:startIconDrawable="@drawable/baseline_person_24">
+        android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEdUpdateName"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:id="@+id/profileUpdateBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Profile"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/primary_text"
+            android:textSize="17sp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
 
     <!--phone number -->
     <com.google.android.material.textfield.TextInputLayout
@@ -77,7 +59,8 @@
         app:helperTextTextColor="@color/desc_text"
         app:hintTextColor="@color/edBorder"
         app:prefixText="+91"
-        app:startIconDrawable="@drawable/phone_call">
+        app:startIconDrawable="@drawable/phone_call"
+        android:enabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEdUpdatePhone"
@@ -119,6 +102,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textEmailAddress"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutUpdateName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:hint="@string/fullname"
+        app:boxBackgroundColor="@color/edText"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/edBorder"
+        app:cursorColor="@color/edBorder"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/exclamation"
+        app:helperText=""
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/desc_text"
+        app:hintTextColor="@color/edBorder"
+        app:startIconDrawable="@drawable/baseline_person_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEdUpdateName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 

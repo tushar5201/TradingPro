@@ -119,4 +119,11 @@
         android:layout_marginBottom="20dp"
         app:cornerRadius="10dp" />
 
+    <ProgressBar
+        android:id="@+id/pbarUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/bg_color"
+        />
 </LinearLayout>

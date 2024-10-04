@@ -23,8 +23,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvAppname"
@@ -39,8 +38,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgLogo"
@@ -59,8 +57,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgLogo"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -84,9 +83,8 @@
             app:helperText="@string/required"
             app:helperTextEnabled="true"
             app:helperTextTextColor="@color/desc_text"
-            app:hintTextColor="@color/edBorder"
-            >
-<!--            app:startIconDrawable="@drawable/user"-->
+            app:hintTextColor="@color/edBorder">
+            <!--            app:startIconDrawable="@drawable/user"-->
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEdEmailOrPhnLog"
@@ -117,9 +115,8 @@
             app:helperText="@string/required"
             app:helperTextEnabled="true"
             app:helperTextTextColor="@color/desc_text"
-            app:hintTextColor="@color/edBorder"
-            >
-<!--            app:startIconDrawable="@drawable/padlock"-->
+            app:hintTextColor="@color/edBorder">
+            <!--            app:startIconDrawable="@drawable/padlock"-->
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEdPasswordLog"
@@ -137,8 +134,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_light_font"
             android:text="@string/checkbox_remember"
-            android:textColor="@color/desc_text"
-            />
+            android:textColor="@color/desc_text" />
 
         <!--    btnLogin-->
         <com.google.android.material.button.MaterialButton
@@ -157,58 +153,58 @@
             app:cornerRadius="10dp" />
 
         <!--    Divider-->
-        <RelativeLayout
-            android:id="@+id/relativeOR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnLogin"
-            android:layout_marginTop="30dp">
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/relativeOR"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/btnLogin"-->
+        <!--            android:layout_marginTop="30dp">-->
 
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/dividerOR2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_toEndOf="@id/tvOr"
-                android:background="@color/desc_text" />
+        <!--            <com.google.android.material.divider.MaterialDivider-->
+        <!--                android:id="@+id/dividerOR2"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="8dp"-->
+        <!--                android:layout_toEndOf="@id/tvOr"-->
+        <!--                android:background="@color/desc_text" />-->
 
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/dividerOR1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_toStartOf="@id/tvOr"
-                android:background="@color/desc_text" />
+        <!--            <com.google.android.material.divider.MaterialDivider-->
+        <!--                android:id="@+id/dividerOR1"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="8dp"-->
+        <!--                android:layout_toStartOf="@id/tvOr"-->
+        <!--                android:background="@color/desc_text" />-->
 
 
-            <TextView
-                android:id="@+id/tvOr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/poppins_light_font"
-                android:paddingHorizontal="20dp"
-                android:text="@string/or" />
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvOr"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_centerHorizontal="true"-->
+        <!--                android:fontFamily="@font/poppins_light_font"-->
+        <!--                android:paddingHorizontal="20dp"-->
+        <!--                android:text="@string/or" />-->
 
-        </RelativeLayout>
+        <!--        </RelativeLayout>-->
 
         <!--    Google Logo-->
-        <ImageView
-            android:id="@+id/imgGoogle"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/relativeOR"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/google_logo" />
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imgGoogle"-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_below="@id/relativeOR"-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_marginTop="15dp"-->
+        <!--            android:src="@drawable/google_logo" />-->
 
-        <!--    last divider-->
+        <!--        &lt;!&ndash;    last divider&ndash;&gt;-->
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imgGoogle"
-            android:layout_marginTop="20dp"
+            android:layout_below="@id/btnLogin"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="20dp"
             android:background="@color/desc_text" />
 
@@ -218,10 +214,10 @@
             android:id="@+id/linearSignupLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/divider2"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_below="@+id/divider2">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
