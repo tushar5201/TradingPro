@@ -106,10 +106,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 if (item.getItemId() == R.id.navmarket) {
                     cardBottomNav.setVisibility(View.VISIBLE);
                     tvToolbarHeading.setText("Markets");
+                    BottomIcon1();
                     replaceFragment(new MarketsFragment());
                 } else if (item.getItemId() == R.id.navfavourite) {
                     cardBottomNav.setVisibility(View.VISIBLE);
                     tvToolbarHeading.setText("Watchlist");
+                    bottomIcon2();
                     replaceFragment(new WatchlistFragment());
                 } else if (item.getItemId() == R.id.navtnc) {
                     tvToolbarHeading.setText("Terms and Conditions");
@@ -374,9 +376,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
             super.onBackPressed();
+            Toast.makeText(this, "if", Toast.LENGTH_SHORT).show();
 
         } else {
+
+            Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
+            BottomIcon1();
+            cardBottomNav.setVisibility(View.VISIBLE);
             getSupportFragmentManager().popBackStack();
+            tvToolbarHeading.setText("Markets");
+
+            if((tvToolbarHeading.getText().toString()).equals("Markets")) {
+                super.onBackPressed();
+                Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
+
+            }
 
         }
     }

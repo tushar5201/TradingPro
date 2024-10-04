@@ -82,6 +82,7 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
         profileUpdateBack.setOnClickListener(v -> {
             Intent intent = new Intent(UserProfileUpdateActivity.this, UserProfileActivity.class);
             startActivity(intent);
+            finish();
         });
 
 
@@ -160,6 +161,7 @@ public class UserProfileUpdateActivity extends AppCompatActivity {
 
                                             Intent intent = new Intent(UserProfileUpdateActivity.this, UserProfileActivity.class);
                                             startActivity(intent);
+                                            finish();
                                         } else {
                                             Toast.makeText(UserProfileUpdateActivity.this, "Record updated failed", Toast.LENGTH_SHORT).show();
                                         }

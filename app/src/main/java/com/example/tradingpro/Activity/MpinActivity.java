@@ -78,10 +78,14 @@ public class MpinActivity extends AppCompatActivity {
         tvTitle.setText("\uD83D\uDC4B HI " + unm.toUpperCase());
 
         // Go to login when back click
-        backBtn.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            finish();
-        });
+//        backBtn.setOnClickListener(v -> {
+//            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//            finish();
+//        });
+
+        // Call fingerPrintCheck() to manage visibility of the button
+        fingerPrintCheck();
+
 
         // Initialize BiometricPrompt and PromptInfo
         Executor executor = ContextCompat.getMainExecutor(this);
@@ -96,6 +100,7 @@ public class MpinActivity extends AppCompatActivity {
                 super.onAuthenticationSucceeded(result);
                 main.setVisibility(View.VISIBLE);
                 startActivity(new Intent(MpinActivity.this, HomeActivity.class));
+                finish();
             }
 
             @Override
@@ -117,8 +122,6 @@ public class MpinActivity extends AppCompatActivity {
             }
         });
 
-        // Call fingerPrintCheck() to manage visibility of the button
-        fingerPrintCheck();
 
         // MPin confirmation logic
         btnConfirm.setOnClickListener(v -> {
@@ -171,6 +174,7 @@ public class MpinActivity extends AppCompatActivity {
 //                Snackbar.make(main, "Login Success", Snackbar.LENGTH_SHORT).show();
                 main.setVisibility(View.VISIBLE);
                 startActivity(new Intent(MpinActivity.this, HomeActivity.class));
+                finish();
             }
 
             @Override
@@ -182,6 +186,8 @@ public class MpinActivity extends AppCompatActivity {
         promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("TradingPro")
                 .setDescription("Use Fingerprint To Login").setDeviceCredentialAllowed(true).build();
         biometricPrompt.authenticate(promptInfo);
+        finish();
+
     }
 
     public void fingerPrintCheck() {
@@ -230,6 +236,7 @@ public class MpinActivity extends AppCompatActivity {
 
                         if (mpin.equals(inputMpin)) {
                             startActivity(new Intent(MpinActivity.this, HomeActivity.class));
+                            finish();
                         } else {
                             Snackbar.make(main, "Invalid MPIN ", Snackbar.LENGTH_SHORT).show();
                         }

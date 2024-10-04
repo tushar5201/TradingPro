@@ -141,7 +141,7 @@ public class WatchlistFragment extends Fragment {
                             fetchStockPrices(symbol, i);
                             i++;
                         }
-                        handler.postDelayed(this, 3000);
+                        handler.postDelayed(this, 300000);
                     }
                 };
                 handler.post(runnable);

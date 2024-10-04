@@ -60,6 +60,7 @@ public class UserProfileActivity extends AppCompatActivity {
         profileBack.setOnClickListener(v -> {
             Intent intent = new Intent(UserProfileActivity.this, HomeActivity.class);
             startActivity(intent);
+            finish();
         });
 
         SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
@@ -115,6 +116,7 @@ public class UserProfileActivity extends AppCompatActivity {
 //            //i1.putExtra("username",profileUserName.getText());
 //            startActivity(i1);
             startActivity(i1);
+            finish();
         });
 
         btnProfileDel.setOnClickListener(v -> {
@@ -145,6 +147,7 @@ public class UserProfileActivity extends AppCompatActivity {
                                                 dialog.dismiss();
                                                 Intent intent = new Intent(UserProfileActivity.this, LoginActivity.class);
                                                 startActivity(intent);
+                                                finish();
                                             });
                                 }
                             }
