@@ -1,5 +1,7 @@
 package com.example.tradingpro.OverviewTabFragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -130,7 +132,7 @@ public class CompanyProfileFragment extends Fragment {
             public Map<String, String> getHeaders() {
                 // Add the API key in the headers
                 Map<String, String> headers = new HashMap<>();
-//                headers.put("x-rapidapi-key", "396f9767cdmsh5a9239f74f0fbd4p18965bjsnaf8ec32e38bc");  // Your API key
+                headers.put("x-rapidapi-key", "c92e06d5c6mshfce3e7cdfaad84ap1f19dfjsn2f60255af180");  // Your API key
                 return headers;
             }
         };
@@ -174,6 +176,13 @@ public class CompanyProfileFragment extends Fragment {
                             tvWebsite.setText(website);
                             tvBookVal.setText(bookValue);
                             tvPB.setText(PB);
+
+
+                            tvWebsite.setOnClickListener(v-> {
+                                Intent i1 = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
+                                startActivity(i1);
+                            });
+
                         } catch (JSONException e) {
                             getData2();
                         }
@@ -191,7 +200,7 @@ public class CompanyProfileFragment extends Fragment {
             public Map<String, String> getHeaders() {
                 // Add the API key in the headers
                 Map<String, String> headers = new HashMap<>();
-//                headers.put("x-rapidapi-key", "396f9767cdmsh5a9239f74f0fbd4p18965bjsnaf8ec32e38bc");  // Your API key
+                headers.put("x-rapidapi-key", "c92e06d5c6mshfce3e7cdfaad84ap1f19dfjsn2f60255af180");  // Your API key
                 return headers;
             }
         };

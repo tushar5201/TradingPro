@@ -42,6 +42,7 @@ import com.example.tradingpro.HomeFragments.SearchFragment;
 import com.example.tradingpro.HomeFragments.TermsAndConditionFragment;
 import com.example.tradingpro.HomeFragments.WatchlistFragment;
 import com.example.tradingpro.R;
+import com.example.tradingpro.internetCheck;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -73,6 +74,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+//        check internet permission
+        checkInternetPermission();
 
         if(savedInstanceState == null) {
             addFragment(new MarketsFragment());
@@ -282,6 +285,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        });
     }
 
+    private void checkInternetPermission() {
+        if (internetCheck.isCheckInternet(this)) {
+        } else {
+            Toast.makeText(this, "No internet access", Toast.LENGTH_SHORT).show();
+            // Handle no internet scenario
+        }
+    }
+
     private void BottomIcon1() {
         GradientDrawable backgroundDrawable = new GradientDrawable();
         backgroundDrawable.setCornerRadius(80f);
@@ -376,12 +387,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
             super.onBackPressed();
-//            Toast.makeText(this, "if", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "if", Toast.LENGTH_SHORT).show();
 
         } else {
             if((tvToolbarHeading.getText().toString()).equals("Markets")) {
                 super.onBackPressed();
-//                Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -390,8 +401,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             cardBottomNav.setVisibility(View.VISIBLE);
             getSupportFragmentManager().popBackStack();
             tvToolbarHeading.setText("Markets");
-
-
 
         }
     }

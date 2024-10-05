@@ -52,7 +52,7 @@ public class TopLosersFragment extends Fragment {
         adapter = new GainerLosersAdapter(dataList, getContext());
         rcylLosers.setAdapter(adapter);
 
-//        fetchDataFromApi();
+        fetchDataFromApi();
     }
 
     private void fetchDataFromApi() {
