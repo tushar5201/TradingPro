@@ -54,7 +54,7 @@ public class TopGainersFragment extends Fragment {
         adapter = new GainerLosersAdapter(dataList, getContext());
         rcylGainers.setAdapter(adapter);
 
-//        fetchDataFromApi();
+        fetchDataFromApi();
     }
 
     private void fetchDataFromApi() {

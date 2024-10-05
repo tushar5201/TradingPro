@@ -84,7 +84,7 @@ public class MpinActivity extends AppCompatActivity {
 //        });
 
         // Call fingerPrintCheck() to manage visibility of the button
-        fingerPrintCheck();
+//        fingerPrintCheck();
 
 
         // Initialize BiometricPrompt and PromptInfo

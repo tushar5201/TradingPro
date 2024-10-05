@@ -52,14 +52,14 @@ public class GainerLosersAdapter extends RecyclerView.Adapter<GainerLosersAdapte
         holder.stockPlusMinusPercentage.setText(gainerLosersModel.getChangesPercentage());
         holder.stockPlusMinusPoints.setText(gainerLosersModel.getChange());
 
-        holder.itemView.setOnClickListener(v-> {
-            String symbolName = gainerLosersModel.getSymbolName();
-            String symbol = gainerLosersModel.getSymbol();
-            Intent i1 = new Intent(v.getContext(), StockOverviewActivity.class);
-            i1.putExtra("symbolName", symbolName);
-            i1.putExtra("symbol", symbol);
-            v.getContext().startActivity(i1);
-        });
+//        holder.itemView.setOnClickListener(v-> {
+//            String symbolName = gainerLosersModel.getSymbolName();
+//            String symbol = gainerLosersModel.getSymbol();
+//            Intent i1 = new Intent(v.getContext(), StockOverviewActivity.class);
+//            i1.putExtra("symbolName", symbolName);
+//            i1.putExtra("symbol", symbol);
+//            v.getContext().startActivity(i1);
+//        });
     }
 
     @Override

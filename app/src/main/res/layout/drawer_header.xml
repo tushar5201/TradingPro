@@ -18,7 +18,7 @@
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/poppins_light"
         android:text="@string/trading_pro"
-        android:textSize="30sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:textColor="#0F0E0E"/>
 
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_light"
         android:text="@string/tradingpro_gmail_com"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="#161617"/>
 
 </LinearLayout>
