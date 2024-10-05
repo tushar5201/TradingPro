@@ -13,6 +13,7 @@ import android.telephony.SmsManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     ImageButton buttondrawertoggle;
     NavigationView nav_view;
     TextView tvToolbarHeading;
+    FrameLayout frame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
 // drawer..........
+        frame = findViewById(R.id.frame);
         drawerLayout = findViewById(R.id.main);
         toolbar = findViewById(R.id.toolbar);
         nav_view = findViewById(R.id.nav_view);
@@ -288,8 +291,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void checkInternetPermission() {
         if (internetCheck.isCheckInternet(this)) {
         } else {
-            Toast.makeText(this, "No internet access", Toast.LENGTH_SHORT).show();
-            Snackbar.make(drawerLayout, "NO INTERNET CONNECTION!", Snackbar.LENGTH_LONG).show();
+            Toast.makeText(this, "No internet access", Toast.LENGTH_LONG).show();
+//            Snackbar.make(, "NO INTERNET CONNECTION!", Snackbar.LENGTH_SHORT).show();
             // Handle no internet scenario
         }
     }
