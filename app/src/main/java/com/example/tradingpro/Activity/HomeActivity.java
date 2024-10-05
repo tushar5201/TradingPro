@@ -289,6 +289,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (internetCheck.isCheckInternet(this)) {
         } else {
             Toast.makeText(this, "No internet access", Toast.LENGTH_SHORT).show();
+            Snackbar.make(drawerLayout, "NO INTERNET CONNECTION!", Snackbar.LENGTH_LONG).show();
             // Handle no internet scenario
         }
     }
@@ -387,12 +388,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
             super.onBackPressed();
-            Toast.makeText(this, "if", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "if", Toast.LENGTH_SHORT).show();
 
         } else {
             if((tvToolbarHeading.getText().toString()).equals("Markets")) {
                 super.onBackPressed();
-                Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
 
             }
 
