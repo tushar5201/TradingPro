@@ -65,12 +65,13 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.view
         WatchlistModel watchlistModel = list1.get(position);
         holder.symbol.setText(watchlistModel.getSymbol());
         holder.stockPrice.setText(watchlistModel.getStockPrice());
-        if (Double.parseDouble(watchlistModel.getStockPlusMinusPoints()) >= 0) {
-            holder.stockPlusMinusPoints.setTextColor(Color.parseColor("#3FC33F"));
-            holder.stockPlusMinusPercentage.setTextColor(Color.parseColor("#3FC33F"));
+        double pts = com.example.tradingpro.Constant.StockUtils.safeParseDouble(watchlistModel.getStockPlusMinusPoints(), 0.0);
+        if (pts >= 0) {
+            holder.stockPlusMinusPoints.setTextColor(Color.parseColor("#00D09C"));
+            holder.stockPlusMinusPercentage.setTextColor(Color.parseColor("#00D09C"));
         } else {
-            holder.stockPlusMinusPoints.setTextColor(Color.parseColor("#D53030"));
-            holder.stockPlusMinusPercentage.setTextColor(Color.parseColor("#D53030"));
+            holder.stockPlusMinusPoints.setTextColor(Color.parseColor("#EB5757"));
+            holder.stockPlusMinusPercentage.setTextColor(Color.parseColor("#EB5757"));
         }
         holder.stockPlusMinusPercentage.setText(watchlistModel.getStockPlusMinusPercentage());
         holder.stockPlusMinusPoints.setText(watchlistModel.getStockPlusMinusPoints());

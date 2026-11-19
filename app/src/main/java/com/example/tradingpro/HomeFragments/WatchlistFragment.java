@@ -157,44 +157,42 @@ public class WatchlistFragment extends Fragment {
     }
 
     private void fetchStockPrices(String stockSymbol, int position) {
-        dataList.clear();
+        ensureListSize(dataList, arrayListTemp.size());
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://query1.finance.yahoo.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        IndicesApi api = retrofit.create(IndicesApi.class);
+        IndicesApi api = com.example.tradingpro.Network.ApiClient.createService(IndicesApi.class);
 
         api.getIndicesPrice(stockSymbol).enqueue(new Callback<IndicesResponseModel>() {
             @Override
             public void onResponse(Call<IndicesResponseModel> call, retrofit2.Response<IndicesResponseModel> response) {
+                if (!isAdded()) return;
                 try {
                     if (response.isSuccessful() && response.body() != null) {
-                        DecimalFormat decim = new DecimalFormat("###.##");
                         IndicesResponseModel stockResponse = response.body();
-                        previousClose = stockResponse.chart.result[0].meta.previousClose;
-                        stockPrice = stockResponse.chart.result[0].meta.regularMarketPrice;
-                        symbol = stockResponse.chart.result[0].meta.symbol;
-                        symbolName = stockResponse.chart.result[0].meta.symbolFullname;
-                        stockPlusMinusPoints = decim.format(Double.parseDouble(stockPrice) - Double.parseDouble(previousClose));
-                        stockPlusMinusPercentage = "  (" + decim.format(((Double.parseDouble(stockPlusMinusPoints) * 100) / Double.parseDouble(stockPrice))) + "%)";
-                        if (Double.parseDouble(stockPlusMinusPoints) > 0) {
-                            stockPlusMinusPoints = "+" + stockPlusMinusPoints;
-                            stockPlusMinusPercentage = " (+" + decim.format(((Double.parseDouble(stockPlusMinusPoints) * 100) / Double.parseDouble(stockPrice))) + "%)";
-                        }
-//                        Toast.makeText(getContext(), stockPrice, Toast.LENGTH_SHORT).show();
-                        ensureListSize(dataList, arrayListTemp.size());
+                        if (stockResponse.chart != null && stockResponse.chart.result != null && stockResponse.chart.result.length > 0) {
+                            IndicesResponseModel.Meta meta = stockResponse.chart.result[0].meta;
+                            if (meta != null) {
+                                previousClose = meta.getPrevClose();
+                                stockPrice = meta.regularMarketPrice != null ? meta.regularMarketPrice : "0";
+                                symbol = meta.symbol != null ? meta.symbol : stockSymbol;
+                                symbolName = meta.getFullName();
 
-                        dataList.set(position, new WatchlistModel(symbol, symbolName, stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage));
-//                        dataList.add(stockPrice, stockPlusMinusPoints, stockPlusMinusPercentage);
-//                        adapter.notifyDataSetChanged();
-                        adapter.notifyItemChanged(position);
-                        watchlistPbar.setVisibility(View.GONE);
-                    } else {
-                        Log.d("problem", "some Problem");
-                        watchlistPbar.setVisibility(View.GONE);
+                                double p = com.example.tradingpro.Constant.StockUtils.safeParseDouble(stockPrice, 0.0);
+                                double prev = com.example.tradingpro.Constant.StockUtils.safeParseDouble(previousClose, p);
+                                double diff = p - prev;
+                                double pct = prev > 0 ? (diff / prev) * 100.0 : 0.0;
+
+                                stockPlusMinusPoints = com.example.tradingpro.Constant.StockUtils.formatPoints(diff);
+                                stockPlusMinusPercentage = "  " + com.example.tradingpro.Constant.StockUtils.formatPercentage(pct);
+                                String formattedPrice = String.format(java.util.Locale.getDefault(), "₹%.2f", p);
+
+                                if (position < dataList.size()) {
+                                    dataList.set(position, new WatchlistModel(symbol, symbolName, formattedPrice, stockPlusMinusPoints, stockPlusMinusPercentage));
+                                    adapter.notifyItemChanged(position);
+                                }
+                            }
+                        }
                     }
+                    watchlistPbar.setVisibility(View.GONE);
                 } catch (Exception e) {
                     e.printStackTrace();
                     watchlistPbar.setVisibility(View.GONE);
@@ -203,10 +201,27 @@ public class WatchlistFragment extends Fragment {
 
             @Override
             public void onFailure(Call<IndicesResponseModel> call, Throwable t) {
-                t.printStackTrace();
-                watchlistPbar.setVisibility(View.GONE);
+                if (isAdded()) {
+                    watchlistPbar.setVisibility(View.GONE);
+                }
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+        }
     }
 
     private void ensureListSize(ArrayList<WatchlistModel> list, int size) {

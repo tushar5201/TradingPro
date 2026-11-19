@@ -1,17 +1,31 @@
 package com.example.tradingpro.Model;
 
 public class GainerLosersModel {
-    public String symbol, symbolName, price, change, changesPercentage;
+    private String symbol;
+    private String symbolName;
+    private String price;
+    private String change;
+    private String changesPercentage;
+    private String exchange = "NSE";
+
+    public GainerLosersModel() {
+    }
 
     public GainerLosersModel(String symbol, String symbolName, String price, String change, String changesPercentage) {
         this.symbol = symbol;
+        this.symbolName = symbolName;
         this.price = price;
         this.change = change;
         this.changesPercentage = changesPercentage;
-        this.symbolName = symbolName;
     }
 
-    public GainerLosersModel() {
+    public GainerLosersModel(String symbol, String symbolName, String price, String change, String changesPercentage, String exchange) {
+        this.symbol = symbol;
+        this.symbolName = symbolName;
+        this.price = price;
+        this.change = change;
+        this.changesPercentage = changesPercentage;
+        this.exchange = exchange;
     }
 
     public String getSymbol() {
@@ -23,7 +37,7 @@ public class GainerLosersModel {
     }
 
     public String getSymbolName() {
-        return symbolName;
+        return symbolName != null ? symbolName : symbol;
     }
 
     public void setSymbolName(String symbolName) {
@@ -54,4 +68,11 @@ public class GainerLosersModel {
         this.changesPercentage = changesPercentage;
     }
 
+    public String getExchange() {
+        return exchange != null ? exchange : "NSE";
+    }
+
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
 }

@@ -6,19 +6,22 @@ public class IndicesResponseModel {
     @SerializedName("chart")
     public Chart chart;
 
-    public class Chart {
+    public static class Chart {
         @SerializedName("result")
         public Result[] result;
 
-        public class Result {
+        public static class Result {
             @SerializedName("meta")
             public Meta meta;
         }
     }
 
-    public class Meta {
+    public static class Meta {
         @SerializedName("previousClose")
         public String previousClose;
+
+        @SerializedName("chartPreviousClose")
+        public String chartPreviousClose;
 
         @SerializedName("regularMarketPrice")
         public String regularMarketPrice;
@@ -28,5 +31,18 @@ public class IndicesResponseModel {
 
         @SerializedName("longName")
         public String symbolFullname;
+
+        @SerializedName("shortName")
+        public String shortName;
+
+        public String getPrevClose() {
+            if (previousClose != null && !previousClose.isEmpty()) return previousClose;
+            return chartPreviousClose != null ? chartPreviousClose : "0";
+        }
+
+        public String getFullName() {
+            if (symbolFullname != null && !symbolFullname.isEmpty()) return symbolFullname;
+            return shortName != null ? shortName : symbol;
+        }
     }
 }

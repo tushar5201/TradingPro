@@ -6,17 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.StockOverviewActivity"
-    android:background="@color/bg_color"
-   >
+    android:background="@color/bg_color">
 
     <ImageView
         android:id="@+id/cancelButton"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/cancel"
-        app:tint="@color/primary_text"
-       />
+        app:tint="@color/primary_text" />
 
     <TextView
         android:id="@+id/stockName"
@@ -27,16 +25,15 @@
         android:textStyle="bold"
         android:textColor="@color/primary_text"
         android:layout_below="@+id/cancelButton"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/poppins"/>
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"/>
 
     <TextView
         android:id="@+id/symbolFullName"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="NSE"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:textSize="13sp"
         android:textColor="@color/desc_text"
         android:layout_below="@+id/stockName"
         android:fontFamily="@font/poppins_light"/>
@@ -47,9 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cancelButton"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/poppins"
-        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
         android:textColor="@color/primary_text"
         android:text=""
         android:textSize="20sp" />
@@ -62,7 +58,7 @@
         android:layout_below="@+id/stockPrice"
         android:textSize="13sp"
         android:layout_alignParentEnd="true"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/green"/>
 
     <TextView
@@ -73,71 +69,93 @@
         android:layout_toStartOf="@+id/stockPlusMinusPercentage"
         android:layout_below="@+id/stockPrice"
         android:textSize="13sp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/green"/>
-
-
 
     <ImageView
         android:id="@+id/imgBtnAddWatchList"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/stockPlusMinusPercentage"
         android:layout_marginTop="10dp"
+        android:src="@drawable/plus"
         android:tooltipText="WatchList"
-        android:scaleType="center"
+        android:scaleType="centerInside"
         app:tint="@color/primary_text"/>
 
-    <LinearLayout
-        android:id="@+id/linearstock"
-        android:layout_below="@id/imgBtnAddWatchList"
-        android:layout_marginTop="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:orientation="horizontal">
-
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/btnBuy"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_weight="1"-->
-<!--            app:cornerRadius="10dp"-->
-<!--            android:backgroundTint="@color/green"-->
-<!--            android:text="Buy"-->
-<!--            android:fontFamily="@font/poppins"-->
-<!--            android:textColor="@color/secondary_text"-->
-<!--            android:textSize="15sp"/>-->
-
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/btnSell"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_weight="1"-->
-<!--            app:cornerRadius="10dp"-->
-<!--            android:backgroundTint="@color/red"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:text="Sell"-->
-<!--            android:fontFamily="@font/poppins"-->
-<!--            android:textColor="@color/secondary_text"-->
-<!--            android:textSize="15sp"/>-->
-
-    </LinearLayout>
-
     <com.google.android.material.tabs.TabLayout
-        android:layout_marginTop="10dp"
+        android:id="@+id/tabstock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearstock"
+        android:layout_below="@+id/imgBtnAddWatchList"
+        android:layout_marginTop="10dp"
         app:tabSelectedTextColor="@color/primary_text"
         app:tabTextColor="@color/tabUnselect"
-        android:id="@+id/tabstock"/>
+        app:tabIndicatorColor="@color/yellow"/>
 
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpagerstock"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tabstock"
-        android:id="@+id/viewpagerstock"/>
+        android:layout_above="@+id/bottomTradingBar"/>
+
+    <!-- Bottom Trading Bar (Groww Style) -->
+    <LinearLayout
+        android:id="@+id/bottomTradingBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_color"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/tvHoldingStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Owned: 0 shares"
+            android:textColor="@color/desc_text"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBuy"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:backgroundTint="#00D09C"
+                android:fontFamily="@font/poppins_bold"
+                android:text="BUY"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSell"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:backgroundTint="#EB5757"
+                android:fontFamily="@font/poppins_bold"
+                android:text="SELL"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

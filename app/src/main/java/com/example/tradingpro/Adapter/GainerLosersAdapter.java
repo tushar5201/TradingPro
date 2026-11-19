@@ -6,21 +6,21 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tradingpro.Activity.StockOverviewActivity;
+import com.example.tradingpro.Constant.StockUtils;
 import com.example.tradingpro.Model.GainerLosersModel;
 import com.example.tradingpro.R;
 
 import java.util.ArrayList;
 
 public class GainerLosersAdapter extends RecyclerView.Adapter<GainerLosersAdapter.gainersViewHolder> {
-    ArrayList<GainerLosersModel> list;
-    Context context;
+    private final ArrayList<GainerLosersModel> list;
+    private final Context context;
 
     public GainerLosersAdapter(ArrayList<GainerLosersModel> list, Context context) {
         this.list = list;
@@ -30,36 +30,39 @@ public class GainerLosersAdapter extends RecyclerView.Adapter<GainerLosersAdapte
     @NonNull
     @Override
     public gainersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context con = parent.getContext();
-        LayoutInflater layoutInflater = LayoutInflater.from(con);
-        View view = layoutInflater.inflate(R.layout.row_watchlist, parent, false);
-        GainerLosersAdapter.gainersViewHolder gainersViewHolder = new GainerLosersAdapter.gainersViewHolder(view);
-        return gainersViewHolder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_watchlist, parent, false);
+        return new gainersViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull gainersViewHolder holder, int position) {
-        GainerLosersModel gainerLosersModel = list.get(position);
-        holder.symbol.setText(gainerLosersModel.getSymbol());
-        holder.stockPrice.setText(gainerLosersModel.getPrice());
-        if (Double.parseDouble(gainerLosersModel.getChange()) >= 0) {
-            holder.stockPlusMinusPoints.setTextColor(Color.parseColor("#3FC33F"));
-            holder.stockPlusMinusPercentage.setTextColor(Color.parseColor("#3FC33F"));
-        } else {
-            holder.stockPlusMinusPoints.setTextColor(Color.parseColor("#D53030"));
-            holder.stockPlusMinusPercentage.setTextColor(Color.parseColor("#D53030"));
-        }
-        holder.stockPlusMinusPercentage.setText(gainerLosersModel.getChangesPercentage());
-        holder.stockPlusMinusPoints.setText(gainerLosersModel.getChange());
+        GainerLosersModel item = list.get(position);
 
-//        holder.itemView.setOnClickListener(v-> {
-//            String symbolName = gainerLosersModel.getSymbolName();
-//            String symbol = gainerLosersModel.getSymbol();
-//            Intent i1 = new Intent(v.getContext(), StockOverviewActivity.class);
-//            i1.putExtra("symbolName", symbolName);
-//            i1.putExtra("symbol", symbol);
-//            v.getContext().startActivity(i1);
-//        });
+        holder.symbol.setText(StockUtils.cleanDisplaySymbol(item.getSymbol()));
+        if (holder.symbolExchange != null) {
+            String name = item.getSymbolName();
+            if (name == null || name.isEmpty() || name.equals(item.getSymbol())) {
+                holder.symbolExchange.setText(item.getExchange());
+            } else {
+                holder.symbolExchange.setText(String.format("%s • %s", item.getExchange(), name));
+            }
+        }
+
+        holder.stockPrice.setText(item.getPrice());
+        holder.stockPlusMinusPercentage.setText(item.getChangesPercentage());
+        holder.stockPlusMinusPoints.setText(item.getChange());
+
+        double changeVal = StockUtils.safeParseDouble(item.getChange(), 0.0);
+        int color = changeVal >= 0 ? Color.parseColor("#00D09C") : Color.parseColor("#EB5757");
+        holder.stockPlusMinusPoints.setTextColor(color);
+        holder.stockPlusMinusPercentage.setTextColor(color);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), StockOverviewActivity.class);
+            intent.putExtra("symbolName", item.getSymbolName());
+            intent.putExtra("symbol", item.getSymbol());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -68,12 +71,12 @@ public class GainerLosersAdapter extends RecyclerView.Adapter<GainerLosersAdapte
     }
 
     public static class gainersViewHolder extends RecyclerView.ViewHolder {
-        TextView symbol, symbolName, stockPrice, stockPlusMinusPercentage, stockPlusMinusPoints;
-        ImageView plus;
+        TextView symbol, symbolExchange, stockPrice, stockPlusMinusPercentage, stockPlusMinusPoints;
+
         public gainersViewHolder(@NonNull View itemView) {
             super(itemView);
-
             symbol = itemView.findViewById(R.id.symbolWatch);
+            symbolExchange = itemView.findViewById(R.id.symbolExchangeWatch);
             stockPrice = itemView.findViewById(R.id.stockPriceWatch);
             stockPlusMinusPercentage = itemView.findViewById(R.id.stockPlusMinusPercentageWatch);
             stockPlusMinusPoints = itemView.findViewById(R.id.stockPlusMinusPointsWatch);

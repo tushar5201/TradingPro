@@ -1,16 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragments.marketFragments.TopLosersFragment"
-    android:orientation="vertical">
+    android:background="@color/bg_color"
+    tools:context=".HomeFragments.marketFragments.TopLosersFragment">
+
+    <!-- Market Category Selector (NSE India vs Global) -->
+    <LinearLayout
+        android:id="@+id/layoutLosersFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/chipLosersNse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/cradius"
+            android:backgroundTint="@color/yellow"
+            android:fontFamily="@font/poppins_bold"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:text="NSE (India)"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/chipLosersGlobal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ed_style"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:text="Global Markets"
+            android:textColor="@color/desc_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvLosersLiveBadge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end|center_vertical"
+            android:fontFamily="@font/poppins_medium"
+            android:text="● LIVE"
+            android:textColor="#EB5757"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbLosers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/yellow" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcylLosers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        />
+        android:layout_below="@+id/layoutLosersFilter"
+        android:clipToPadding="false"
+        android:paddingHorizontal="12dp"
+        android:paddingBottom="16dp"
+        android:scrollbars="none" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvLosersEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/poppins_light"
+        android:text="Loading real-time losers..."
+        android:textColor="@color/desc_text"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

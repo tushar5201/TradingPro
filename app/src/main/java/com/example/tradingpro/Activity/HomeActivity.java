@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.telephony.SmsManager;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,8 +35,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.tradingpro.Constant.Constant_user_info;
-import com.example.tradingpro.HomeFragments.ContactUsFragment;
+import com.example.tradingpro.HomeFragments.HoldingsFragment;
 import com.example.tradingpro.HomeFragments.MarketsFragment;
+import com.example.tradingpro.HomeFragments.OrdersFragment;
 import com.example.tradingpro.HomeFragments.SearchFragment;
 import com.example.tradingpro.HomeFragments.TermsAndConditionFragment;
 import com.example.tradingpro.HomeFragments.WatchlistFragment;
@@ -53,13 +53,14 @@ import com.orhanobut.dialogplus.ViewHolder;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    CardView card1, card2, card3, card4, card5, cardBottomNav;
-    ImageView img1, img2, img3, img4, img5;
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
-    ImageButton buttondrawertoggle;
-    NavigationView nav_view;
-    TextView tvToolbarHeading;
+    private CardView card1, cardHoldings, cardOrders, card2, card3, cardBottomNav;
+    private ImageView img1, imgHoldings, imgOrders, img2, img3;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private NavigationView nav_view;
+    private TextView tvToolbarHeading;
+
+    private int currentTab = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,24 +73,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return insets;
         });
 
-
-
-//        check internet permission
         checkInternetPermission();
 
-        if(savedInstanceState == null) {
-            addFragment(new MarketsFragment());
-        }
-
-
-
-
-
-
-
-
-
-// drawer..........
         drawerLayout = findViewById(R.id.main);
         toolbar = findViewById(R.id.toolbar);
         nav_view = findViewById(R.id.nav_view);
@@ -100,309 +85,225 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(abdt);
         abdt.syncState();
-        nav_view.setNavigationItemSelectedListener(this);
 
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                if (item.getItemId() == R.id.navmarket) {
+                int id = item.getItemId();
+                if (id == R.id.navmarket) {
                     cardBottomNav.setVisibility(View.VISIBLE);
-                    tvToolbarHeading.setText("Markets");
-                    BottomIcon1();
-                    replaceFragment(new MarketsFragment());
-                } else if (item.getItemId() == R.id.navfavourite) {
+                    selectBottomTab(0);
+                } else if (id == R.id.navportfolio) {
                     cardBottomNav.setVisibility(View.VISIBLE);
-                    tvToolbarHeading.setText("Watchlist");
-                    bottomIcon2();
-                    replaceFragment(new WatchlistFragment());
-                } else if (item.getItemId() == R.id.navtnc) {
+                    selectBottomTab(1);
+                } else if (id == R.id.navoders) {
+                    cardBottomNav.setVisibility(View.VISIBLE);
+                    selectBottomTab(2);
+                } else if (id == R.id.navfavourite) {
+                    cardBottomNav.setVisibility(View.VISIBLE);
+                    selectBottomTab(3);
+                } else if (id == R.id.navtnc) {
                     tvToolbarHeading.setText("Terms and Conditions");
                     cardBottomNav.setVisibility(View.GONE);
                     replaceFragment(new TermsAndConditionFragment());
-                } else if (item.getItemId() == R.id.navcontactus) {
-                    cardBottomNav.setVisibility(View.VISIBLE);
-//                    tvToolbarHeading.setText("Contact Us");
-//                    addFragment(new ContactUsFragment());
+                } else if (id == R.id.navcontactus) {
                     Intent i1 = new Intent(Intent.ACTION_DIAL);
                     i1.setData(Uri.parse("tel:+916351650589"));
                     startActivity(i1);
-                } else if (item.getItemId() == R.id.navShare) {
+                } else if (id == R.id.navShare) {
                     Intent i1 = new Intent(Intent.ACTION_SEND);
                     i1.setType("text/plain");
                     i1.putExtra(Intent.EXTRA_TEXT, "https://github.com/tushar5201/TradingPro");
                     startActivity(Intent.createChooser(i1, "Share with"));
-                } else if (item.getItemId() == R.id.navProfile) {
-                    cardBottomNav.setVisibility(View.VISIBLE);
-                    Intent i = new Intent(HomeActivity.this,UserProfileActivity.class);
+                } else if (id == R.id.navProfile) {
+                    Intent i = new Intent(HomeActivity.this, UserProfileActivity.class);
                     startActivity(i);
-                }else if(item.getItemId() == R.id.navfeedback){
-                    cardBottomNav.setVisibility(View.VISIBLE);
-                    DialogPlus dialogPlus = DialogPlus.newDialog(HomeActivity.this)
-                            .setExpanded(true, 1200)
-                            .setContentHolder(new ViewHolder(R.layout.dialog_feedback))
-                            .create()
-                            ;
-
-                    dialogPlus.show();
-
-                    View view = dialogPlus.getHolderView();
-
-                    TextInputEditText textInputEdMsg = view.findViewById(R.id.textInputEdMsg);
-                    MaterialButton btnSubmitFeedback = view.findViewById(R.id.btnSubmitFeedback);
-                    TextInputLayout textInputLayoutMsg = view.findViewById(R.id.textInputLayoutMsg);
-                    TextView tvEmailorPhn = view.findViewById(R.id.tvEmailorPhn);
-
-                    SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
-                    String nameOrEmail = sp.getString(Constant_user_info.SHARED_LOGIN_EMAILORPHONE, String.valueOf(false));
-
-                    tvEmailorPhn.setText(nameOrEmail);
-
-                    btnSubmitFeedback.setOnClickListener(v -> {
-
-                        try{
-
-                            Double isPhone = Double.parseDouble(nameOrEmail);
-                            isPhone.getClass();
-
-                            if(ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                                ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.SEND_SMS}, 1);
-                                Snackbar.make(drawerLayout, "Permission Denied!", Snackbar.LENGTH_SHORT).show();
-                            } else {
-                                    SmsManager sms = SmsManager.getDefault();
-                                    sms.sendTextMessage("+91"+nameOrEmail, null, textInputEdMsg.getText().toString().trim(), null, null);
-                                Snackbar.make(drawerLayout, "Feedback sent successfully", Snackbar.LENGTH_SHORT).show();
-                                dialogPlus.dismiss();
-                            }
-
-
-                        }catch(NumberFormatException err){
-
-                            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                            emailIntent.setData(Uri.parse("mailto:"));
-                            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"tusharlakadiya@gmail.com"});
-                            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
-                            emailIntent.putExtra(Intent.EXTRA_TEXT, textInputEdMsg.getText().toString().trim());
-                            startActivity(Intent.createChooser(emailIntent, "TradingPro"));
-                            dialogPlus.dismiss();
-                        }catch (Error err){
-                            Snackbar.make(drawerLayout, "Something went wrong!", Snackbar.LENGTH_SHORT).show();
-                        }
-                    });
-
-
-                }
-                else if (item.getItemId() == R.id.navlogout) {
-                    cardBottomNav.setVisibility(View.VISIBLE);
-                    DialogPlus dialog = DialogPlus.newDialog(HomeActivity.this)
-                            .setExpanded(true, 700)
-                            .setContentHolder(new ViewHolder(R.layout.dialog_logout))
-                            .create();
-
-                    View view =dialog.getHolderView();
-
-                    Button btnLogoutYes = view.findViewById(R.id.btnLogoutYes);
-                    Button btnLogoutNo = view.findViewById(R.id.btnLogoutNo);
-
-                    btnLogoutYes.setOnClickListener(v -> {
-                        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.clear();
-                        editor.commit();
-                        dialog.dismiss();
-                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    });
-
-                    btnLogoutNo.setOnClickListener(v -> {
-                        dialog.dismiss();
-                    });
-                    dialog.show();
+                } else if (id == R.id.navfeedback) {
+                    showFeedbackDialog();
+                } else if (id == R.id.navlogout) {
+                    showLogoutDialog();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
-
                 return true;
             }
         });
 
-//        get header view of drawer
+        // Header view of drawer
         View headerView = nav_view.getHeaderView(0);
+        if (headerView != null) {
+            TextView navUserName = headerView.findViewById(R.id.DrawerHeaderUserName);
+            TextView navEmail = headerView.findViewById(R.id.DrawerHeaderEmail);
 
-//        bind the textview for set name n email
-        TextView navUserName = headerView.findViewById(R.id.DrawerHeaderUserName);
-        TextView navEmail = headerView.findViewById(R.id.DrawerHeaderEmail);
+            SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
+            String headerName = sp.getString(Constant_user_info.SHARED_LOGIN_USERNM, "Trader");
+            String headerEmail = sp.getString(Constant_user_info.SHARED_LOGIN_EMAILORPHONE, "trader@tradingpro.com");
 
-//        get name from shared preferences
-        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
+            if (navUserName != null) navUserName.setText(headerName.toUpperCase());
+            if (navEmail != null) navEmail.setText(headerEmail);
+        }
 
-        String headerName = sp.getString(Constant_user_info.SHARED_LOGIN_USERNM, String.valueOf(false));
-        String headerEmail = sp.getString(Constant_user_info.SHARED_LOGIN_EMAILORPHONE, String.valueOf(false));
-
-//       set name in header drawerlayout
-        navUserName.setText(headerName.toUpperCase());
-        navEmail.setText(headerEmail);
-
-//        bottom navigation
+        // Bottom Navigation Views
         card1 = findViewById(R.id.card1);
+        cardHoldings = findViewById(R.id.cardHoldings);
+        cardOrders = findViewById(R.id.cardOrders);
         card2 = findViewById(R.id.card2);
         card3 = findViewById(R.id.card3);
-//        card4 = findViewById(R.id.card4);
-//        card5 = findViewById(R.id.card5);
 
         img1 = findViewById(R.id.img1);
+        imgHoldings = findViewById(R.id.imgHoldings);
+        imgOrders = findViewById(R.id.imgOrders);
         img2 = findViewById(R.id.img2);
         img3 = findViewById(R.id.img3);
-//        img4 = findViewById(R.id.img4);
-//        img5 = findViewById(R.id.img5);
 
-        BottomIcon1();
+        card1.setOnClickListener(v -> selectBottomTab(0));
+        cardHoldings.setOnClickListener(v -> selectBottomTab(1));
+        cardOrders.setOnClickListener(v -> selectBottomTab(2));
+        card2.setOnClickListener(v -> selectBottomTab(3));
+        card3.setOnClickListener(v -> selectBottomTab(4));
 
-        card1.setOnClickListener(v -> {
-            BottomIcon1();
-            replaceFragment(new MarketsFragment());
+        if (savedInstanceState == null) {
+            selectBottomTab(0);
+        }
+    }
+
+    public void selectBottomTab(int index) {
+        currentTab = index;
+
+        // Reset all card backgrounds to black, icons to white
+        setCardStyle(card1, img1, false, R.drawable.market_white);
+        setCardStyle(cardHoldings, imgHoldings, false, R.drawable.portfolio_white);
+        setCardStyle(cardOrders, imgOrders, false, R.drawable.order_white);
+        setCardStyle(card2, img2, false, R.drawable.watchlist_white);
+        setCardStyle(card3, img3, false, R.drawable.search_white);
+
+        cardBottomNav.setVisibility(View.VISIBLE);
+
+        if (index == 0) {
+            setCardStyle(card1, img1, true, R.drawable.market);
             tvToolbarHeading.setText("Markets");
-        });
-
-        card2.setOnClickListener(v -> {
-            bottomIcon2();
-            replaceFragment(new WatchlistFragment());
+            replaceFragment(new MarketsFragment());
+        } else if (index == 1) {
+            setCardStyle(cardHoldings, imgHoldings, true, R.drawable.portfolio);
+            tvToolbarHeading.setText("Holdings");
+            replaceFragment(new HoldingsFragment());
+        } else if (index == 2) {
+            setCardStyle(cardOrders, imgOrders, true, R.drawable.order);
+            tvToolbarHeading.setText("Orders");
+            replaceFragment(new OrdersFragment());
+        } else if (index == 3) {
+            setCardStyle(card2, img2, true, R.drawable.watchlist);
             tvToolbarHeading.setText("Watchlist");
-        });
-
-//        card3
-        card3.setOnClickListener(v -> {
-            bottomIcon3();
-            replaceFragment(new SearchFragment());
+            replaceFragment(new WatchlistFragment());
+        } else if (index == 4) {
+            setCardStyle(card3, img3, true, R.drawable.search_);
             tvToolbarHeading.setText("Search");
+            replaceFragment(new SearchFragment());
+        }
+    }
+
+    private void setCardStyle(CardView card, ImageView img, boolean isSelected, int iconRes) {
+        if (card == null || img == null) return;
+        GradientDrawable gd = new GradientDrawable();
+        gd.setCornerRadius(80f);
+        if (isSelected) {
+            gd.setColor(Color.parseColor("#fee83f"));
+        } else {
+            gd.setColor(Color.parseColor("#000000"));
+        }
+        card.setBackground(gd);
+        img.setImageResource(iconRes);
+    }
+
+    public void switchToMarkets() {
+        selectBottomTab(0);
+    }
+
+    private void showFeedbackDialog() {
+        DialogPlus dialogPlus = DialogPlus.newDialog(HomeActivity.this)
+                .setExpanded(true, 1200)
+                .setContentHolder(new ViewHolder(R.layout.dialog_feedback))
+                .create();
+
+        dialogPlus.show();
+        View view = dialogPlus.getHolderView();
+
+        TextInputEditText textInputEdMsg = view.findViewById(R.id.textInputEdMsg);
+        MaterialButton btnSubmitFeedback = view.findViewById(R.id.btnSubmitFeedback);
+        TextView tvEmailorPhn = view.findViewById(R.id.tvEmailorPhn);
+
+        SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
+        String nameOrEmail = sp.getString(Constant_user_info.SHARED_LOGIN_EMAILORPHONE, "User");
+        tvEmailorPhn.setText(nameOrEmail);
+
+        btnSubmitFeedback.setOnClickListener(v -> {
+            try {
+                Double isPhone = Double.parseDouble(nameOrEmail);
+                if (ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.SEND_SMS}, 1);
+                    Snackbar.make(drawerLayout, "Permission Denied!", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    SmsManager sms = SmsManager.getDefault();
+                    sms.sendTextMessage("+91" + nameOrEmail, null, textInputEdMsg.getText().toString().trim(), null, null);
+                    Snackbar.make(drawerLayout, "Feedback sent successfully", Snackbar.LENGTH_SHORT).show();
+                    dialogPlus.dismiss();
+                }
+            } catch (NumberFormatException err) {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@tradingpro.com"});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, textInputEdMsg.getText().toString().trim());
+                startActivity(Intent.createChooser(emailIntent, "TradingPro"));
+                dialogPlus.dismiss();
+            } catch (Exception err) {
+                Snackbar.make(drawerLayout, "Something went wrong!", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showLogoutDialog() {
+        DialogPlus dialog = DialogPlus.newDialog(HomeActivity.this)
+                .setExpanded(true, 700)
+                .setContentHolder(new ViewHolder(R.layout.dialog_logout))
+                .create();
+
+        View view = dialog.getHolderView();
+        Button btnLogoutYes = view.findViewById(R.id.btnLogoutYes);
+        Button btnLogoutNo = view.findViewById(R.id.btnLogoutNo);
+
+        btnLogoutYes.setOnClickListener(v -> {
+            SharedPreferences sp = getSharedPreferences(Constant_user_info.SHARED_LOGIN_ID, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.clear();
+            editor.apply();
+            dialog.dismiss();
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-//        card4.setOnClickListener(v -> {
-//            bottomIcon4();
-//        });
-//
-//        card5.setOnClickListener(v -> {
-//            bottomIcon5();
-//        });
+        btnLogoutNo.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
     }
 
     private void checkInternetPermission() {
-        if (internetCheck.isCheckInternet(this)) {
-        } else {
+        if (!internetCheck.isCheckInternet(this)) {
             Toast.makeText(this, "No internet access", Toast.LENGTH_SHORT).show();
-            // Handle no internet scenario
         }
     }
-
-    private void BottomIcon1() {
-        GradientDrawable backgroundDrawable = new GradientDrawable();
-        backgroundDrawable.setCornerRadius(80f);
-        card1.setBackground(backgroundDrawable);
-        backgroundDrawable.setColor(Color.parseColor("#fee83f"));
-        img1.setImageResource(R.drawable.market);
-
-//            other icon bg remove
-        GradientDrawable backgroundDrawableOther = new GradientDrawable();
-        backgroundDrawableOther.setCornerRadius(80f);
-        backgroundDrawableOther.setColor(Color.parseColor("#000000"));
-        card2.setBackground(backgroundDrawableOther);
-        card3.setBackground(backgroundDrawableOther);
-
-//            other icon color change
-        img2.setImageResource(R.drawable.watchlist_white);
-        img3.setImageResource(R.drawable.search_white);
-
-    }
-
-    private void bottomIcon2() {
-        GradientDrawable backgroundDrawable = new GradientDrawable();
-        backgroundDrawable.setCornerRadius(80f);
-        card2.setBackground(backgroundDrawable);
-        backgroundDrawable.setColor(Color.parseColor("#fee83f"));
-        img2.setImageResource(R.drawable.watchlist);
-
-//            other icon bg remove
-        GradientDrawable backgroundDrawableOther = new GradientDrawable();
-        backgroundDrawableOther.setCornerRadius(80f);
-        backgroundDrawableOther.setColor(Color.parseColor("#000000"));
-        card1.setBackground(backgroundDrawableOther);
-        card3.setBackground(backgroundDrawableOther);
-
-//            other icon color change
-        img1.setImageResource(R.drawable.market_white);
-        img3.setImageResource(R.drawable.search_white);
-
-    }
-
-    private void bottomIcon3() {
-        GradientDrawable backgroundDrawable = new GradientDrawable();
-        backgroundDrawable.setCornerRadius(80f);
-        card3.setBackground(backgroundDrawable);
-        backgroundDrawable.setColor(Color.parseColor("#fee83f"));
-        img3.setImageResource(R.drawable.search_);
-
-//            other icon bg remove
-        GradientDrawable backgroundDrawableOther = new GradientDrawable();
-        backgroundDrawableOther.setCornerRadius(80f);
-        backgroundDrawableOther.setColor(Color.parseColor("#000000"));
-        card1.setBackground(backgroundDrawableOther);
-        card2.setBackground(backgroundDrawableOther);
-
-//            other icon color change
-        img1.setImageResource(R.drawable.market_white);
-        img2.setImageResource(R.drawable.watchlist_white);
-    }
-
-
-
-
-
 
     public void addFragment(Fragment fragment) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame, fragment);
-        ft.commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
-
-
-
 
     public void replaceFragment(Fragment fragment) {
-        clearStackToRoot();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame, fragment);
-        ft.addToBackStack(null);
-        ft.commit();
-    }
-
-
-    public void clearStackToRoot() {
-        if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            super.onBackPressed();
-            Toast.makeText(this, "if", Toast.LENGTH_SHORT).show();
-
-        } else {
-            if((tvToolbarHeading.getText().toString()).equals("Markets")) {
-                super.onBackPressed();
-                Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
-
-            }
-
-//            Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
-            BottomIcon1();
-            cardBottomNav.setVisibility(View.VISIBLE);
-            getSupportFragmentManager().popBackStack();
-            tvToolbarHeading.setText("Markets");
-
-        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override

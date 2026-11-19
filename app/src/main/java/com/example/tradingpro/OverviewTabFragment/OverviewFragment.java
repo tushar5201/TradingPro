@@ -3,12 +3,6 @@ package com.example.tradingpro.OverviewTabFragment;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,15 +12,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import com.example.tradingpro.Constant.StockUtils;
 import com.example.tradingpro.Interfaces.StockPrice;
 import com.example.tradingpro.Model.StockPriceModel;
+import com.example.tradingpro.Network.ApiClient;
 import com.example.tradingpro.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -34,52 +29,48 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.sql.Timestamp;
-import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OverviewFragment extends Fragment {
 
-    View view;
-    Handler handler = new Handler();
-    Runnable runnable;
-    ProgressBar progressBarToday, progressBar52;
-    ImageView indicatorToday, indicator52;
-    TextView tvTodayLow, tvTodayHigh, tv52Low, tv52High, tvVolume, tvPrevClose;
-    Double todayLow = 0.0;
-    Double todayHigh = 0.0;
-    Double fiftytwoLow = 0.0;
-    Double fiftytwoHigh = 0.0;
-    Double current = 0.0;
-    Double previousClose = 0.0;
-    String receivedSymbol;
-    String volume;
-    private static final String BASE_YAHOO_URL = "https://query1.finance.yahoo.com/";
-    LineChart lineChart;
-    ArrayList<Integer> timestamps = new ArrayList<>();
-    ArrayList<Float> prices = new ArrayList<>();
+    private final Handler handler = new Handler();
+    private Runnable priceRunnable;
+    private Runnable chartRunnable;
 
+    private ProgressBar progressBarToday, progressBar52;
+    private ImageView indicatorToday, indicator52;
+    private TextView tvTodayLow, tvTodayHigh, tv52Low, tv52High, tvVolume, tvPrevClose;
+
+    private double todayLow = 0.0;
+    private double todayHigh = 0.0;
+    private double fiftytwoLow = 0.0;
+    private double fiftytwoHigh = 0.0;
+    private double current = 0.0;
+    private double previousClose = 0.0;
+    private String receivedSymbol = "RELIANCE.NS";
+    private String volume = "0";
+
+    private LineChart lineChart;
+    private final ArrayList<Integer> timestamps = new ArrayList<>();
+    private final ArrayList<Float> prices = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_overview, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_overview, container, false);
         if (getArguments() != null) {
-            receivedSymbol = getArguments().getString("symbol");
+            String sym = getArguments().getString("symbol");
+            if (sym != null && !sym.isEmpty()) {
+                receivedSymbol = sym;
+            }
         }
         return view;
     }
@@ -102,211 +93,198 @@ public class OverviewFragment extends Fragment {
 
         setupChart();
 
-        runnable = new Runnable() {
+        priceRunnable = new Runnable() {
             @Override
             public void run() {
                 fetchStockData(receivedSymbol);
-                handler.postDelayed(this, 3000);
-
-                int progressToday = (int) (((float) (current - todayLow) / (todayHigh - todayLow)) * 100);
-                int progress52 = (int) (((float) (current - fiftytwoLow) / (fiftytwoHigh - fiftytwoLow)) * 100);
-
-                progressBarToday.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Ensure the ProgressBar width is ready before calculating
-                        int progressBarWidth = progressBarToday.getWidth();
-
-                        // Calculate the new marginStart for the ImageView (indicator)
-                        int newMarginStart = (int) (((float) progressToday / 100) * progressBarWidth);
-
-                        // Get the current layout params of the ImageView
-                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) indicatorToday.getLayoutParams();
-
-                        // Set the calculated marginStart
-                        params.setMarginStart(newMarginStart);
-
-                        // Apply the updated layout params back to the ImageView
-                        indicatorToday.setLayoutParams(params);
-                    }
-                });
-                progressBar52.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Ensure the ProgressBar width is ready before calculating
-                        int progressBarWidth = progressBar52.getWidth();
-
-                        // Calculate the new marginStart for the ImageView (indicator)
-                        int newMarginStart = (int) (((float) progress52 / 100) * progressBarWidth);
-
-                        // Get the current layout params of the ImageView
-                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) indicator52.getLayoutParams();
-
-                        // Set the calculated marginStart
-                        params.setMarginStart(newMarginStart);
-
-                        // Apply the updated layout params back to the ImageView
-                        indicator52.setLayoutParams(params);
-                    }
-                });
+                handler.postDelayed(this, 5000);
             }
         };
-        handler.post(runnable);
+        handler.post(priceRunnable);
 
-
-        runnable = new Runnable() {
+        chartRunnable = new Runnable() {
             @Override
             public void run() {
                 fetchChartData(receivedSymbol);
                 handler.postDelayed(this, 60000);
             }
         };
-        handler.post(runnable);
-
+        handler.post(chartRunnable);
     }
 
     public void fetchStockData(String symbol) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_YAHOO_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        StockPrice apiService = retrofit.create(StockPrice.class);
+        StockPrice apiService = ApiClient.createService(StockPrice.class);
         Call<StockPriceModel> call = apiService.getChartData(symbol);
 
         call.enqueue(new Callback<StockPriceModel>() {
             @Override
-            public void onResponse(Call<StockPriceModel> call, Response<StockPriceModel> response) {
-                if (response.isSuccessful()) {
-                    DecimalFormat decim = new DecimalFormat("###.##");
+            public void onResponse(@NonNull Call<StockPriceModel> call, @NonNull Response<StockPriceModel> response) {
+                if (response.isSuccessful() && response.body() != null && isAdded()) {
                     StockPriceModel stockPriceModel = response.body();
-                    if (stockPriceModel != null) {
-                        current = Double.parseDouble(stockPriceModel.chart.result[0].meta.regularMarketPrice);
-                        previousClose = Double.parseDouble(stockPriceModel.chart.result[0].meta.previousClose);
-                        fiftytwoHigh = Double.parseDouble(stockPriceModel.chart.result[0].meta.fiftyTwoWeekHigh);
-                        fiftytwoLow = Double.parseDouble(stockPriceModel.chart.result[0].meta.fiftyTwoWeekLow);
-                        todayHigh = Double.parseDouble(stockPriceModel.chart.result[0].meta.regularMarketDayHigh);
-                        todayLow = Double.parseDouble(stockPriceModel.chart.result[0].meta.regularMarketDayLow);
-                        volume = stockPriceModel.chart.result[0].meta.regularMarketVolume;
+                    if (stockPriceModel.chart != null && stockPriceModel.chart.result != null && stockPriceModel.chart.result.length > 0) {
+                        StockPriceModel.Meta meta = stockPriceModel.chart.result[0].meta;
+                        if (meta != null) {
+                            current = StockUtils.safeParseDouble(meta.regularMarketPrice, 0.0);
+                            previousClose = StockUtils.safeParseDouble(meta.previousClose != null ? meta.previousClose : meta.chartPreviousClose, current);
+                            fiftytwoHigh = StockUtils.safeParseDouble(meta.fiftyTwoWeekHigh, 0.0);
+                            fiftytwoLow = StockUtils.safeParseDouble(meta.fiftyTwoWeekLow, 0.0);
+                            todayHigh = StockUtils.safeParseDouble(meta.regularMarketDayHigh, current);
+                            todayLow = StockUtils.safeParseDouble(meta.regularMarketDayLow, current);
+                            volume = meta.regularMarketVolume != null ? meta.regularMarketVolume : "N/A";
 
-                        tv52High.setText(fiftytwoHigh.toString());
-                        tv52Low.setText(fiftytwoLow.toString());
-                        tvTodayHigh.setText(todayHigh.toString());
-                        tvTodayLow.setText(todayLow.toString());
-                        tvVolume.setText(volume.toString());
-                        tvPrevClose.setText(previousClose.toString());
+                            tv52High.setText(String.format(Locale.getDefault(), "₹%.2f", fiftytwoHigh));
+                            tv52Low.setText(String.format(Locale.getDefault(), "₹%.2f", fiftytwoLow));
+                            tvTodayHigh.setText(String.format(Locale.getDefault(), "₹%.2f", todayHigh));
+                            tvTodayLow.setText(String.format(Locale.getDefault(), "₹%.2f", todayLow));
+                            tvVolume.setText(volume);
+                            tvPrevClose.setText(String.format(Locale.getDefault(), "₹%.2f", previousClose));
+
+                            updateProgressBars();
+                        }
                     }
-                } else {
-                    Log.e("Retrofit", "Request failed with status code: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<StockPriceModel> call, Throwable t) {
-                Log.e("Retrofit", "Network request failed", t);
+            public void onFailure(@NonNull Call<StockPriceModel> call, @NonNull Throwable t) {
+                Log.e("OverviewFragment", "Failed to fetch stock data", t);
+            }
+        });
+    }
+
+    private void updateProgressBars() {
+        if (!isAdded()) return;
+
+        double todayDiff = todayHigh - todayLow;
+        int progressToday = todayDiff > 0 ? (int) (((current - todayLow) / todayDiff) * 100) : 50;
+        progressToday = Math.max(0, Math.min(100, progressToday));
+
+        double f52Diff = fiftytwoHigh - fiftytwoLow;
+        int progress52 = f52Diff > 0 ? (int) (((current - fiftytwoLow) / f52Diff) * 100) : 50;
+        progress52 = Math.max(0, Math.min(100, progress52));
+
+        final int pToday = progressToday;
+        final int p52 = progress52;
+
+        progressBarToday.post(() -> {
+            if (!isAdded()) return;
+            int width = progressBarToday.getWidth();
+            if (width > 0 && indicatorToday != null) {
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) indicatorToday.getLayoutParams();
+                params.setMarginStart((int) (((float) pToday / 100f) * width));
+                indicatorToday.setLayoutParams(params);
             }
         });
 
+        progressBar52.post(() -> {
+            if (!isAdded()) return;
+            int width = progressBar52.getWidth();
+            if (width > 0 && indicator52 != null) {
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) indicator52.getLayoutParams();
+                params.setMarginStart((int) (((float) p52 / 100f) * width));
+                indicator52.setLayoutParams(params);
+            }
+        });
     }
-
 
     public void setupChart() {
         lineChart.getDescription().setEnabled(false);
         lineChart.setDrawGridBackground(false);
 
-        // Customize X-Axis
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
-        //
-//        xAxis.setAxisMaximum(345f);
-//        xAxis.setAxisMinimum(0f);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                int index = (int) value;
+                if (index >= 0 && index < timestamps.size()) {
+                    long millis = timestamps.get(index) * 1000L;
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                    return sdf.format(new Date(millis));
+                }
+                return "";
+            }
+        });
 
-
-        // Customize Y-Axis (left)
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setDrawGridLines(true);
-        leftAxis.setTextColor(Color.LTGRAY);  // Label color
+        leftAxis.setTextColor(Color.LTGRAY);
 
-        // Disable the right Y-Axis
         lineChart.getAxisRight().setEnabled(false);
     }
 
     public void fetchChartData(String symbol) {
-        timestamps.clear();
-        prices.clear();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_YAHOO_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        StockPrice apiService = retrofit.create(StockPrice.class);
+        StockPrice apiService = ApiClient.createService(StockPrice.class);
         Call<StockPriceModel> call = apiService.getChartData(symbol);
         call.enqueue(new Callback<StockPriceModel>() {
             @Override
-            public void onResponse(Call<StockPriceModel> call, Response<StockPriceModel> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(@NonNull Call<StockPriceModel> call, @NonNull Response<StockPriceModel> response) {
+                if (response.isSuccessful() && response.body() != null && isAdded()) {
                     StockPriceModel stockPriceModel = response.body();
-                    if (stockPriceModel != null) {
-                        timestamps.addAll(stockPriceModel.chart.result[0].timestamp);
-                        prices.addAll(stockPriceModel.chart.result[0].indicators.quote[0].close);
+                    if (stockPriceModel.chart != null && stockPriceModel.chart.result != null && stockPriceModel.chart.result.length > 0) {
+                        StockPriceModel.Chart.Result res = stockPriceModel.chart.result[0];
+                        if (res.timestamp != null && res.indicators != null && res.indicators.quote != null && res.indicators.quote.length > 0) {
+                            timestamps.clear();
+                            prices.clear();
+                            timestamps.addAll(res.timestamp);
+                            if (res.indicators.quote[0].close != null) {
+                                prices.addAll(res.indicators.quote[0].close);
+                            }
 
-                        // Create a dataset with the data
-                        ArrayList<Entry> values = new ArrayList<>();
-//                        Toast.makeText(getContext(), String.valueOf(prices.size()), Toast.LENGTH_SHORT).show();
-                        for (int i = 0; i < timestamps.size(); i++) {
-                            Float price = prices.get(i);
-                            Integer time = timestamps.get(i);
-                            if (price != null) {
-                                values.add(new Entry(time, price));
+                            ArrayList<Entry> values = new ArrayList<>();
+                            for (int i = 0; i < Math.min(timestamps.size(), prices.size()); i++) {
+                                Float p = prices.get(i);
+                                if (p != null) {
+                                    values.add(new Entry(i, p));
+                                }
+                            }
+
+                            if (!values.isEmpty()) {
+                                LineDataSet lineDataSet = new LineDataSet(values, "Price");
+                                boolean isPositive = (current - previousClose) >= 0;
+                                int themeColor = isPositive ? Color.parseColor("#00D09C") : Color.parseColor("#EB5757");
+
+                                lineDataSet.setColor(themeColor);
+                                lineDataSet.setLineWidth(2f);
+                                lineDataSet.setDrawCircles(false);
+                                lineDataSet.setDrawValues(false);
+                                lineDataSet.setDrawFilled(true);
+                                lineDataSet.setFillAlpha(70);
+
+                                try {
+                                    int drawableId = isPositive ? R.drawable.green_gradiant_fill : R.drawable.red_gradiant_fill;
+                                    Drawable drawable = ContextCompat.getDrawable(requireContext(), drawableId);
+                                    lineDataSet.setFillDrawable(drawable);
+                                } catch (Exception ignored) {}
+
+                                LineData lineData = new LineData(lineDataSet);
+                                lineChart.setData(lineData);
+                                lineChart.invalidate();
                             }
                         }
-                        LineDataSet lineDataSet = new LineDataSet(values, "Stock Prices");
-
-                        // Customize dataset appearance
-                        if ((current - previousClose) >= 0.0) {
-                            lineDataSet.setColor(Color.GREEN);
-                        } else {
-                            lineDataSet.setColor(Color.RED);  // Fill color
-                        }
-                        lineDataSet.setLineWidth(1f);  // Line width
-                        lineDataSet.setDrawCircles(false);  // No circles at data points
-                        lineDataSet.setDrawValues(false);  // No values at data points
-                        lineDataSet.setDrawFilled(true);  // Fill the area under the line
-                        // Customize fill for gradient effect (optional)
-                        lineDataSet.setFillAlpha(110);
-                        if (current - previousClose >= 0) {
-                            try {
-                                Drawable drawable = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.green_gradiant_fill);
-                                lineDataSet.setFillDrawable(drawable);
-                            } catch (Exception ex) {
-
-                            }
-                        } else {
-                            try {
-                                Drawable drawable = ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.red_gradiant_fill);
-                                lineDataSet.setFillDrawable(drawable);
-                            } catch (Exception ex) {
-
-                            }
-                        }
-
-                        // Set the data to the chart
-                        LineData lineData = new LineData(lineDataSet);
-                        lineChart.setData(lineData);
-                        // Refresh the chart
-                        lineChart.invalidate();
                     }
-                } else {
-                    Log.e("Retrofit", "Request failed with status code: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<StockPriceModel> call, Throwable t) {
-                Log.e("Retrofit", "Network request failed", t);
+            public void onFailure(@NonNull Call<StockPriceModel> call, @NonNull Throwable t) {
+                Log.e("OverviewFragment", "Failed to fetch chart data", t);
             }
         });
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (priceRunnable != null) handler.removeCallbacks(priceRunnable);
+        if (chartRunnable != null) handler.removeCallbacks(chartRunnable);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (priceRunnable != null) handler.removeCallbacks(priceRunnable);
+        if (chartRunnable != null) handler.removeCallbacks(chartRunnable);
     }
 }

@@ -2,7 +2,6 @@ package com.example.tradingpro.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tradingpro.Constant.StockUtils;
 import com.example.tradingpro.Model.IndicesModel;
 import com.example.tradingpro.R;
 
@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class IndicesAdapter extends RecyclerView.Adapter<IndicesAdapter.IndicesViewHolder> {
-    Context context;
-    ArrayList<IndicesModel> list;
+    private final Context context;
+    private final ArrayList<IndicesModel> list;
 
     public IndicesAdapter(Context context, ArrayList<IndicesModel> list) {
         this.context = context;
@@ -31,11 +31,8 @@ public class IndicesAdapter extends RecyclerView.Adapter<IndicesAdapter.IndicesV
     @NonNull
     @Override
     public IndicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context con = parent.getContext();
-        LayoutInflater layoutInflater = LayoutInflater.from(con);
-        View view = layoutInflater.inflate(R.layout.indices_card, parent, false);
-        IndicesViewHolder indicesViewHolder = new IndicesViewHolder(view);
-        return indicesViewHolder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.indices_card, parent, false);
+        return new IndicesViewHolder(view);
     }
 
     @Override
@@ -44,16 +41,24 @@ public class IndicesAdapter extends RecyclerView.Adapter<IndicesAdapter.IndicesV
         holder.symbol.setText(model.getSymbol());
         holder.symbolFullName.setText(model.getSymbolFullName());
         holder.stockPrice.setText(model.getStockPrice());
-        if (Double.parseDouble(model.getStockPlusMinusPoints()) >= 0) {
-            holder.stockPlusMinusPoints.setTextColor(Color.parseColor("#3FC33F"));
-            holder.stockPlusMinusPercentage.setTextColor(Color.parseColor("#3FC33F"));
-        } else {
-            holder.stockPlusMinusPoints.setTextColor(Color.parseColor("#D53030"));
-            holder.stockPlusMinusPercentage.setTextColor(Color.parseColor("#D53030"));
-        }
+
+        double points = StockUtils.safeParseDouble(model.getStockPlusMinusPoints(), 0.0);
+        int color = points >= 0 ? Color.parseColor("#00D09C") : Color.parseColor("#EB5757");
+        holder.stockPlusMinusPoints.setTextColor(color);
+        holder.stockPlusMinusPercentage.setTextColor(color);
+
         holder.stockPlusMinusPoints.setText(model.getStockPlusMinusPoints());
         holder.stockPlusMinusPercentage.setText(model.getStockPlusMinusPercentage());
-        Glide.with(context).load(model.getSymbolIcon()).into(holder.symbolIcon);
+
+        if (model.getSymbolIcon() != null && !model.getSymbolIcon().isEmpty()) {
+            Glide.with(context)
+                    .load(model.getSymbolIcon())
+                    .placeholder(R.drawable.nifty_icon)
+                    .error(R.drawable.nifty_icon)
+                    .into(holder.symbolIcon);
+        } else {
+            holder.symbolIcon.setImageResource(R.drawable.nifty_icon);
+        }
     }
 
     @Override

@@ -21,17 +21,17 @@
             android:icon="@drawable/watchlist"
             android:title="@string/favourite1" />
 
-<!--        <item-->
-<!--            android:id="@+id/navoders"-->
-<!--            android:fontFamily="@font/poppins_light"-->
-<!--            android:icon="@drawable/orderbag"-->
-<!--            android:title="@string/orders" />-->
+        <item
+            android:id="@+id/navportfolio"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/drawerportfolio"
+            android:title="@string/portfolio" />
 
-<!--        <item-->
-<!--            android:id="@+id/navportfolio"-->
-<!--            android:fontFamily="@font/poppins_light"-->
-<!--            android:icon="@drawable/drawerportfolio"-->
-<!--            android:title="@string/portfolio" />-->
+        <item
+            android:id="@+id/navoders"
+            android:fontFamily="@font/poppins_light"
+            android:icon="@drawable/orderbag"
+            android:title="@string/orders" />
 
     </group>
 
